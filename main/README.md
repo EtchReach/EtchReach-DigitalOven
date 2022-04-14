@@ -14,10 +14,10 @@ Function to receive the temperature from the thermoprobe, artificial smoothing i
 Function that receives the number input from the user, and switches on / off the relay correspondingly. Responsible for sending a display output to the OLED as well.
 
 ## Keypad Inputs
-1 - Turns all oven components on
-2 - Toggles the upper heating coil on/off
-3 - Toggles the lower heating coil on/off
-4 - Toggles the fan on/off
-5 - Toggles the rotisserie on/off
-6 - Toggles the bulb on/off
-7 - Turns all oven components off
+- 1 - Turns all oven components on
+- 2 - Toggles the upper heating coil on/off
+- 3 - Toggles the lower heating coil on/off
+- 4 - Toggles the fan on/off
+- 5 - Toggles the rotisserie on/off
+- 6 - Toggles the bulb on/off
+- 7 - Turns all oven components off
