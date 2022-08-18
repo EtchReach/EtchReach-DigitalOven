@@ -1,8 +1,9 @@
-#include <Keypad.h>
 #include <SPI.h>
 #include <Wire.h>
+#include <Keypad.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <Adafruit_MAX31865.h>
 
 // KEYPAD constants & variables
 #define ROW_NUM     4 // four rows
@@ -28,6 +29,15 @@ Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+// Use software SPI: CS, DI, DO, CLK
+Adafruit_MAX31865 thermo = Adafruit_MAX31865(05, 23, 19, 18);
+
+// The value of the Rref resistor. Use 430.0 for PT100 and 4300.0 for PT1000
+#define RREF      430.0
+// The 'nominal' 0-degrees-C resistance of the sensor
+// 100.0 for PT100, 1000.0 for PT1000
+#define RNOMINAL  100.0
+
 // relay constants & variables
 bool upper = false;
 bool lower = false;
@@ -42,30 +52,26 @@ bool rotisserie = false;
 // 15 green rotisserie #5
 
 const int upperPin = 2; 
-const int lowerPin = 5; 
+const int lowerPin = 16; 
 const int bulbPin = 4; 
-const int fanPin = 18; 
+const int fanPin = 17; 
 const int rotisseriePin = 15; 
 
 // thermoprobe constants & variables
-const int analogInPin = 34; //sensor connected to A5 pin
-const int interval = 100;
-const float m = 0.208602;
-const float c = -458.66;
-const int numReadings = 5;
-float readings[numReadings];
-int readIndex = 0;
-float total = 0;
-float average = 0;
+const int interval = 1000;
 
-int sensorValue = 0;
 float Temp = 0;
 unsigned long prevTempMillis = 0;
 
+//logtime constants
+const int timeInterval = 60000;
+unsigned long prevTimeMillis = 0;
+const long millisToHour = 3600000;
+const int millisToMin = 60000;
+const int millisToSec = 1000;
+
 void setup() {
   // put your setup code here, to run once:
-  pinMode(analogInPin, INPUT);
-  
   pinMode(upperPin, OUTPUT);
   pinMode(lowerPin, OUTPUT);
   pinMode(fanPin, OUTPUT);
@@ -78,7 +84,9 @@ void setup() {
   digitalWrite(rotisseriePin, HIGH);
   digitalWrite(bulbPin, HIGH);
   
-  Serial.begin(9600);
+  Serial.begin(115200);
+
+  thermo.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary, initialising thermoprobe
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
@@ -89,16 +97,11 @@ void setup() {
   // Clear the buffer
   display.setTextColor(WHITE);
   display.setTextSize(2);
-
-  // Reset Temperature array
-  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
-    readings[thisReading] = 0;
-  }
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  unsigned long currentMillis = millis();
+  unsigned long long currentMillis = millis();
   
   char key = keypad.getKey();
   String input = String(key);
@@ -112,37 +115,79 @@ void loop() {
     processDisplay(input);
   }
 
+  // runs every 1s
   if (currentMillis - prevTempMillis >= interval) {
     prevTempMillis = currentMillis;
     getTemperature();
   }
-}
 
-void getTemperature(){
-  sensorValue = analogRead(analogInPin);
-  Temp = m*sensorValue + c;
-  total = total - readings[readIndex];
-  // read from the sensor:
-  readings[readIndex] = Temp;
-  // add the reading to the total:
-  total = total + readings[readIndex];
-  // advance to the next position in the array:
-  readIndex = readIndex + 1;
-  Serial.println(readIndex);
-  // if we're at the end of the array...
-  if (readIndex >= numReadings) {
-    // ...wrap around to the beginning:
-    readIndex = 0;
+  // runs every minute
+  if (currentMillis - prevTimeMillis >= timeInterval) {
+    prevTimeMillis = currentMillis;
+    logTime();
   }
-
-  // calculate the average:
-  average = total / numReadings;
-
-  Serial.println("Sensor Value: "+String(sensorValue)); //printing value of sensor on the serial monitor
-  Serial.println("Temperature: "+String(average)); // printing temperature on the serial monitor
 }
+
+void logTime() {
+  unsigned long long currentMillis = millis();
+  int hour = currentMillis / millisToHour;
+  int hourRemainder = currentMillis % millisToHour;
+  int mins = hourRemainder / millisToMin;
+  int minRemainder = hourRemainder % millisToMin;
+  int secs = minRemainder / millisToSec;
+  int remainder = minRemainder % millisToSec;
+
+  Serial.println("Time: " + String(hour) + "h " + String(mins) + "mins " + String(secs) + "s " + String(remainder) + "ms");
+}
+
+float getTemperature() {
+  uint16_t rtd = thermo.readRTD();
+
+  Serial.print("RTD value: "); Serial.println(rtd);
+  float ratio = rtd;
+  ratio /= 32768;
+  Serial.print("Ratio = "); Serial.println(ratio,8);
+  Serial.print("Resistance = "); Serial.println(RREF*ratio,8);
+  Serial.print("Temperature = "); Serial.println(thermo.temperature(RNOMINAL, RREF));
+
+  // Check and print any faults
+  uint8_t fault = thermo.readFault();
+  if (fault) {
+    Serial.print("Fault 0x"); Serial.println(fault, HEX);
+    if (fault & MAX31865_FAULT_HIGHTHRESH) {
+      Serial.println("RTD High Threshold"); 
+    }
+    if (fault & MAX31865_FAULT_LOWTHRESH) {
+      Serial.println("RTD Low Threshold"); 
+    }
+    if (fault & MAX31865_FAULT_REFINLOW) {
+      Serial.println("REFIN- > 0.85 x Bias"); 
+    }
+    if (fault & MAX31865_FAULT_REFINHIGH) {
+      Serial.println("REFIN- < 0.85 x Bias - FORCE- open"); 
+    }
+    if (fault & MAX31865_FAULT_RTDINLOW) {
+      Serial.println("RTDIN- < 0.85 x Bias - FORCE- open"); 
+    }
+    if (fault & MAX31865_FAULT_OVUV) {
+      Serial.println("Under/Over voltage"); 
+    }
+    thermo.clearFault();
+  }
+  Serial.println();
+  return (thermo.temperature(RNOMINAL, RREF));
+}
+
 
 void processDisplay(String input) {
+  // input 1: turn everything on
+  // input 2: toggle upper coil
+  // input 3: toggle lower coil
+  // input 4: toggle fan
+  // input 5: toggle rotisserie
+  // input 6: toggle bulb
+  // input 7: turn everything off
+  
   if (input == "1"){
       digitalWrite(upperPin, LOW);
       digitalWrite(lowerPin, LOW);
@@ -199,5 +244,25 @@ void processDisplay(String input) {
       bulb = true;
       fan = true;
       rotisserie = true;
+    }
+    if (input == "8"){
+      unsigned long long timeStart = millis();
+      unsigned long long timeNow = millis();
+      unsigned long long preTime = 0;
+      while (timeStart-timeNow <  1200000){ //20min
+        Temp= getTemperature();
+        if (Temp < 200){
+          digitalWrite(upperPin, HIGH);
+          digitalWrite(lowerPin, HIGH);
+        } else {
+          digitalWrite(upperPin, LOW);
+          digitalWrite(lowerPin, LOW);
+        }
+        if (timeNow - preTime >= timeInterval) {
+          preTime = timeNow;
+          logTime();
+        }
+        timeNow = millis();
+      }
     }
 }
