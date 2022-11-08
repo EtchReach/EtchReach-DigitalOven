@@ -1,4 +1,4 @@
-#include <SPI.h>
+ #include <SPI.h>
 #include <Wire.h>
 #include <Keypad.h>
 #include <Adafruit_GFX.h>
@@ -249,20 +249,32 @@ void processDisplay(String input) {
       unsigned long long timeStart = millis();
       unsigned long long timeNow = millis();
       unsigned long long preTime = 0;
-      while (timeStart-timeNow <  1200000){ //20min
-        Temp= getTemperature();
-        if (Temp < 200){
+      digitalWrite(upperPin, LOW);
+      digitalWrite(lowerPin, LOW);
+      while (timeNow-timeStart <  3600000){ // 60min
+//      while (true) {
+        char key = keypad.getKey();
+        if (key) {
+          Serial.println("Key: " + String(key));
+          Serial.println("Aborting test...");
+          break;
+        }
+        Temp = getTemperature();
+        if (Temp < 230){
+//           turn oven on when temp is < 150
+            digitalWrite(upperPin, LOW);
+            digitalWrite(lowerPin, LOW);
+        } else {
           digitalWrite(upperPin, HIGH);
           digitalWrite(lowerPin, HIGH);
-        } else {
-          digitalWrite(upperPin, LOW);
-          digitalWrite(lowerPin, LOW);
         }
         if (timeNow - preTime >= timeInterval) {
           preTime = timeNow;
           logTime();
         }
         timeNow = millis();
+        delay(1000);
       }
     }
-}
+    }
+//}
