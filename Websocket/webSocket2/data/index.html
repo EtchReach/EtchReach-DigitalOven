@@ -17,6 +17,7 @@
       <h2>Output - GPIO 2</h2>
       <p class="state">state: <span id="state">%STATE%</span></p>
       <p><button id="button" class="button">Toggle</button></p>
+      <p><button id="saveButton" class="button">Save Settings</button></p>
     </div>
 
     <div class="buttons">
@@ -30,7 +31,7 @@
               <h2>Duration</h2>
               <input disabled id= "duration1" type="number" min="1" max="100" value=%defaultD1%>
               <h2>Function</h2>
-              <input disabled id= "function1" type="number" min="1" max="5">
+              <input disabled id= "function1" type="number" min="1" max="5" value=%defaultF1%>
               <h2></h2>
             </div>
           </div>
@@ -46,7 +47,7 @@
               <h2>Duration</h2>
               <input disabled id= "duration2" type="number" min="1" max="100" value=%defaultD2%>
               <h2>Function</h2>
-              <input disabled id= "function2" type="number" min="1" max="5">
+              <input disabled id= "function2" type="number" min="1" max="5" value=%defaultF2%>
               <h2></h2>
             </div>
           </div>
@@ -64,7 +65,7 @@
               <h2>Duration</h2>
               <input disabled id= "duration3" type="number" min="1" max="100"  value=%defaultD3%>
               <h2>Function</h2>
-              <input disabled id= "function3" type="number" min="1" max="5">
+              <input disabled id= "function3" type="number" min="1" max="5" value=%defaultF3%>
               <h2></h2>
             </div>
           </div>
@@ -80,7 +81,7 @@
               <h2>Duration</h2>
               <input disabled id= "duration4" type="number" min="1" max="100" value=%defaultD4%>
               <h2>Function</h2>
-              <input disabled id= "function4" type="number" min="1" max="5">
+              <input disabled id= "function4" type="number" min="1" max="5" value=%defaultF4%>
               <h2></h2>
             </div>
           </div>
@@ -133,6 +134,7 @@
     document.getElementById('secondbutton').addEventListener('click', toggle2);
     document.getElementById('thirdbutton').addEventListener('click', toggle3);
     document.getElementById('fourthbutton').addEventListener('click', toggle4);
+    document.getElementById('saveButton').addEventListener('click', toggleSave);
 
     document.getElementById('setting1').addEventListener('click', () => {
       temperatureInput1 = !temperatureInput1;
@@ -194,6 +196,14 @@
     var value= temp+','+duration+','+func
     //console.log(value);
     websocket.send(value);
+  }
+  function toggleSave(){
+    var temp = document.getElementById("temperature4").value;
+    var duration = document.getElementById("duration4").value;
+    var func = document.getElementById("function4").value;
+    var value= temp+','+duration+','+func
+    //console.log(value);
+    websocket.send("save");
   }
 
 </script>

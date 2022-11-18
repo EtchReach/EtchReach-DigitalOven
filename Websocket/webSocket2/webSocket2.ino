@@ -27,6 +27,11 @@ String duration1;
 String duration2;
 String duration3;
 String duration4;
+String function1;
+String function2;
+String function3;
+String function4;
+
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -49,6 +54,11 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
       Serial.printf("Yes\n"); // This will turn the oven on/off
       ledState = !ledState;
       notifyClients();
+    }
+    else if (strcmp((char *)data, "save") == 0)
+    {
+      Serial.printf("Saving Configurations");
+      savePresets();
     }
     else
     {
@@ -92,7 +102,6 @@ void initWebSocket()
 }
 
 // Searches for placeholders in HTML and replaces them before sending the webpage to the browser
-//used to load diff preset configurations in
 String processor(const String &var)
 {
   Serial.println(var);
@@ -131,9 +140,23 @@ String processor(const String &var)
   else if (var=="defaultD4"){
     return duration4;
   }
+  else if (var=="defaultF1"){
+    return function1;
+  }
+  else if (var=="defaultF2"){
+    return function2;
+  }
+  else if (var=="defaultF3"){
+    return function3;
+  }
+  else if (var=="defaultF4"){
+    return function4;
+  }
   return String();
 }
-
+void savePresets(){
+  //yet to implement: save temp, duration and function into the SPIFFS
+}
 void loadPresets(){ //read preset configurations
   File file = SPIFFS.open("/text.txt");
   if (!file) {
@@ -150,12 +173,19 @@ void loadPresets(){ //read preset configurations
   }
   temperature1= v[0];
   duration1= v[1];
-  temperature2= v[2];
-  duration2= v[3];
-  temperature3= v[4];
-  duration3= v[5];
-  temperature4= v[6];
-  duration4= v[7];
+  function1=v[2];
+  
+  temperature2= v[3];
+  duration2= v[4];
+  function2=v[5];
+  
+  temperature3= v[6];
+  duration3= v[7];
+  function3=v[8];
+  
+  temperature4= v[9];
+  duration4= v[10];
+  function4=v[11];
 }
 
 void setup()
