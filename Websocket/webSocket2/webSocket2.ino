@@ -11,8 +11,10 @@
 #include <ESPAsyncWebServer.h>
 
 // Replace with your network credentials
-const char* ssid = "Xiaomi_7660";
-const char* password = "spaghetti";
+// const char* ssid = "Wong’s iPhone";
+// const char* password = "yufei12345";
+const char *ssid = "Xiaomi_7660";
+const char *password = "spaghetti";
 
 bool ledState = 0;
 const int ledPin = 2;
@@ -20,7 +22,7 @@ const int ledPin = 2;
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
-
+// html variable that will be rendered on the webserver
 const char index_html[] PROGMEM = R"rawliteral(
 <!DOCTYPE HTML><html>
 <head>
@@ -312,80 +314,99 @@ const char index_html[] PROGMEM = R"rawliteral(
 </body>
 </html>
 )rawliteral";
+//%stuff% are placeholders
+// window.location.hostname gets webserver IP address and listeners can be added on it
+// onMessage handles incoming messages from the board
 
-void notifyClients() {
-  ws.textAll(String(ledState));
+void notifyClients()
+{
+  ws.textAll(String(ledState)); // communicates to all clients connected to the server (aka our webserver)
 }
 
-void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
-  AwsFrameInfo *info = (AwsFrameInfo*)arg;
-  if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
+void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
+{ // callback to handle the data from clients via websocket protocol
+  AwsFrameInfo *info = (AwsFrameInfo *)arg;
+  if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
+  {
     data[len] = 0;
-    if (strcmp((char*)data, "toggle") == 0) {
-      Serial.printf("%s\n",(char*)data);
+    if (strcmp((char *)data, "toggle") == 0)
+    {
+      Serial.printf("%s\n", (char *)data);
       Serial.printf("Yes\n"); // This will turn the oven on/off
       ledState = !ledState;
       notifyClients();
     }
-    else{
-       char* ptr;
-       ptr = strtok((char*)data,",");
-       while(ptr!=NULL){
+    else
+    {
+      char *ptr;
+      ptr = strtok((char *)data, ",");
+      while (ptr != NULL)
+      {
         Serial.println(ptr);
-        ptr=strtok(NULL,",");
-       }      
+        ptr = strtok(NULL, ",");
+      }
     }
-
-
   }
 }
 
+// configure event listener to handle different WebSocket protocol
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
-             void *arg, uint8_t *data, size_t len) {
-  switch (type) {
-    case WS_EVT_CONNECT:
-      Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
-      break;
-    case WS_EVT_DISCONNECT:
-      Serial.printf("WebSocket client #%u disconnected\n", client->id());
-      break;
-    case WS_EVT_DATA:
-      handleWebSocketMessage(arg, data, len);
-      break;
-    case WS_EVT_PONG:
-    case WS_EVT_ERROR:
-      break;
+             void *arg, uint8_t *data, size_t len)
+{
+  switch (type)
+  {
+  case WS_EVT_CONNECT:
+    Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
+    break;
+  case WS_EVT_DISCONNECT:
+    Serial.printf("WebSocket client #%u disconnected\n", client->id());
+    break;
+  case WS_EVT_DATA: // when a data packet is received from the client
+    handleWebSocketMessage(arg, data, len);
+    break;
+  case WS_EVT_PONG:
+  case WS_EVT_ERROR:
+    break;
   }
 }
 
-void initWebSocket() {
+// initialises websocket protocol
+void initWebSocket()
+{
   ws.onEvent(onEvent);
   server.addHandler(&ws);
 }
 
-String processor(const String& var){
+// Searches for placeholders in HTML and replaces them before sending the webpage to the browser
+String processor(const String &var)
+{
   Serial.println(var);
-  if(var == "STATE"){
-    if (ledState){
+  if (var == "STATE")
+  {
+    if (ledState)
+    {
       return "ON";
     }
-    else{
+    else
+    {
       return "OFF";
     }
   }
   return String();
 }
 
-void setup(){
+void setup()
+{
   // Serial port for debugging purposes
   Serial.begin(115200);
 
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
-  
+
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(1000);
     Serial.println("Connecting to WiFi..");
   }
@@ -396,15 +417,15 @@ void setup(){
   initWebSocket();
 
   // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send_P(200, "text/html", index_html, processor);
-  });
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send_P(200, "text/html", index_html, processor); });
 
   // Start server
   server.begin();
 }
 
-void loop() {
-  ws.cleanupClients();
+void loop()
+{
+  ws.cleanupClients(); // limits number of clients by closing oldest client when maximum num of client has exceeded - can call once per second to conserve power
   digitalWrite(ledPin, ledState);
 }
