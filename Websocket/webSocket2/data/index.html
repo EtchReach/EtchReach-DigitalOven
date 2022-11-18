@@ -198,12 +198,19 @@
     websocket.send(value);
   }
   function toggleSave(){
-    var temp = document.getElementById("temperature4").value;
-    var duration = document.getElementById("duration4").value;
-    var func = document.getElementById("function4").value;
-    var value= temp+','+duration+','+func
-    //console.log(value);
-    websocket.send("save");
+    var temp1 = document.getElementById("temperature1").value;
+    var duration1 = document.getElementById("duration1").value;
+    var func1 = document.getElementById("function1").value;
+    var temp2 = document.getElementById("temperature2").value;
+    var duration2 = document.getElementById("duration2").value;
+    var func2 = document.getElementById("function2").value;
+    var temp3 = document.getElementById("temperature3").value;
+    var duration3 = document.getElementById("duration3").value;
+    var func3 = document.getElementById("function3").value;
+    var temp4 = document.getElementById("temperature4").value;
+    var duration4 = document.getElementById("duration4").value;
+    var func4 = document.getElementById("function4").value;
+    websocket.send(`save,${temp1}\n${duration1}\n${func1}\n${temp2}\n${duration2}\n${func2}\n${temp3}\n${duration3}\n${func3}\n${temp4}\n${duration4}\n${func4}`);
   }
 
 </script>

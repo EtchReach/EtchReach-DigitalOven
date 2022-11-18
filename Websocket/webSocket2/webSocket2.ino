@@ -48,6 +48,8 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
   {
     data[len] = 0;
+    Serial.printf("%s\n", (char *)data);
+
     if (strcmp((char *)data, "toggle") == 0)
     {
       Serial.printf("%s\n", (char *)data);
@@ -55,15 +57,17 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
       ledState = !ledState;
       notifyClients();
     }
-    else if (strcmp((char *)data, "save") == 0)
-    {
-      Serial.printf("Saving Configurations");
-      savePresets();
-    }
     else
     {
       char *ptr;
       ptr = strtok((char *)data, ",");
+      if (strcmp((char *)ptr, "save") == 0) {
+        Serial.printf("Saving Configurations\n");
+        char * settings= strtok(NULL, ",");
+        Serial.printf("%s\n", settings);
+        savePresets(settings);
+        return;
+      }
       while (ptr != NULL)
       {
         Serial.println(ptr);
@@ -79,18 +83,18 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
 {
   switch (type)
   {
-  case WS_EVT_CONNECT:
-    Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
-    break;
-  case WS_EVT_DISCONNECT:
-    Serial.printf("WebSocket client #%u disconnected\n", client->id());
-    break;
-  case WS_EVT_DATA: // when a data packet is received from the client
-    handleWebSocketMessage(arg, data, len);
-    break;
-  case WS_EVT_PONG:
-  case WS_EVT_ERROR:
-    break;
+    case WS_EVT_CONNECT:
+      Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
+      break;
+    case WS_EVT_DISCONNECT:
+      Serial.printf("WebSocket client #%u disconnected\n", client->id());
+      break;
+    case WS_EVT_DATA: // when a data packet is received from the client
+      handleWebSocketMessage(arg, data, len);
+      break;
+    case WS_EVT_PONG:
+    case WS_EVT_ERROR:
+      break;
   }
 }
 
@@ -116,48 +120,63 @@ String processor(const String &var)
       return "OFF";
     }
   }
-  else if (var=="defaultT1"){
+  else if (var == "defaultT1") {
     return temperature1;
   }
-  else if (var=="defaultT2"){
+  else if (var == "defaultT2") {
     return temperature2;
   }
-  else if (var=="defaultT3"){
+  else if (var == "defaultT3") {
     return temperature3;
   }
-  else if (var=="defaultT4"){
+  else if (var == "defaultT4") {
     return temperature4;
   }
-  else if (var=="defaultD1"){
+  else if (var == "defaultD1") {
     return duration1;
   }
-  else if (var=="defaultD2"){
+  else if (var == "defaultD2") {
     return duration2;
   }
-  else if (var=="defaultD3"){
+  else if (var == "defaultD3") {
     return duration3;
   }
-  else if (var=="defaultD4"){
+  else if (var == "defaultD4") {
     return duration4;
   }
-  else if (var=="defaultF1"){
+  else if (var == "defaultF1") {
     return function1;
   }
-  else if (var=="defaultF2"){
+  else if (var == "defaultF2") {
     return function2;
   }
-  else if (var=="defaultF3"){
+  else if (var == "defaultF3") {
     return function3;
   }
-  else if (var=="defaultF4"){
+  else if (var == "defaultF4") {
     return function4;
   }
   return String();
 }
-void savePresets(){
-  //yet to implement: save temp, duration and function into the SPIFFS
+
+void savePresets(char * data) {
+  File file = SPIFFS.open("/text.txt", "w");
+  if (!file) {
+    Serial.println("Error opening file for writing");
+    return;
+  }
+  int bytesWritten = file.print(data);
+  if (bytesWritten > 0) {
+    Serial.println("File was written");
+    Serial.println(bytesWritten);
+  } else {
+    Serial.println("File write failed");
+  }
+  file.close();
+  return;
 }
-void loadPresets(){ //read preset configurations
+
+void loadPresets() { //read preset configurations
   File file = SPIFFS.open("/text.txt");
   if (!file) {
     Serial.println("Failed to open file for reading");
@@ -171,21 +190,21 @@ void loadPresets(){ //read preset configurations
   for (String s : v) {
     Serial.println(s);
   }
-  temperature1= v[0];
-  duration1= v[1];
-  function1=v[2];
-  
-  temperature2= v[3];
-  duration2= v[4];
-  function2=v[5];
-  
-  temperature3= v[6];
-  duration3= v[7];
-  function3=v[8];
-  
-  temperature4= v[9];
-  duration4= v[10];
-  function4=v[11];
+  temperature1 = v[0];
+  duration1 = v[1];
+  function1 = v[2];
+
+  temperature2 = v[3];
+  duration2 = v[4];
+  function2 = v[5];
+
+  temperature3 = v[6];
+  duration3 = v[7];
+  function3 = v[8];
+
+  temperature4 = v[9];
+  duration4 = v[10];
+  function4 = v[11];
 }
 
 void setup()
@@ -195,13 +214,13 @@ void setup()
   digitalWrite(ledPin, LOW);
 
   // Initialize SPIFFS
-  if(!SPIFFS.begin(true)){
+  if (!SPIFFS.begin(true)) {
     Serial.println("An Error has occurred while mounting SPIFFS");
     return;
   }
-  
+
   loadPresets();
- 
+
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
@@ -212,16 +231,14 @@ void setup()
 
   // Print ESP Local IP Address
   Serial.println(WiFi.localIP());
-
-  initWebSocket();
   
-   // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  initWebSocket();
+  // Route for root / web page
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/index.html", String(), false, processor);
   });
-  
   // Route to load style.css file
-  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
+  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/style.css", "text/css");
   });
 
