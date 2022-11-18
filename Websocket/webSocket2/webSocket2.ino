@@ -1,322 +1,36 @@
 /*********
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp32-websocket-server-arduino/
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
+  references:
+  https://randomnerdtutorials.com/esp32-websocket-server-arduino/#1
+  https://randomnerdtutorials.com/esp32-web-server-spiffs-spi-flash-file-system/
 *********/
 
 // Import required libraries
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+#include "SPIFFS.h"
+
+using namespace std;
 
 // Replace with your network credentials
 // const char* ssid = "Wong’s iPhone";
 // const char* password = "yufei12345";
 const char *ssid = "Xiaomi_7660";
 const char *password = "spaghetti";
-
 bool ledState = 0;
 const int ledPin = 2;
+String temperature1;
+String temperature2;
+String temperature3;
+String temperature4;
+String duration1;
+String duration2;
+String duration3;
+String duration4;
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
-// html variable that will be rendered on the webserver
-const char index_html[] PROGMEM = R"rawliteral(
-<!DOCTYPE HTML><html>
-<head>
-  <title>ESP Web Server</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="data:,">
-  <style>
-  html {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-  }
-  h1 {
-    font-size: 1.8rem;
-    color: white;
-  }
-  h2{
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #143642;
-  }
-  h3{
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #143642;
-  }
-  .topnav {
-    overflow: hidden;
-    background-color: #143642;
-  }
-  body {
-    margin: 0;
-  }
-  .content {
-    padding: 30px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .card {
-    background-color: #F8F7F9;;
-    box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
-    padding-top:10px;
-    padding-bottom:20px;
-  }
-  .buttons{
-    display:flex;
-    flex-direction: column;
-   }
-   .state {
-     font-size: 1.5rem;
-     color:#8c8c8c;
-     font-weight: bold;
-   }
-   
-  .toprow{
-    display:flex;
-    justify-content: space-evenly;
-    margin-top: 35px;
-
-  }
-  .bottomrow{
-    display:flex;
-    justify-content: space-evenly; 
-    margin-top: 35px;
-  }
-   .firstSet{
-    border-width: 3px;
-    border-radius:10px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background-color: #FFB52E;
-    border-style: solid;
-   }
-  .secondSet{
-    border-width: 3px;
-    border-radius:10px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background-color: #A668A6;
-    border-style: solid;
-  }
-  .thirdSet{
-    border-width: 3px;
-    border-radius:10px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background-color: #5FD85F;
-    border-style: solid;
-  }
-  .fourthSet{
-    border-width: 3px;
-    border-radius:10px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background-color: #10BBE5;
-    border-style: solid;
-  } 
-  .buttonInner{
-    justify-content: space-between;
-  }
-  </style>
-<title>ESP Web Server</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:,">
-</head>
-<body>
-  <div class="topnav">
-    <h1>ESP WebSocket Server</h1>
-  </div>
-  <div class="content">
-    <div class="card">
-      <h2>Output - GPIO 2</h2>
-      <p class="state">state: <span id="state">%STATE%</span></p>
-      <p><button id="button" class="button">Toggle</button></p>
-    </div>
-
-    <div class="buttons">
-      <div class="toprow">
-        <div class="firstSet">
-          <div class="first">
-            <div class="buttonInner">
-              <h3> 1 </h3>
-              <h2>Temperature</h2>
-              <input disabled id= "temperature1" type="number" min="1" max="100">
-              <h2>Duration</h2>
-              <input disabled id= "duration1" type="number" min="1" max="100">
-              <h2>Function</h2>
-              <input disabled id= "function1" type="number" min="1" max="5">
-              <h2></h2>
-            </div>
-          </div>
-            <button id="setting1" class="settingButton">Setting</button>
-            <button id="firstbutton" class="settingButton">Toggle</button>
-        </div>
-        <div class="secondSet">
-          <div class="second">
-            <div class="buttonInner">
-              <h3> 2 </h3>
-              <h2>Temperature</h2>
-              <input disabled id= "temperature2" type="number" min="1" max="100">
-              <h2>Duration</h2>
-              <input disabled id= "duration2" type="number" min="1" max="100">
-              <h2>Function</h2>
-              <input disabled id= "function2" type="number" min="1" max="5">
-              <h2></h2>
-            </div>
-          </div>
-            <button id="setting2" class="settingButton">Setting</button>
-            <button id="secondbutton" class="settingButton">Toggle</button>
-        </div>
-      </div>  
-      <div class="bottomrow">
-        <div class="thirdSet">
-          <div class="third">
-            <div class="buttonInner">
-              <h3> 3 </h3>
-              <h2>Temperature</h2>
-              <input disabled id= "temperature3" type="number" min="1" max="100">
-              <h2>Duration</h2>
-              <input disabled id= "duration3" type="number" min="1" max="100">
-              <h2>Function</h2>
-              <input disabled id= "function3" type="number" min="1" max="5">
-              <h2></h2>
-            </div>
-          </div>
-            <button id="setting3" class="settingButton">Setting</button>
-            <button id="thirdbutton" class="settingButton">Toggle</button>
-        </div>
-        <div class="fourthSet">
-          <div class="fourth">
-            <div class="buttonInner">
-              <h3> 4 </h3>
-              <h2>Temperature</h2>
-              <input disabled id= "temperature4" type="number" min="1" max="100">
-              <h2>Duration</h2>
-              <input disabled id= "duration4" type="number" min="1" max="100">
-              <h2>Function</h2>
-              <input disabled id= "function4" type="number" min="1" max="5">
-              <h2></h2>
-            </div>
-          </div>
-            <button id="setting4" class="settingButton">Setting</button>
-            <button id="fourthbutton" class="settingButton">Toggle</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<script>
-  var gateway = `ws://${window.location.hostname}/ws`;
-  var websocket;
-  let temperatureInput1 = true;
-  let temperatureInput2 = true;
-  let temperatureInput3 = true;
-  let temperatureInput4 = true;
-  window.addEventListener('load', onLoad);
-  function initWebSocket() {
-    console.log('Trying to open a WebSocket connection...');
-    websocket = new WebSocket(gateway);
-    websocket.onopen    = onOpen;
-    websocket.onclose   = onClose;
-    websocket.onmessage = onMessage; // <-- add this line
-  }
-  function onOpen(event) {
-    console.log('Connection opened');
-  }
-  function onClose(event) {
-    console.log('Connection closed');
-    setTimeout(initWebSocket, 2000);
-  }
-  function onMessage(event) {
-    var state;
-    if (event.data == "1"){
-      state = "ON";
-    }
-    else{
-      state = "OFF";
-    }
-    document.getElementById('state').innerHTML = state;
-  }
-  function onLoad(event) {
-    initWebSocket();
-    initButton();
-  }
-  function initButton() {
-    document.getElementById('button').addEventListener('click', toggle);
-    document.getElementById('firstbutton').addEventListener('click', toggle1);
-    document.getElementById('secondbutton').addEventListener('click', toggle2);
-    document.getElementById('thirdbutton').addEventListener('click', toggle3);
-    document.getElementById('fourthbutton').addEventListener('click', toggle4);
-
-    document.getElementById('setting1').addEventListener('click', () => {
-      temperatureInput1 = !temperatureInput1;
-      document.getElementById('temperature1').disabled= temperatureInput1;
-      document.getElementById('duration1').disabled= temperatureInput1;
-      document.getElementById('function1').disabled= temperatureInput1;
-    });
-    document.getElementById('setting2').addEventListener('click', () => {
-      temperatureInput2 = !temperatureInput2;
-      document.getElementById('temperature2').disabled= temperatureInput2;
-      document.getElementById('duration2').disabled= temperatureInput2;
-      document.getElementById('function2').disabled= temperatureInput2;
-    });
-    document.getElementById('setting3').addEventListener('click', () => {
-      temperatureInput3 = !temperatureInput3;
-      document.getElementById('temperature3').disabled= temperatureInput3;
-      document.getElementById('duration3').disabled= temperatureInput3;
-      document.getElementById('function3').disabled= temperatureInput3;
-    });
-    document.getElementById('setting4').addEventListener('click', () => {
-      temperatureInput4 = !temperatureInput4;
-      document.getElementById('temperature4').disabled= temperatureInput4;
-      document.getElementById('duration4').disabled= temperatureInput4;
-      document.getElementById('function4').disabled= temperatureInput4;
-    });
-  }
-  function toggle(){
-    console.log("toggle");
-    websocket.send("toggle");
-  }
-  function toggle1(){
-    var temp = document.getElementById("temperature1").value;
-    var duration = document.getElementById("duration1").value;
-    var func = document.getElementById("function1").value;
-    var value= temp+','+duration+','+func
-    console.log(value);
-    websocket.send(value);
-  }
-  function toggle2(){
-    var temp = document.getElementById("temperature2").value;
-    var duration = document.getElementById("duration2").value;
-    var func = document.getElementById("function2").value;
-    var value= temp+','+duration+','+func
-    console.log(value);
-    websocket.send(value);
-  }
-  function toggle3(){
-    var temp = document.getElementById("temperature3").value;
-    var duration = document.getElementById("duration3").value;
-    var func = document.getElementById("function3").value;
-    var value= temp+','+duration+','+func
-    console.log(value);
-    websocket.send(value);
-  }
-  function toggle4(){
-    var temp = document.getElementById("temperature4").value;
-    var duration = document.getElementById("duration4").value;
-    var func = document.getElementById("function4").value;
-    var value= temp+','+duration+','+func
-    console.log(value);
-    websocket.send(value);
-  }
-
-</script>
-</body>
-</html>
-)rawliteral";
-//%stuff% are placeholders
-// window.location.hostname gets webserver IP address and listeners can be added on it
-// onMessage handles incoming messages from the board
 
 void notifyClients()
 {
@@ -378,6 +92,7 @@ void initWebSocket()
 }
 
 // Searches for placeholders in HTML and replaces them before sending the webpage to the browser
+//used to load diff preset configurations in
 String processor(const String &var)
 {
   Serial.println(var);
@@ -392,17 +107,71 @@ String processor(const String &var)
       return "OFF";
     }
   }
+  else if (var=="defaultT1"){
+    return temperature1;
+  }
+  else if (var=="defaultT2"){
+    return temperature2;
+  }
+  else if (var=="defaultT3"){
+    return temperature3;
+  }
+  else if (var=="defaultT4"){
+    return temperature4;
+  }
+  else if (var=="defaultD1"){
+    return duration1;
+  }
+  else if (var=="defaultD2"){
+    return duration2;
+  }
+  else if (var=="defaultD3"){
+    return duration3;
+  }
+  else if (var=="defaultD4"){
+    return duration4;
+  }
   return String();
+}
+
+void loadPresets(){ //read preset configurations
+  File file = SPIFFS.open("/text.txt");
+  if (!file) {
+    Serial.println("Failed to open file for reading");
+    return;
+  }
+  vector<String> v;
+  while (file.available()) {
+    v.push_back(file.readStringUntil('\n'));
+  }
+  file.close();
+  for (String s : v) {
+    Serial.println(s);
+  }
+  temperature1= v[0];
+  duration1= v[1];
+  temperature2= v[2];
+  duration2= v[3];
+  temperature3= v[4];
+  duration3= v[5];
+  temperature4= v[6];
+  duration4= v[7];
 }
 
 void setup()
 {
-  // Serial port for debugging purposes
   Serial.begin(115200);
-
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
 
+  // Initialize SPIFFS
+  if(!SPIFFS.begin(true)){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+  
+  loadPresets();
+ 
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
@@ -415,10 +184,16 @@ void setup()
   Serial.println(WiFi.localIP());
 
   initWebSocket();
-
-  // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/html", index_html, processor); });
+  
+   // Route for root / web page
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/index.html", String(), false, processor);
+  });
+  
+  // Route to load style.css file
+  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/style.css", "text/css");
+  });
 
   // Start server
   server.begin();
