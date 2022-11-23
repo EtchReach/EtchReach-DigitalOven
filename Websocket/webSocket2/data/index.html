@@ -25,7 +25,7 @@
         <div class="firstSet" id="firstSet" onclick="selectfirst()">
           <div class="first">
             <div class="buttonInner">
-              <h2 class="titles"> Fermentation </h2>
+              <h2 class="titles" id="firstTitle">  </h2>
               <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
               <h2 class="descriptions fermentationdescription">60°C</h2>
               <input class="temperature" id= "temperature1" type="number" min="1" max="100" value=%defaultT1%>
@@ -38,7 +38,7 @@
         <div class="secondSet" id="secondSet" onclick="selectsecond()">
           <div class="second">
             <div class="buttonInner">
-              <h2 class="titles"> Top&Btm Heat </h2>
+              <h2 class="titles" id="secondTitle"> </h2>
               <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
                 <h2 class="descriptions">60°C</h2>
                 <input class="temperature"  id= "temperature2" type="number" min="1" max="100" value=%defaultT2%>
@@ -53,7 +53,7 @@
         <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
           <div class="third">
             <div class="buttonInner">
-              <h2 class="titles"> Top & Rotisserie </h2>
+              <h2 class="titles" id="thirdTitle"> </h2>
               <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
                 <h2 class="descriptions">60°C</h2>
                 <input class="temperature"  id= "temperature3" type="number" min="1" max="100" value=%defaultT3%>
@@ -66,7 +66,7 @@
         <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
           <div class="fourth">
             <div class="buttonInner">
-              <h2 class="titles"> Top, Btm & Fan </h2>
+              <h2 class="titles" id="fourthTitle"></h2>
               <input class="function" id= "function4" type="number" min="1" max="5" value=%defaultF4%>
                 <h2 class="descriptions">60°C</h2>
                 <input  class="temperature" id= "temperature4" type="number" min="1" max="100" value=%defaultT4%>
@@ -108,6 +108,16 @@
     </div>
   </div>
 <script>
+
+  let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
+  let function1name = document.getElementById("firstTitle");
+  let function2name = document.getElementById("secondTitle");
+  let function3name = document.getElementById("thirdTitle");
+  let function4name = document.getElementById("fourthTitle");
+  function1name.innerHTML=functionnames[1];
+  function2name.innerHTML=functionnames[2];
+  function3name.innerHTML=functionnames[3];
+  function4name.innerHTML=functionnames[4];
   var gateway = `ws://${window.location.hostname}/ws`; //gets the webserver IP address
   var websocket;
   let temperatureInput1 = true;
