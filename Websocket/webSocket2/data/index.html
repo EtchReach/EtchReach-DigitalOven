@@ -25,11 +25,11 @@
         <div class="firstSet" id="firstSet" onclick="selectfirst()">
           <div class="first">
             <div class="buttonInner">
-              <h2 class="titles"> Fermentation </h2>
+              <h2 class="titles" id="firstTitle"> </h2>
               <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
-              <h2 class="descriptions fermentationdescription">60°C</h2>
+              <h2 class="descriptions" id="firstTemperature"></h2>
               <input class="temperature" id= "temperature1" type="number" min="1" max="100" value=%defaultT1%>
-              <h2 class="descriptions">45 min</h2>
+              <h2 class="descriptions" id="firstDuration">45 min</h2>
               <input class = "duration"  id= "duration1" type="number" min="1" max="100" value=%defaultD1%>
               <h2></h2>
             </div>
@@ -38,11 +38,11 @@
         <div class="secondSet" id="secondSet" onclick="selectsecond()">
           <div class="second">
             <div class="buttonInner">
-              <h2 class="titles"> Top&Btm Heat </h2>
+              <h2 class="titles" id="secondTitle"> </h2>
               <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
-                <h2 class="descriptions">60°C</h2>
+                <h2 class="descriptions" id="secondTemperature"></h2>
                 <input class="temperature"  id= "temperature2" type="number" min="1" max="100" value=%defaultT2%>
-                <h2 class="descriptions">45 min</h2>
+                <h2 class="descriptions" id="secondDuration"></h2>
                 <input class="duration"  id= "duration2" type="number" min="1" max="100" value=%defaultD2%>
               <h2></h2>
             </div>
@@ -53,11 +53,11 @@
         <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
           <div class="third">
             <div class="buttonInner">
-              <h2 class="titles"> Top & Rotisserie </h2>
+              <h2 class="titles" id="thirdTitle"> </h2>
               <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
-                <h2 class="descriptions">60°C</h2>
+                <h2 class="descriptions" id="thirdTemperature"></h2>
                 <input class="temperature"  id= "temperature3" type="number" min="1" max="100" value=%defaultT3%>
-                <h2 class="descriptions">45 min</h2>
+                <h2 class="descriptions" id="thirdDuration"></h2>
                 <input class="duration"  id= "duration3" type="number" min="1" max="100"  value=%defaultD3%>
               <h2></h2>
             </div>
@@ -66,11 +66,11 @@
         <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
           <div class="fourth">
             <div class="buttonInner">
-              <h2 class="titles"> Top, Btm & Fan </h2>
+              <h2 class="titles" id="fourthTitle"></h2>
               <input class="function" id= "function4" type="number" min="1" max="5" value=%defaultF4%>
-                <h2 class="descriptions">60°C</h2>
+                <h2 class="descriptions" id="fourthTemperature"></h2>
                 <input  class="temperature" id= "temperature4" type="number" min="1" max="100" value=%defaultT4%>
-                <h2 class="descriptions">45 min</h2>
+                <h2 class="descriptions" id="fourthDuration"></h2>
                 <input  class="duration" id= "duration4" type="number" min="1" max="100" value=%defaultD4%>
               <h2></h2>
             </div>
@@ -108,6 +108,44 @@
     </div>
   </div>
 <script>
+
+  let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
+  let function1name = document.getElementById("firstTitle");
+  let function2name = document.getElementById("secondTitle");
+  let function3name = document.getElementById("thirdTitle");
+  let function4name = document.getElementById("fourthTitle");
+  let function1Set = document.getElementById("function1").value;
+  let function2Set = document.getElementById("function2").value;
+  let function3Set = document.getElementById("function3").value;
+  let function4Set = document.getElementById("function4").value;
+  function1name.innerHTML=functionnames[function1Set];
+  function2name.innerHTML=functionnames[function2Set];
+  function3name.innerHTML=functionnames[function3Set];
+  function4name.innerHTML=functionnames[function4];
+  let temperature1Name = document.getElementById("firstTemperature");
+  let temperature2Name = document.getElementById("secondTemperature");
+  let temperature3Name = document.getElementById("thirdTemperature");
+  let temperature4Name = document.getElementById("fourthTemperature");
+  let duration1Name = document.getElementById("firstDuration");
+  let duration2Name = document.getElementById("secondDuration");
+  let duration3Name = document.getElementById("thirdDuration");
+  let duration4Name = document.getElementById("fourthDuration");
+  let temperature1Set = document.getElementById("temperature1").value;
+  let temperature2Set = document.getElementById("temperature2").value;
+  let temperature3Set = document.getElementById("temperature3").value;
+  let temperature4Set = document.getElementById("temperature4").value;
+  let duration1Set = document.getElementById("duration1").value;
+  let duration2Set = document.getElementById("duration2").value;
+  let duration3Set = document.getElementById("duration3").value;
+  let duration4Set = document.getElementById("duration4").value;
+  temperature1Name.innerHTML= temperature1Set+ "°C";
+  temperature2Name.innerHTML= temperature2Set+ "°C";
+  temperature3Name.innerHTML= temperature3Set+ "°C";
+  temperature4Name.innerHTML= temperature4Set+ "°C";
+  duration1Name.innerHTML=duration1Set + " Mins";
+  duration2Name.innerHTML=duration2Set + " Mins";
+  duration3Name.innerHTML=duration3Set + " Mins";
+  duration4Name.innerHTML=duration4Set + " Mins";
   var gateway = `ws://${window.location.hostname}/ws`; //gets the webserver IP address
   var websocket;
   let temperatureInput1 = true;
@@ -278,6 +316,31 @@ function hideblock(){
     function3.style.display="block";
     function4.style.display="block";
   }
+
+  let function1Set = document.getElementById("function1").value;
+  let function2Set = document.getElementById("function2").value;
+  let function3Set = document.getElementById("function3").value;
+  let function4Set = document.getElementById("function4").value;
+  let temperature1Set = document.getElementById("temperature1").value;
+  let temperature2Set = document.getElementById("temperature2").value;
+  let temperature3Set = document.getElementById("temperature3").value;
+  let temperature4Set = document.getElementById("temperature4").value;
+  let duration1Set = document.getElementById("duration1").value;
+  let duration2Set = document.getElementById("duration2").value;
+  let duration3Set = document.getElementById("duration3").value;
+  let duration4Set = document.getElementById("duration4").value;
+  function1name.innerHTML=functionnames[function1Set];
+  function2name.innerHTML=functionnames[function2Set];
+  function3name.innerHTML=functionnames[function3Set];
+  function4name.innerHTML=functionnames[function4Set];
+  temperature1Name.innerHTML= temperature1Set+ "°C";
+  temperature2Name.innerHTML= temperature2Set+ "°C";
+  temperature3Name.innerHTML= temperature3Set+ "°C";
+  temperature4Name.innerHTML= temperature4Set+ "°C";
+  duration1Name.innerHTML=duration1Set + " Mins";
+  duration2Name.innerHTML=duration2Set + " Mins";
+  duration3Name.innerHTML=duration3Set + " Mins";
+  duration4Name.innerHTML=duration4Set + " Mins";
 }
 function resetall(){
   let box1 = document.getElementById("firstSet");
@@ -311,6 +374,9 @@ function selectsecond(){
   if(z === "rgb(166, 104, 166)"){
     resetall();
     x.style.backgroundColor="green";
+    let temperature = document.getElementById("temperature2").innerText;
+    let duration = document.getElementById("duration2").innerText;
+    websocket.send("function,2," + temperature + "," + duration);
   }
   else{
     resetall();
@@ -323,6 +389,9 @@ function selectthird(){
   if(z === "rgb(247, 164, 164)"){
     resetall();
     x.style.backgroundColor="green";
+    let temperature = document.getElementById("temperature3").innerText;
+    let duration = document.getElementById("duration3").innerText;
+    websocket.send("function,3," + temperature + "," + duration);
   }
   else{
     resetall();
@@ -335,6 +404,9 @@ function selectfourth(){
   if(z === "rgb(16, 187, 229)"){
     resetall();
     x.style.backgroundColor="green";
+    let temperature = document.getElementById("temperature4").innerText;
+    let duration = document.getElementById("duration4").innerText;
+    websocket.send("function,4," + temperature + "," + duration);
   }
   else{
     resetall();
