@@ -1,4 +1,4 @@
- #include <SPI.h>
+#include <SPI.h>
 #include <Wire.h>
 #include <Keypad.h>
 #include <Adafruit_GFX.h>
@@ -95,38 +95,71 @@ void setup() {
   }
 
   // Clear the buffer
+  display.clearDisplay();
   display.setTextColor(WHITE);
   display.setTextSize(2);
 }
 
+//void loop() {
+//  // put your main code here, to run repeatedly:
+//  unsigned long long currentMillis = millis();
+//  
+//  char key = keypad.getKey();
+//  String input = String(key);
+//  
+//  if (key) {
+//    Serial.println(key);
+//    display.clearDisplay();
+//    display.setCursor(0,0);
+//    display.print("Key: "+input);
+//    display.display();
+//    processDisplay(input);
+//  }
+//
+//  // runs every 1s
+//  if (currentMillis - prevTempMillis >= interval) {
+//    prevTempMillis = currentMillis;
+//    float temp = getTemperature();
+//    Serial.println("Temperature: " + String(temp));
+//  }
+//
+//  // runs every minute
+//  if (currentMillis - prevTimeMillis >= timeInterval) {
+//    prevTimeMillis = currentMillis;
+//    logTime();
+//  }
+//}
+
 void loop() {
-  // put your main code here, to run repeatedly:
-  unsigned long long currentMillis = millis();
-  
-  char key = keypad.getKey();
-  String input = String(key);
-  
-  if (key) {
-    Serial.println(key);
-    display.clearDisplay();
-    display.setCursor(0,0);
-    display.print("Key: "+input);
-    display.display();
-    processDisplay(input);
-  }
-
-  // runs every 1s
-  if (currentMillis - prevTempMillis >= interval) {
-    prevTempMillis = currentMillis;
-    getTemperature();
-  }
-
-  // runs every minute
-  if (currentMillis - prevTimeMillis >= timeInterval) {
-    prevTimeMillis = currentMillis;
-    logTime();
-  }
+  display.setCursor(0,0);
+  display.print("Key: 1");
+  display.display();
 }
+
+//void loop() {
+//    digitalWrite(upperPin, LOW);
+//    Serial.println("Upper Pin");
+//    delay(2000);
+//    digitalWrite(lowerPin, LOW);
+//    Serial.println("Lower Pin");
+//    delay(2000);
+//    digitalWrite(fanPin, LOW);
+//    Serial.println("Fan Pin");
+//    delay(2000);
+//    digitalWrite(rotisseriePin, LOW);
+//    Serial.println("Rotisserie Pin");
+//    delay(2000);
+//    digitalWrite(bulbPin, LOW);
+//    Serial.println("Bulb Pin");
+//    delay(2000);
+//    Serial.println("All off");
+//    digitalWrite(upperPin, HIGH);
+//    digitalWrite(lowerPin, HIGH);
+//    digitalWrite(fanPin, HIGH);
+//    digitalWrite(rotisseriePin, HIGH);
+//    digitalWrite(bulbPin, HIGH);
+//    delay(2000);
+//}
 
 void logTime() {
   unsigned long long currentMillis = millis();

@@ -359,12 +359,12 @@ void setup()
 float getTemperature() {
   uint16_t rtd = thermo.readRTD();
 
-  Serial.print("RTD value: "); Serial.println(rtd);
+//  Serial.print("RTD value: "); Serial.println(rtd);
   float ratio = rtd;
   ratio /= 32768;
-  Serial.print("Ratio = "); Serial.println(ratio,8);
-  Serial.print("Resistance = "); Serial.println(RREF*ratio,8);
-  Serial.print("Temperature = "); Serial.println(thermo.temperature(RNOMINAL, RREF));
+//  Serial.print("Ratio = "); Serial.println(ratio,8);
+//  Serial.print("Resistance = "); Serial.println(RREF*ratio,8);
+//  Serial.print("Temperature = "); Serial.println(thermo.temperature(RNOMINAL, RREF));
 
   // Check and print any faults
   uint8_t fault = thermo.readFault();
