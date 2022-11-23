@@ -16,8 +16,8 @@
     <div class="card" id="content">
       <h2 class="statusstate">Status: </h2>
       <p class="state">Function: Top and bottom heat</p>
-      <p class="state">Temp(°C): 122/120</p>
-      <p class="state">Duration(mins): 30/55</p>
+      <p class="state state-temperature">Temp(°C): 122/120</p>
+      <p class="state state-duration">Duration(mins): 30/55</p>
     </div>
 
     <div class="buttons">
@@ -132,13 +132,13 @@
   function onMessage(event) { //Handles incoming message from the server (esp32 board)
     var state;
     console.log(event);
-    if (event.data == "1"){
-      state = "ON";
-    }
-    else{
-      state = "OFF";
-    }
-    document.getElementById('state').innerHTML = state;
+    // if (event.data == "1"){
+    //   state = "ON";
+    // }
+    // else{
+    //   state = "OFF";
+    // }
+    // document.getElementById('state').innerHTML = state;
   }
   function onLoad(event) {
     initWebSocket();
