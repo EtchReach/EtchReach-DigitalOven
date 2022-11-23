@@ -121,11 +121,6 @@ unsigned long long current_time = 0;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
-// void notifyClients()
-//{
-//   ws.textAll(String(ledState)); // communicates to all clients connected to the server (aka our webserver)
-// }
-
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 { // callback to handle the data from clients via websocket protocol
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
@@ -135,15 +130,14 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     Serial.printf("%s\n", (char *)data);
     char *ptr;
     ptr = strtok((char *)data, ",");
+    Serial.println(String(ptr));
     if (strcmp((char *)ptr, "function") == 0)
     {
 //      Serial.printf("%s\n", (char *)data);
 //      Serial.printf("Yes\n"); // This will turn the oven on/off
-
       receivedFunction = String(strtok(NULL, ","));
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
-      Serial.println(receivedFunction + receivedTemp + receivedDuration);
       last_time = millis();
       last_send = millis();
     }
@@ -367,8 +361,12 @@ void setup()
 
   Serial.begin(115200);
 
+  Serial.println("Before thermocouple");
+
   thermo.begin(MAX31865_3WIRE); // set to 2WIRE or 4WIRE as necessary, initialising thermoprobe
 
+  Serial.println("After thermocouple");
+  
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
   {
@@ -376,6 +374,8 @@ void setup()
     for (;;)
       ; // Don't proceed, loop forever
   }
+
+  Serial.println("After Screen");
 
   // Clear the buffer
   display.setTextColor(WHITE);
@@ -464,7 +464,7 @@ void resetOven()
 
 void notifyClients()
 {
-  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / 1000));
+  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)));
 }
 
 void loop()
@@ -488,31 +488,31 @@ void loop()
     case 1:
       Serial.println("Fermentation");
       digitalWrite(bulbPin, LOW);
-      monitorTemperature(true);
+//      monitorTemperature(true);
       break;
 
     case 2:
       Serial.println("Top & Bottom Heat");
-      monitorTemperature(true);
+//      monitorTemperature(true);
       break;
 
     case 3:
       Serial.println("Top Heat with Rotisserie");
       digitalWrite(rotisseriePin, LOW);
-      monitorTemperature(false);
+//      monitorTemperature(false);
       break;
 
     case 4:
       Serial.println("Top & Bottom Heat with Fan");
       digitalWrite(fanPin, LOW);
-      monitorTemperature(true);
+//      monitorTemperature(true);
       break;
 
     case 5:
       Serial.println("Top Heat with Fan & Rotisserie");
       digitalWrite(rotisseriePin, LOW);
       digitalWrite(fanPin, LOW);
-      monitorTemperature(false);
+//      monitorTemperature(false);
       break;
 
     default:

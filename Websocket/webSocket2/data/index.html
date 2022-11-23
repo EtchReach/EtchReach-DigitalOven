@@ -131,14 +131,11 @@
   }
   function onMessage(event) { //Handles incoming message from the server (esp32 board)
     var state;
-    console.log(event);
-    // if (event.data == "1"){
-    //   state = "ON";
-    // }
-    // else{
-    //   state = "OFF";
-    // }
-    // document.getElementById('state').innerHTML = state;
+    let data = event.data.split(",");
+    let temperature = data[1];
+    let duration = data[3];
+    document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(°C): ${temperature}/120`;
+    document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/55`;
   }
   function onLoad(event) {
     initWebSocket();
@@ -299,8 +296,8 @@ function selectfirst(){
   if(z === "rgb(255, 181, 46)"){
     resetall();
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature1").innerText;
-    let duration = document.getElementById("duration1").innerText;
+    let temperature = document.getElementById("temperature1").value;
+    let duration = document.getElementById("duration1").value;
     websocket.send("function,1," + temperature + "," + duration);
   }
   else{
