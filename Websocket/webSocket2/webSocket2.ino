@@ -477,6 +477,7 @@ void loop() {
 
     if (current_time - last_send >= sendInterval) {
       last_send = current_time;
+      notifyClients();
     }
           
     if (current_time - last_time >= duration) {
