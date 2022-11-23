@@ -121,10 +121,19 @@ unsigned long long current_time = 0;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
-// void notifyClients()
-//{
-//   ws.textAll(String(ledState)); // communicates to all clients connected to the server (aka our webserver)
-// }
+void resetOven()
+{
+  current_time = millis();
+  last_time = millis();
+  receivedFunction = "0";
+  receivedTemp = "0";
+  receivedDuration = "0";
+  digitalWrite(upperPin, HIGH);
+  digitalWrite(lowerPin, HIGH);
+  digitalWrite(fanPin, HIGH);
+  digitalWrite(rotisseriePin, HIGH);
+  digitalWrite(bulbPin, HIGH);
+}
 
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 { // callback to handle the data from clients via websocket protocol
@@ -135,21 +144,17 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     Serial.printf("%s\n", (char *)data);
     char *ptr;
     ptr = strtok((char *)data, ",");
+    Serial.println(String(ptr));
     if (strcmp((char *)ptr, "function") == 0)
     {
 //      Serial.printf("%s\n", (char *)data);
 //      Serial.printf("Yes\n"); // This will turn the oven on/off
-
       receivedFunction = String(strtok(NULL, ","));
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
-      Serial.println(receivedFunction + receivedTemp + receivedDuration);
       last_time = millis();
       last_send = millis();
-    }
-    else
-    {
-      if (strcmp((char *)ptr, "save") == 0)
+    } else if (strcmp((char *)ptr, "save") == 0) {
       {
         Serial.printf("Saving Configurations\n");
         char *settings = strtok(NULL, ",");
@@ -157,8 +162,10 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
         savePresets(settings);
         return;
       }
-      while (ptr != NULL)
-      {
+    } else if (strcmp((char*)ptr, "reset") == 0) {
+      resetOven();
+    } else {
+      while (ptr != NULL) {
         Serial.println(ptr);
         ptr = strtok(NULL, ",");
       }
@@ -368,7 +375,7 @@ void setup()
   Serial.begin(115200);
 
   thermo.begin(MAX31865_3WIRE); // set to 2WIRE or 4WIRE as necessary, initialising thermoprobe
-
+  
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
   {
@@ -448,23 +455,9 @@ void monitorTemperature(bool bottomCoil)
   }
 }
 
-void resetOven()
-{
-  current_time = millis();
-  last_time = millis();
-  receivedFunction = "0";
-  receivedTemp = "0";
-  receivedDuration = "0";
-  digitalWrite(upperPin, HIGH);
-  digitalWrite(lowerPin, HIGH);
-  digitalWrite(fanPin, HIGH);
-  digitalWrite(rotisseriePin, HIGH);
-  digitalWrite(bulbPin, HIGH);
-}
-
 void notifyClients()
 {
-  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / 1000));
+  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)));
 }
 
 void loop()
