@@ -266,7 +266,7 @@
     var temp4 = document.getElementById("temperature4").value;
     var duration4 = document.getElementById("duration4").value;
     var func4 = document.getElementById("function4").value;
-    // websocket.send(`save,${temp1}\n${duration1}\n${func1}\n${temp2}\n${duration2}\n${func2}\n${temp3}\n${duration3}\n${func3}\n${temp4}\n${duration4}\n${func4}`);
+    websocket.send(`save,${temp1}\n${duration1}\n${func1}\n${temp2}\n${duration2}\n${func2}\n${temp3}\n${duration3}\n${func3}\n${temp4}\n${duration4}\n${func4}`);
     hideblock();
 
   }
@@ -426,7 +426,7 @@ function selectfourth(){
   }
 }
 function resetfunction(){
-  console.log("Reset");
+  websocket.send("reset");
   resetall();
   defaultNavbar.style.display="flex";
   thirdNavbar.style.display="none";
