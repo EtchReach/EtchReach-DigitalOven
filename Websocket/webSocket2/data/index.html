@@ -14,10 +14,10 @@
   </div>
   <div class="content">
     <div class="card" id="content">
-      <h2 class="statusstate">Status: </h2>
-      <p class="state">Function: Top and bottom heat</p>
-      <p class="state state-temperature">Temp(°C): 122/120</p>
-      <p class="state state-duration">Duration(mins): 30/55</p>
+      <h2 class="statusstate">Status</h2>
+      <p class="state state-function">Function: NIL</p>
+      <p class="state state-temperature">Temp(<sup>o</sup>C):NIL</p>
+      <p class="state state-duration">Duration(mins): NIL</p>
     </div>
 
     <div class="buttons">
@@ -29,7 +29,7 @@
               <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
               <h2 class="descriptions" id="firstTemperature"></h2>
               <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
-              <h2 class="descriptions" id="firstDuration">45 min</h2>
+              <h2 class="descriptions" id="firstDuration"></h2>
               <input class = "duration"  id= "duration1" type="number" min="1" max="60" value=%defaultD1%>
               <h2></h2>
             </div>
@@ -177,8 +177,12 @@
     let data = event.data.split(",");
     let temperature = data[1];
     let duration = data[3];
-    document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(°C): ${temperature}/120`;
-    document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/55`;
+    let maxTemp= data[5];
+    let maxDuration= data[7];
+    let selectedFunction=parseInt(data[9]);
+    document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
+    document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): ${temperature}/${maxTemp}`;
+    document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/${maxDuration}`;
   }
   function onLoad(event) {
     initWebSocket();
@@ -428,6 +432,9 @@ function selectfourth(){
 function resetfunction(){
   websocket.send("reset");
   resetall();
+  document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
+  document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
+  document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
   defaultNavbar.style.display="flex";
   thirdNavbar.style.display="none";
 }

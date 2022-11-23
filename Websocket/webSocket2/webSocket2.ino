@@ -457,7 +457,7 @@ void monitorTemperature(bool bottomCoil)
 
 void notifyClients()
 {
-  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)));
+  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",max_temp," + String(receivedTemp)+ ",max_temp," + String(receivedDuration)+ ",function," + String(receivedFunction));
 }
 
 void loop()
