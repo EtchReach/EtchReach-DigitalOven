@@ -193,6 +193,19 @@ cursor: pointer;
     cursor: pointer;   
 }
 
+.resetButton{
+    height:70px;
+    width:380px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8CC0DE;
+    border-radius: 14px;
+}
+.thirdBottomNav{
+    display:none;
+    justify-content: center;
+}
 .function1{
     display:block; 
 }

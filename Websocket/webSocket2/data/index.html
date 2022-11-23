@@ -104,11 +104,16 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
         </svg>
       </div>
-      
+    </div>
+  </div>
+  <div class="thirdBottomNav" id = "thirdBottomNav">
+    <div class="resetButtonClass">
+      <h3 class="resetButton" onclick="resetfunction()"> Reset </h3>
     </div>
   </div>
 <script>
-
+  let defaultNavbar = document.getElementById("defaultbottomnav");
+  let thirdNavbar = document.getElementById("thirdBottomNav");
   let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
   let function1name = document.getElementById("firstTitle");
   let function2name = document.getElementById("secondTitle");
@@ -358,6 +363,8 @@ function selectfirst(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(255, 181, 46)"){
     resetall();
+    defaultNavbar.style.display="none";
+    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature1").value;
     let duration = document.getElementById("duration1").value;
@@ -373,6 +380,8 @@ function selectsecond(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(166, 104, 166)"){
     resetall();
+    defaultNavbar.style.display="none";
+    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature2").value;
     let duration = document.getElementById("duration2").value;
@@ -388,6 +397,8 @@ function selectthird(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(247, 164, 164)"){
     resetall();
+    defaultNavbar.style.display="none";
+    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature3").value;
     let duration = document.getElementById("duration3").value;
@@ -403,6 +414,8 @@ function selectfourth(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(16, 187, 229)"){
     resetall();
+    defaultNavbar.style.display="none";
+    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature4").value;
     let duration = document.getElementById("duration4").value;
@@ -411,6 +424,12 @@ function selectfourth(){
   else{
     resetall();
   }
+}
+function resetfunction(){
+  console.log("Reset");
+  resetall();
+  defaultNavbar.style.display="flex";
+  thirdNavbar.style.display="none";
 }
 
 
