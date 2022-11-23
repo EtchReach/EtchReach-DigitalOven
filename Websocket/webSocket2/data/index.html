@@ -30,7 +30,7 @@
               <h2 class="descriptions" id="firstTemperature"></h2>
               <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
               <h2 class="descriptions" id="firstDuration"></h2>
-              <input class = "duration"  id= "duration1" type="number" min="1" max="60" value=%defaultD1%>
+              <input class = "duration"  id= "duration1" type="number" min="1" max="120" value=%defaultD1%>
               <h2></h2>
             </div>
           </div>
@@ -43,7 +43,7 @@
                 <h2 class="descriptions" id="secondTemperature"></h2>
                 <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
                 <h2 class="descriptions" id="secondDuration"></h2>
-                <input class="duration"  id= "duration2" type="number" min="1" max="60" value=%defaultD2%>
+                <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
               <h2></h2>
             </div>
           </div>
@@ -58,7 +58,7 @@
                 <h2 class="descriptions" id="thirdTemperature"></h2>
                 <input class="temperature"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
                 <h2 class="descriptions" id="thirdDuration"></h2>
-                <input class="duration"  id= "duration3" type="number" min="1" max="60"  value=%defaultD3%>
+                <input class="duration"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
               <h2></h2>
             </div>
           </div>
@@ -71,7 +71,7 @@
                 <h2 class="descriptions" id="fourthTemperature"></h2>
                 <input  class="temperature" id= "temperature4" type="number" min="1" max="230" value=%defaultT4%>
                 <h2 class="descriptions" id="fourthDuration"></h2>
-                <input  class="duration" id= "duration4" type="number" min="1" max="60" value=%defaultD4%>
+                <input  class="duration" id= "duration4" type="number" min="1" max="120" value=%defaultD4%>
               <h2></h2>
             </div>
           </div>
@@ -143,10 +143,10 @@
   let duration2Set = document.getElementById("duration2").value;
   let duration3Set = document.getElementById("duration3").value;
   let duration4Set = document.getElementById("duration4").value;
-  temperature1Name.innerHTML= temperature1Set+ "°C";
-  temperature2Name.innerHTML= temperature2Set+ "°C";
-  temperature3Name.innerHTML= temperature3Set+ "°C";
-  temperature4Name.innerHTML= temperature4Set+ "°C";
+  temperature1Name.innerHTML= temperature1Set+ "<sup>o</sup>C";
+  temperature2Name.innerHTML= temperature2Set+ "<sup>o</sup>C";
+  temperature3Name.innerHTML= temperature3Set+ "<sup>o</sup>C";
+  temperature4Name.innerHTML= temperature4Set+ "<sup>o</sup>C";
   duration1Name.innerHTML=duration1Set + " Mins";
   duration2Name.innerHTML=duration2Set + " Mins";
   duration3Name.innerHTML=duration3Set + " Mins";
@@ -157,6 +157,11 @@
   let temperatureInput2 = true;
   let temperatureInput3 = true;
   let temperatureInput4 = true;
+  let temperature = "0";
+  let duration = "0";
+  let maxTemp= "0";
+  let maxDuration= "0";
+  let selectedFunction=0;
   window.addEventListener('load', onLoad); //adds listeners to it
   function initWebSocket() {
     console.log('Trying to open a WebSocket connection...');
@@ -175,11 +180,11 @@
   function onMessage(event) { //Handles incoming message from the server (esp32 board)
     var state;
     let data = event.data.split(",");
-    let temperature = data[1];
-    let duration = data[3];
-    let maxTemp= data[5];
-    let maxDuration= data[7];
-    let selectedFunction=parseInt(data[9]);
+    temperature = data[1];
+    duration = data[3];
+    maxTemp= data[5];
+    maxDuration= data[7];
+    selectedFunction=parseInt(data[9]);
     document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
     document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): ${temperature}/${maxTemp}`;
     document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/${maxDuration}`;
@@ -437,6 +442,11 @@ function resetfunction(){
   document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
   defaultNavbar.style.display="flex";
   thirdNavbar.style.display="none";
+  temperature = "0";
+  duration = "0";
+  maxTemp= "0";
+  maxDuration= "0";
+  selectedFunction=0;
 }
 
 

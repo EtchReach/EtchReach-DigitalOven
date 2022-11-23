@@ -73,6 +73,7 @@ const int rotisseriePin = 15;
 
 // thermoprobe constants & variables
 float temp = 0;
+float readTemp = 0;
 unsigned long long prevTempMillis = 0;
 
 // logtime constants
@@ -438,8 +439,9 @@ float getTemperature()
 
 void monitorTemperature(bool bottomCoil)
 {
-  float readTemp = getTemperature();
+  readTemp = getTemperature();
   temp = (float)(receivedTemp.toInt());
+  //Serial.println(readTemp);
   if (readTemp < temp)
   {
     digitalWrite(upperPin, LOW);
@@ -457,7 +459,7 @@ void monitorTemperature(bool bottomCoil)
 
 void notifyClients()
 {
-  ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",max_temp," + String(receivedTemp)+ ",max_temp," + String(receivedDuration)+ ",function," + String(receivedFunction));
+  ws.textAll("temperature," + String(readTemp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",max_temp," + String(receivedTemp)+ ",max_temp," + String(receivedDuration)+ ",function," + String(receivedFunction));
 }
 
 void loop()
