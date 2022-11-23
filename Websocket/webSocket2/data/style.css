@@ -57,6 +57,7 @@ margin-top: 19px;
 display:flex;
 flex-direction: column;
 background-color: #D9D9D9;
+justify-content: center;
 }
 .statusstate{
     margin:0;
@@ -80,6 +81,7 @@ margin-top: 35px;
 display:flex;
 justify-content: space-evenly; 
 margin-top: 35px;
+margin-bottom:35px;
 }
 .firstSet{
 border-width: 3px;
@@ -88,6 +90,7 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 background-color: #FFB52E;
 border-style: solid;
 }
+
 .secondSet{
 border-width: 3px;
 border-radius:10px;
@@ -99,7 +102,7 @@ border-style: solid;
 border-width: 3px;
 border-radius:10px;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-background-color: #5FD85F;
+background-color: #F7A4A4;
 border-style: solid;
 }
 .fourthSet{
@@ -112,7 +115,8 @@ border-style: solid;
 .buttonInner{
 justify-content: space-between;
 width: 165px;
-height: 192px;
+display:flex;
+flex-direction: column;
 cursor: pointer;
 }
 .bottomnav{
@@ -152,4 +156,55 @@ cursor: pointer;
     align-items: center;
     justify-content: center;
     cursor: pointer;            
+}
+
+.alternatebottomnav{
+    margin-top:30px;
+    display:flex;
+    justify-content: space-between;
+    display: none;
+
+}
+.backbuttonicon{
+    width: 55px;
+}
+.backbutton{
+    margin-left:12px;
+    background-color: #8CC0DE;
+    border-radius: 14px;
+    height:70px;
+    width:86px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;     
+}
+.savebuttonicon{
+    padding-top:2px;
+    width:55px;
+}
+.savebutton{
+    align-items: center;
+    justify-content: center;
+    margin-right:12px;
+    background-color: #8CC0DE;
+    border-radius: 14px;
+    height:70px;
+    width:86px;
+    display:flex;
+    cursor: pointer;   
+}
+
+.function1{
+    display:block; 
+}
+
+.temperature{
+    display:none;
+}
+.duration{
+    display:none;
+}
+.function{
+    display:none;
 }
