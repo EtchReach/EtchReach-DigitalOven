@@ -121,6 +121,20 @@ unsigned long long current_time = 0;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
+void resetOven()
+{
+  current_time = millis();
+  last_time = millis();
+  receivedFunction = "0";
+  receivedTemp = "0";
+  receivedDuration = "0";
+  digitalWrite(upperPin, HIGH);
+  digitalWrite(lowerPin, HIGH);
+  digitalWrite(fanPin, HIGH);
+  digitalWrite(rotisseriePin, HIGH);
+  digitalWrite(bulbPin, HIGH);
+}
+
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 { // callback to handle the data from clients via websocket protocol
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
@@ -140,10 +154,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
       receivedDuration = String(strtok(NULL, ","));
       last_time = millis();
       last_send = millis();
-    }
-    else
-    {
-      if (strcmp((char *)ptr, "save") == 0)
+    } else if (strcmp((char *)ptr, "save") == 0) {
       {
         Serial.printf("Saving Configurations\n");
         char *settings = strtok(NULL, ",");
@@ -151,8 +162,10 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
         savePresets(settings);
         return;
       }
-      while (ptr != NULL)
-      {
+    } else if (strcmp((char*)ptr, "reset") == 0) {
+      resetOven();
+    } else {
+      while (ptr != NULL) {
         Serial.println(ptr);
         ptr = strtok(NULL, ",");
       }
@@ -361,11 +374,7 @@ void setup()
 
   Serial.begin(115200);
 
-  Serial.println("Before thermocouple");
-
   thermo.begin(MAX31865_3WIRE); // set to 2WIRE or 4WIRE as necessary, initialising thermoprobe
-
-  Serial.println("After thermocouple");
   
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
@@ -374,8 +383,6 @@ void setup()
     for (;;)
       ; // Don't proceed, loop forever
   }
-
-  Serial.println("After Screen");
 
   // Clear the buffer
   display.setTextColor(WHITE);
@@ -448,20 +455,6 @@ void monitorTemperature(bool bottomCoil)
   }
 }
 
-void resetOven()
-{
-  current_time = millis();
-  last_time = millis();
-  receivedFunction = "0";
-  receivedTemp = "0";
-  receivedDuration = "0";
-  digitalWrite(upperPin, HIGH);
-  digitalWrite(lowerPin, HIGH);
-  digitalWrite(fanPin, HIGH);
-  digitalWrite(rotisseriePin, HIGH);
-  digitalWrite(bulbPin, HIGH);
-}
-
 void notifyClients()
 {
   ws.textAll("temperature," + String(temp) + ",duration," + String((current_time - last_time) / (1000 * 60)));
@@ -488,31 +481,31 @@ void loop()
     case 1:
       Serial.println("Fermentation");
       digitalWrite(bulbPin, LOW);
-//      monitorTemperature(true);
+      monitorTemperature(true);
       break;
 
     case 2:
       Serial.println("Top & Bottom Heat");
-//      monitorTemperature(true);
+      monitorTemperature(true);
       break;
 
     case 3:
       Serial.println("Top Heat with Rotisserie");
       digitalWrite(rotisseriePin, LOW);
-//      monitorTemperature(false);
+      monitorTemperature(false);
       break;
 
     case 4:
       Serial.println("Top & Bottom Heat with Fan");
       digitalWrite(fanPin, LOW);
-//      monitorTemperature(true);
+      monitorTemperature(true);
       break;
 
     case 5:
       Serial.println("Top Heat with Fan & Rotisserie");
       digitalWrite(rotisseriePin, LOW);
       digitalWrite(fanPin, LOW);
-//      monitorTemperature(false);
+      monitorTemperature(false);
       break;
 
     default:

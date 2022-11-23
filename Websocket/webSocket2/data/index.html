@@ -374,8 +374,8 @@ function selectsecond(){
   if(z === "rgb(166, 104, 166)"){
     resetall();
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature2").innerText;
-    let duration = document.getElementById("duration2").innerText;
+    let temperature = document.getElementById("temperature2").value;
+    let duration = document.getElementById("duration2").value;
     websocket.send("function,2," + temperature + "," + duration);
   }
   else{
@@ -389,8 +389,8 @@ function selectthird(){
   if(z === "rgb(247, 164, 164)"){
     resetall();
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature3").innerText;
-    let duration = document.getElementById("duration3").innerText;
+    let temperature = document.getElementById("temperature3").value;
+    let duration = document.getElementById("duration3").value;
     websocket.send("function,3," + temperature + "," + duration);
   }
   else{
@@ -404,8 +404,8 @@ function selectfourth(){
   if(z === "rgb(16, 187, 229)"){
     resetall();
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature4").innerText;
-    let duration = document.getElementById("duration4").innerText;
+    let temperature = document.getElementById("temperature4").value;
+    let duration = document.getElementById("duration4").value;
     websocket.send("function,4," + temperature + "," + duration);
   }
   else{
