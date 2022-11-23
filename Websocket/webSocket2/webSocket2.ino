@@ -137,12 +137,13 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     ptr = strtok((char *)data, ",");
     if (strcmp((char *)ptr, "function") == 0)
     {
-      Serial.printf("%s\n", (char *)data);
-      Serial.printf("Yes\n"); // This will turn the oven on/off
+//      Serial.printf("%s\n", (char *)data);
+//      Serial.printf("Yes\n"); // This will turn the oven on/off
 
       receivedFunction = String(strtok(NULL, ","));
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
+      Serial.println(receivedFunction + receivedTemp + receivedDuration);
       last_time = millis();
       last_send = millis();
     }
@@ -468,7 +469,7 @@ void notifyClients()
 
 void loop()
 {
-  int duration = receivedDuration.toInt() * 1000;
+  int duration = receivedDuration.toInt() * 1000 * 60;
   int function = receivedFunction.toInt();
 
   // function != "0" => start oven

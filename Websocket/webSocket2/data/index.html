@@ -146,10 +146,10 @@
   }
   function initButton() {
     document.getElementById('button').addEventListener('click', toggle);
-    document.getElementById('firstbutton').addEventListener('click', toggle1);
-    document.getElementById('secondbutton').addEventListener('click', toggle2);
-    document.getElementById('thirdbutton').addEventListener('click', toggle3);
-    document.getElementById('fourthbutton').addEventListener('click', toggle4);
+    // document.getElementById('firstbutton').addEventListener('click', toggle1);
+    // document.getElementById('secondbutton').addEventListener('click', toggle2);
+    // document.getElementById('thirdbutton').addEventListener('click', toggle3);
+    // document.getElementById('fourthbutton').addEventListener('click', toggle4);
     document.getElementById('saveButton').addEventListener('click', toggleSave);
 
     document.getElementById('setting1').addEventListener('click', () => {
@@ -181,38 +181,38 @@
     //console.log("toggle");
     websocket.send("toggle");
   }
-  function toggle1(){
-    var temp = document.getElementById("temperature1").value;
-    var duration = document.getElementById("duration1").value;
-    var func = document.getElementById("function1").value;
-    var value= temp+','+duration+','+func
-    // console.log(value);
-    websocket.send(value);
-  }
-  function toggle2(){
-    var temp = document.getElementById("temperature2").value;
-    var duration = document.getElementById("duration2").value;
-    var func = document.getElementById("function2").value;
-    var value= temp+','+duration+','+func
-    //console.log(value);
-    websocket.send(value);
-  }
-  function toggle3(){
-    var temp = document.getElementById("temperature3").value;
-    var duration = document.getElementById("duration3").value;
-    var func = document.getElementById("function3").value;
-    var value= temp+','+duration+','+func
-    //console.log(value);
-    websocket.send(value);
-  }
-  function toggle4(){
-    var temp = document.getElementById("temperature4").value;
-    var duration = document.getElementById("duration4").value;
-    var func = document.getElementById("function4").value;
-    var value= temp+','+duration+','+func
-    //console.log(value);
-    websocket.send(value);
-  }
+  // function toggle1(){
+  //   var temp = document.getElementById("temperature1").value;
+  //   var duration = document.getElementById("duration1").value;
+  //   var func = document.getElementById("function1").value;
+  //   var value= temp+','+duration+','+func
+  //   // console.log(value);
+  //   websocket.send(value);
+  // }
+  // function toggle2(){
+  //   var temp = document.getElementById("temperature2").value;
+  //   var duration = document.getElementById("duration2").value;
+  //   var func = document.getElementById("function2").value;
+  //   var value= temp+','+duration+','+func
+  //   //console.log(value);
+  //   websocket.send(value);
+  // }
+  // function toggle3(){
+  //   var temp = document.getElementById("temperature3").value;
+  //   var duration = document.getElementById("duration3").value;
+  //   var func = document.getElementById("function3").value;
+  //   var value= temp+','+duration+','+func
+  //   //console.log(value);
+  //   websocket.send(value);
+  // }
+  // function toggle4(){
+  //   var temp = document.getElementById("temperature4").value;
+  //   var duration = document.getElementById("duration4").value;
+  //   var func = document.getElementById("function4").value;
+  //   var value= temp+','+duration+','+func
+  //   //console.log(value);
+  //   websocket.send(value);
+  // }
   function toggleSave(){
     var temp1 = document.getElementById("temperature1").value;
     var duration1 = document.getElementById("duration1").value;
@@ -299,6 +299,9 @@ function selectfirst(){
   if(z === "rgb(255, 181, 46)"){
     resetall();
     x.style.backgroundColor="green";
+    let temperature = document.getElementById("temperature1").innerText;
+    let duration = document.getElementById("duration1").innerText;
+    websocket.send("function,1," + temperature + "," + duration);
   }
   else{
     resetall();
