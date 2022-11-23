@@ -20,28 +20,54 @@ color: #143642;
 overflow: hidden;
 background-color: #143642;
 }
+.topnav{
+    font-size: medium;
+}
 body {
 margin: 0;
 }
 .content {
-padding: 30px;
 max-width: 600px;
-margin: 0 auto;
+}
+
+.titles{
+    text-decoration: underline;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: 800;
+}
+.fermentationdescription{
+    padding-top: 30px;
+}
+.descriptions{
+    margin-top: 10px;
+    line-height: 26px;
+    font-size:42px;
+    font-weight:800;
 }
 .card {
-background-color: #F8F7F9;;
+background-color: #D9D9D9;;
 box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
-padding-top:10px;
-padding-bottom:20px;
-}
-.buttons{
 display:flex;
 flex-direction: column;
+align-items: flex-start;
+}
+.buttons{
+margin-top: 19px;
+display:flex;
+flex-direction: column;
+background-color: #D9D9D9;
+}
+.statusstate{
+    margin:0;
+    text-decoration: underline;
 }
 .state {
-    font-size: 1.5rem;
-    color:#8c8c8c;
-    font-weight: bold;
+    font-size: medium;
+    color:black;
+    font-weight: bolder;
+    margin:0;
+
 }
 
 .toprow{
@@ -85,4 +111,45 @@ border-style: solid;
 } 
 .buttonInner{
 justify-content: space-between;
+width: 165px;
+height: 192px;
+cursor: pointer;
+}
+.bottomnav{
+    max-width: 600px;
+    margin-top: 30px;
+    display:flex;
+    justify-content: space-evenly;
+    height:100px;
+}
+.playbuttonicon{
+    background: #8CC0DE;
+    border-radius: 14px;
+    width: 60px;
+}
+.playbutton{
+    background-color: #8CC0DE;
+    border-radius: 14px;
+    width:180px;
+    height: 70px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.settingsbuttonicon{
+    width: 55px;
+}
+.settingsbutton{
+    background-color: #8CC0DE;
+    border-radius: 14px;
+    height:70px;
+    width:86px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;            
 }
