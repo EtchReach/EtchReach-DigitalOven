@@ -295,6 +295,18 @@ function hideblock(){
     function3.style.display="block";
     function4.style.display="block";
   }
+  let function1name = document.getElementById("firstTitle");
+  let function2name = document.getElementById("secondTitle");
+  let function3name = document.getElementById("thirdTitle");
+  let function4name = document.getElementById("fourthTitle");
+  let function1Set = document.getElementById("function1").value;
+  let function2Set = document.getElementById("function2").value;
+  let function3Set = document.getElementById("function3").value;
+  let function4Set = document.getElementById("function4").value;
+  function1name.innerHTML=functionnames[function1Set];
+  function2name.innerHTML=functionnames[function2Set];
+  function3name.innerHTML=functionnames[function3Set];
+  function4name.innerHTML=functionnames[function4];
 }
 function resetall(){
   let box1 = document.getElementById("firstSet");
