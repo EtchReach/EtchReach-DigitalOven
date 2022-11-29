@@ -16,6 +16,11 @@ font-size: 2.5rem;
 font-weight: bold;
 color: #143642;
 }
+.wholeApp{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
 .topnav {
 overflow: hidden;
 background-color: #143642;
@@ -27,7 +32,7 @@ body {
 margin: 0;
 }
 .content {
-max-width: 600px;
+width:100%;
 }
 
 .titles{
@@ -38,13 +43,20 @@ max-width: 600px;
 }
 
 .descriptions{
-    margin-top: 10px;
-    line-height: 26px;
+    margin-top: 20px;
+    line-height:50px;
     font-size:42px;
     font-weight:800;
 }
 .card {
-background-color: #D9D9D9;;
+background-color: #D9D9D9;
+box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
+display:flex;
+flex-direction: column;
+align-items: flex-start;
+}
+.menu{
+background-color: #D9D9D9;
 box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
 display:flex;
 flex-direction: column;
@@ -67,6 +79,16 @@ justify-content: center;
     font-weight: bolder;
     margin:0;
 
+}
+.functionOptions{
+    font-size: medium;
+    color:black;
+    font-weight: bolder;
+    margin:0;
+
+}
+.menu{
+    display:none;
 }
 
 .toprow{
@@ -118,7 +140,7 @@ flex-direction: column;
 cursor: pointer;
 }
 .bottomnav{
-    max-width: 600px;
+    width: 100%;
     margin-top: 30px;
     display:flex;
     justify-content: space-evenly;
@@ -157,6 +179,7 @@ cursor: pointer;
 }
 
 .alternatebottomnav{
+    width:100%;
     margin-top:30px;
     display:flex;
     justify-content: space-between;
@@ -201,6 +224,7 @@ cursor: pointer;
     align-items: center;
     background-color: #8CC0DE;
     border-radius: 14px;
+    cursor:pointer;
 }
 .thirdBottomNav{
     display:none;

@@ -12,103 +12,115 @@
   <div class="topnav">
     <h1 class="topnav name">Enable X Slice Cafe Digital Oven</h1>
   </div>
-  <div class="content">
-    <div class="card" id="content">
-      <h2 class="statusstate">Status</h2>
-      <p class="state state-function">Function: NIL</p>
-      <p class="state state-temperature">Temp(<sup>o</sup>C):NIL</p>
-      <p class="state state-duration">Duration(mins): NIL</p>
-    </div>
+  <div class="wholeApp">
+    <div class="content">
+      <div class="card" id="content">
+        <h2 class="statusstate">Status</h2>
+        <p class="state state-function">Function: NIL</p>
+        <p class="state state-temperature">Temp(<sup>o</sup>C):NIL</p>
+        <p class="state state-duration">Duration(mins): NIL</p>
+      </div>
+      <div>
+        <div class="menu" id ="menu">
+          <h2 class="statusstate">Function Menu</h2>
+          <p class="functionOptions">Enter 1 for Fermentation</p>
+          <p class="functionOptions">Enter 2 for Top & Bottom Heat</p>
+          <p class="functionOptions">Enter 3 for Top heat with Rotisserie</p>
+          <p class="functionOptions">Enter 4 for Top & Bottom Heat with Fan</p>
+          <p class="functionOptions">Enter 5 for Top Heat with Fan & Rotisserie</p>
+        </div>
+      </div>
 
-    <div class="buttons">
-      <div class="toprow">
-        <div class="firstSet" id="firstSet" onclick="selectfirst()">
-          <div class="first">
-            <div class="buttonInner">
-              <h2 class="titles" id="firstTitle"> </h2>
-              <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
-              <h2 class="descriptions" id="firstTemperature"></h2>
-              <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
-              <h2 class="descriptions" id="firstDuration"></h2>
-              <input class = "duration"  id= "duration1" type="number" min="1" max="120" value=%defaultD1%>
-              <h2></h2>
+      <div class="buttons">
+        <div class="toprow">
+          <div class="firstSet" id="firstSet" onclick="selectfirst()">
+            <div class="first">
+              <div class="buttonInner">
+                <h2 class="titles" id="firstTitle"> </h2>
+                <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
+                <h2 class="descriptions" id="firstTemperature"></h2>
+                <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
+                <h2 class="descriptions" id="firstDuration"></h2>
+                <input class = "duration"  id= "duration1" type="number" min="1" max="120" value=%defaultD1%>
+                <h2></h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="secondSet" id="secondSet" onclick="selectsecond()">
-          <div class="second">
-            <div class="buttonInner">
-              <h2 class="titles" id="secondTitle"> </h2>
-              <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
-                <h2 class="descriptions" id="secondTemperature"></h2>
-                <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
-                <h2 class="descriptions" id="secondDuration"></h2>
-                <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
-              <h2></h2>
+          <div class="secondSet" id="secondSet" onclick="selectsecond()">
+            <div class="second">
+              <div class="buttonInner">
+                <h2 class="titles" id="secondTitle"> </h2>
+                <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
+                  <h2 class="descriptions" id="secondTemperature"></h2>
+                  <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
+                  <h2 class="descriptions" id="secondDuration"></h2>
+                  <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
+                <h2></h2>
+              </div>
             </div>
           </div>
-        </div>
-      </div>  
-      <div class="bottomrow" >
-        <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
-          <div class="third">
-            <div class="buttonInner">
-              <h2 class="titles" id="thirdTitle"> </h2>
-              <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
-                <h2 class="descriptions" id="thirdTemperature"></h2>
-                <input class="temperature"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
-                <h2 class="descriptions" id="thirdDuration"></h2>
-                <input class="duration"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
-              <h2></h2>
+        </div>  
+        <div class="bottomrow" >
+          <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
+            <div class="third">
+              <div class="buttonInner">
+                <h2 class="titles" id="thirdTitle"> </h2>
+                <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
+                  <h2 class="descriptions" id="thirdTemperature"></h2>
+                  <input class="temperature"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
+                  <h2 class="descriptions" id="thirdDuration"></h2>
+                  <input class="duration"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
+                <h2></h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
-          <div class="fourth">
-            <div class="buttonInner">
-              <h2 class="titles" id="fourthTitle"></h2>
-              <input class="function" id= "function4" type="number" min="1" max="5" value=%defaultF4%>
-                <h2 class="descriptions" id="fourthTemperature"></h2>
-                <input  class="temperature" id= "temperature4" type="number" min="1" max="230" value=%defaultT4%>
-                <h2 class="descriptions" id="fourthDuration"></h2>
-                <input  class="duration" id= "duration4" type="number" min="1" max="120" value=%defaultD4%>
-              <h2></h2>
+          <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
+            <div class="fourth">
+              <div class="buttonInner">
+                <h2 class="titles" id="fourthTitle"></h2>
+                <input class="function" id= "function4" type="number" min="1" max="5" value=%defaultF4%>
+                  <h2 class="descriptions" id="fourthTemperature"></h2>
+                  <input  class="temperature" id= "temperature4" type="number" min="1" max="230" value=%defaultT4%>
+                  <h2 class="descriptions" id="fourthDuration"></h2>
+                  <input  class="duration" id= "duration4" type="number" min="1" max="120" value=%defaultD4%>
+                <h2></h2>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="bottomnav" id="defaultbottomnav">
-    <div class="playbutton" id = "playbutton">
-      <svg class="playbuttonicon" xmlns="http://www.w3.org/2000/svg"class="w-6 h-20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-      </svg> 
+    <div class="bottomnav" id="defaultbottomnav">
+      <div class="playbutton" id = "playbutton">
+        <svg class="playbuttonicon" xmlns="http://www.w3.org/2000/svg"class="w-6 h-20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+        </svg> 
+      </div>
+      <div class="settingsbutton" onclick="hideblock()">
+        <svg class="settingsbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>      
+      </div>     
     </div>
-    <div class="settingsbutton" onclick="hideblock()">
-      <svg class="settingsbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>      
-    </div>     
-  </div>
-  <div class="alternatebottomnav" id="alternatebottomnav">
-    <div class="backbutton" onclick="hideblock()">
-      <svg class="backbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-      </svg>
-    </div>
-    <div class="savebutton" onclick=toggleSave()>
-      <div class="savebuttonicon">
-        <svg class = "savebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+    <div class="alternatebottomnav" id="alternatebottomnav">
+      <div class="backbutton" onclick="hideblock()">
+        <svg class="backbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
         </svg>
       </div>
+      <div class="savebutton" onclick=toggleSave()>
+        <div class="savebuttonicon">
+          <svg class = "savebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+          </svg>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="thirdBottomNav" id = "thirdBottomNav">
-    <div class="resetButtonClass">
-      <h3 class="resetButton" onclick="resetfunction()"> Reset </h3>
+    <div class="thirdBottomNav" id = "thirdBottomNav">
+      <div class="resetButtonClass">
+        <h3 class="resetButton" onclick="resetfunction()"> Reset </h3>
+      </div>
     </div>
   </div>
 <script>
@@ -281,6 +293,7 @@
   }
 
 function hideblock(){
+  let functionMenu = document.getElementById("menu");
   let x=  document.getElementById("content");
   let y= document.getElementById("defaultbottomnav");
   let z= document.getElementById("alternatebottomnav");
@@ -312,6 +325,7 @@ function hideblock(){
     function2.style.display="none";
     function3.style.display="none";
     function4.style.display="none";
+    functionMenu.style.display="none";
   }
   else{
     x.style.display="none";
@@ -329,6 +343,7 @@ function hideblock(){
     function2.style.display="block";
     function3.style.display="block";
     function4.style.display="block";
+    functionMenu.style.display="block";
   }
 
   let function1Set = document.getElementById("function1").value;
@@ -367,6 +382,11 @@ function resetall(){
   box4.style.backgroundColor="#10BBE5";
 } 
 function selectfirst(){
+  let menu = document.getElementById("menu");
+  let check = window.getComputedStyle(menu,null).display;
+  if(check != "none"){
+    return;
+  }
   let x = document.getElementById("firstSet");
   let y=window.getComputedStyle(x);
   let z = y.getPropertyValue("background-color");
@@ -384,6 +404,11 @@ function selectfirst(){
   }
 }
 function selectsecond(){
+  let menu = document.getElementById("menu");
+  let check = window.getComputedStyle(menu,null).display;
+  if(check != "none"){
+    return;
+  }
   let x = document.getElementById("secondSet");
   let y=window.getComputedStyle(x);
   let z = y.getPropertyValue("background-color");
@@ -401,6 +426,11 @@ function selectsecond(){
   }
 }
 function selectthird(){
+  let menu = document.getElementById("menu");
+  let check = window.getComputedStyle(menu,null).display;
+  if(check != "none"){
+    return;
+  }
   let x = document.getElementById("thirdSet");
   let y=window.getComputedStyle(x);
   let z = y.getPropertyValue("background-color");
@@ -418,6 +448,11 @@ function selectthird(){
   }
 }
 function selectfourth(){
+  let menu = document.getElementById("menu");
+  let check = window.getComputedStyle(menu,null).display;
+  if(check != "none"){
+    return;
+  }
   let x = document.getElementById("fourthSet");
   let y=window.getComputedStyle(x);
   let z = y.getPropertyValue("background-color");
