@@ -2,11 +2,8 @@
 <head>
   <title>Enable X Slice Cafe Digital Oven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="data:,">
+  <link rel="icon" type="image/x-icon" href="Reach.png">
   <link rel="stylesheet" type="text/css" href="style.css">
-<title>ESP Web Server</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:,">
 </head>
 <body>
   <div class="topnav">
@@ -211,7 +208,7 @@
     // document.getElementById('secondbutton').addEventListener('click', toggle2);
     // document.getElementById('thirdbutton').addEventListener('click', toggle3);
     // document.getElementById('fourthbutton').addEventListener('click', toggle4);
-    document.getElementById('saveButton').addEventListener('click', toggleSave);
+    // document.getElementById('saveButton').addEventListener('click', toggleSave);
 
     document.getElementById('setting1').addEventListener('click', () => {
       temperatureInput1 = !temperatureInput1;
@@ -398,6 +395,7 @@ function selectfirst(){
     let temperature = document.getElementById("temperature1").value;
     let duration = document.getElementById("duration1").value;
     let functionSent = document.getElementById("function1").value;
+    console.log("function," + functionSent+"," + temperature + "," + duration);
     websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
@@ -421,6 +419,7 @@ function selectsecond(){
     let temperature = document.getElementById("temperature2").value;
     let duration = document.getElementById("duration2").value;
     let functionSent = document.getElementById("function2").value;
+    console.log("function," + functionSent+"," + temperature + "," + duration);
     websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
@@ -444,6 +443,7 @@ function selectthird(){
     let temperature = document.getElementById("temperature3").value;
     let duration = document.getElementById("duration3").value;
     let functionSent = document.getElementById("function3").value;
+    console.log("function," + functionSent+"," + temperature + "," + duration);
     websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
@@ -467,6 +467,7 @@ function selectfourth(){
     let temperature = document.getElementById("temperature4").value;
     let duration = document.getElementById("duration4").value;
     let functionSent = document.getElementById("function4").value;
+    console.log("function," + functionSent+"," + temperature + "," + duration);
     websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{

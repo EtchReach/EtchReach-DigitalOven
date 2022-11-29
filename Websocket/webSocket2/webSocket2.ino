@@ -9,6 +9,7 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include "SPIFFS.h"
+#include "Credentials.h"
 
 // Oven
 #include <SPI.h>
@@ -86,13 +87,7 @@ const long millisToHour = 3600000;
 const int millisToMin = 60000;
 const int millisToSec = 1000;
 
-// Replace with your network credentials
-// const char* ssid = "Wong’s iPhone";
-// const char* password = "yufei12345";
-
 // Websocket Settings
-const char *ssid = "Xiaomi_7660";
-const char *password = "spaghetti";
 bool ledState = 0;
 const int ledPin = 2;
 String temperature1;
@@ -125,8 +120,7 @@ unsigned long long current_time = 0;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
-void resetOven()
-{
+void resetOven() {
   current_time = millis();
   last_time = millis();
   receivedFunction = "0";
@@ -452,7 +446,7 @@ void notifyClients() {
 
 void loop() {
   int totalDuration = receivedDuration.toInt() * 1000 * 60;
-  int durationElapsed = (current_time - last_time)/(1000*60);
+  int durationElapsed = current_time - last_time;
   int function = receivedFunction.toInt();
 
   // function != l0 => start oven
@@ -471,32 +465,33 @@ void loop() {
     switch (function) {
       case 1:
         digitalWrite(bulbPin, LOW);
+        readTemp = getTemperature();
         display.println("Fermentation");
         display.display();
         break;
 
       case 2:
         monitorTemperature(true);
-        display.println("Top & Bottom Heat");
+        display.println("Top & Btm Heat");
         break;
   
       case 3:
         digitalWrite(rotisseriePin, LOW);
         monitorTemperature(false);
-        display.println("Top Heat with Rotisserie");
+        display.println("Top Heat + Roti");
         break;
   
       case 4:
         digitalWrite(fanPin, LOW);
         monitorTemperature(true);
-        display.println("Top & Bottom Heat with Fan");
+        display.println("Top & Btm Heat + Fan");
         break;
   
       case 5:
         digitalWrite(rotisseriePin, LOW);
         digitalWrite(fanPin, LOW);
         monitorTemperature(false);
-        display.println("Top Heat with Fan & Rotisserie");
+        display.println("Top Heat + Fan & Roti");
         break;
   
       default:
@@ -506,11 +501,11 @@ void loop() {
     }
 
     display.println("--------------------");
-    display.println("Temperature: " + String(readTemp) + "/" + receivedTemp);
-    display.println("Duration: " + String(durationElapsed) + "/" + receivedDuration);
+    display.println("Temp: " + String(readTemp) + "/" + receivedTemp);
+    display.println("Duration: " + String(durationElapsed / (1000 * 60)) + "/" + receivedDuration);
     display.display();
 
-    Serial.println("Current Time: " + String(current_time) + " | Last Time: " + String(last_time) + " | Interval: " + String(current_time - last_time));
+    Serial.println("Current Time: " + String(current_time) + " | Last Time: " + String(last_time) + " | durationElapsed: " + String(durationElapsed) + " | totalDuration: " + String(totalDuration));
 
     if (current_time - last_send >= sendInterval) {
       last_send = current_time;
