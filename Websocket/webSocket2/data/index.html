@@ -397,7 +397,8 @@ function selectfirst(){
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature1").value;
     let duration = document.getElementById("duration1").value;
-    websocket.send("function,1," + temperature + "," + duration);
+    let functionSent = document.getElementById("function1").value;
+    websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
     resetall();
@@ -419,7 +420,8 @@ function selectsecond(){
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature2").value;
     let duration = document.getElementById("duration2").value;
-    websocket.send("function,2," + temperature + "," + duration);
+    let functionSent = document.getElementById("function2").value;
+    websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
     resetall();
@@ -441,7 +443,8 @@ function selectthird(){
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature3").value;
     let duration = document.getElementById("duration3").value;
-    websocket.send("function,3," + temperature + "," + duration);
+    let functionSent = document.getElementById("function3").value;
+    websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
     resetall();
@@ -463,7 +466,8 @@ function selectfourth(){
     x.style.backgroundColor="green";
     let temperature = document.getElementById("temperature4").value;
     let duration = document.getElementById("duration4").value;
-    websocket.send("function,4," + temperature + "," + duration);
+    let functionSent = document.getElementById("function3").value;
+    websocket.send("function," + functionSent+"," + temperature + "," + duration);
   }
   else{
     resetall();
