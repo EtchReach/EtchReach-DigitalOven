@@ -502,8 +502,8 @@ void loop() {
     }
 
     display.println("--------------------");
-    display.println("Temperature: " + readTemp + "/" + receivedTemp);
-    display.println("Duration: " +  + durationElapsed + "/" + totalDuration);
+    display.println("Temperature: " + String(readTemp) + "/" + receivedTemp);
+    display.println("Duration: " + String(durationElapsed) + "/" + String(totalDuration));
     display.display();
 
     Serial.println("Current Time: " + String(current_time) + " | Last Time: " + String(last_time) + " | Interval: " + String(current_time - last_time));
