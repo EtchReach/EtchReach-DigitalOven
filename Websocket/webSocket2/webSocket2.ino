@@ -59,16 +59,19 @@ Adafruit_MAX31865 thermo = Adafruit_MAX31865(05, 23, 19, 18);
 // bool fan = false;
 // bool rotisserie = false;
 
-// 18 yellow fan #4
-// 5 purple lower #3
-// 4 orange bulb #6
-// 2 blue upper #2
-// 15 green rotisserie #5
+// RELAY CONNECTIONS (LEFT -> RIGHT)
+// GND
+// TX2 GPIO 17 BULB
+// RX2 GPIO 16 LOWER COIL
+// D2 GPIO 2 UPPER COIL
+// D4 GPIO 4 FAN
+// D15 GPIO 15 ROTISSERIE
+// VIN
 
-const int upperPin = 2;
-const int lowerPin = 16;
-const int bulbPin = 4;
-const int fanPin = 17;
+const int lowerPin = 16; // RX2
+const int bulbPin = 2;
+const int upperPin = 4;
+const int fanPin = 17; // TX2
 const int rotisseriePin = 15;
 
 // thermoprobe constants & variables
