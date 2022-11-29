@@ -462,6 +462,7 @@ void loop() {
     // function == "4" => Top & Bottom Heat with Fan => Fan on, Top & Bottom Coils
     // function == "5" => Top Heat with Fan & Rotisserie => Fan on & Rotisserie on, Top & Bottom Coils
 
+    display.clearDisplay();
     display.setCursor(0,0);
 
     switch (function) {
@@ -503,7 +504,7 @@ void loop() {
 
     display.println("--------------------");
     display.println("Temperature: " + String(readTemp) + "/" + receivedTemp);
-    display.println("Duration: " + String(durationElapsed) + "/" + String(totalDuration));
+    display.println("Duration: " + String(durationElapsed) + "/" + receivedDuration);
     display.display();
 
     Serial.println("Current Time: " + String(current_time) + " | Last Time: " + String(last_time) + " | Interval: " + String(current_time - last_time));
