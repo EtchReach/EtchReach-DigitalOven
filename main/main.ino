@@ -97,7 +97,7 @@ void setup() {
   // Clear the buffer
   display.clearDisplay();
   display.setTextColor(WHITE);
-  display.setTextSize(2);
+  display.display();
 }
 
 //void loop() {
@@ -132,7 +132,11 @@ void setup() {
 
 void loop() {
   display.setCursor(0,0);
-  display.print("Key: 1");
+  display.setTextSize(1);
+  display.println("Fermentation");
+  display.println("--------------------");
+  display.println("Temperature: 12/12");
+  display.println("Duration: 12/12");
   display.display();
 }
 

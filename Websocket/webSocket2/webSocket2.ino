@@ -136,8 +136,8 @@ void resetOven()
   digitalWrite(bulbPin, HIGH);
 }
 
-void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
-{ // callback to handle the data from clients via websocket protocol
+// callback to handle the data from clients via websocket protocol
+void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) { 
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
   if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
   {
@@ -146,23 +146,18 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
     char *ptr;
     ptr = strtok((char *)data, ",");
     Serial.println(String(ptr));
-    if (strcmp((char *)ptr, "function") == 0)
-    {
-//      Serial.printf("%s\n", (char *)data);
-//      Serial.printf("Yes\n"); // This will turn the oven on/off
+    if (strcmp((char *)ptr, "function") == 0) {
       receivedFunction = String(strtok(NULL, ","));
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
       last_time = millis();
       last_send = millis();
     } else if (strcmp((char *)ptr, "save") == 0) {
-      {
-        Serial.printf("Saving Configurations\n");
-        char *settings = strtok(NULL, ",");
-        Serial.printf("%s\n", settings);
-        savePresets(settings);
-        return;
-      }
+      Serial.printf("Saving Configurations\n");
+      char *settings = strtok(NULL, ",");
+      Serial.printf("%s\n", settings);
+      savePresets(settings);
+      return;
     } else if (strcmp((char*)ptr, "reset") == 0) {
       resetOven();
     } else {
@@ -386,8 +381,10 @@ void setup()
   }
 
   // Clear the buffer
+  display.clearDisplay();
   display.setTextColor(WHITE);
-  display.setTextSize(2);
+  display.setTextSize(1);
+  display.display();
 }
 
 float getTemperature()
@@ -403,32 +400,25 @@ float getTemperature()
 
   // Check and print any faults
   uint8_t fault = thermo.readFault();
-  if (fault)
-  {
+  if (fault) {
     Serial.print("Fault 0x");
     Serial.println(fault, HEX);
-    if (fault & MAX31865_FAULT_HIGHTHRESH)
-    {
+    if (fault & MAX31865_FAULT_HIGHTHRESH) {
       Serial.println("RTD High Threshold");
     }
-    if (fault & MAX31865_FAULT_LOWTHRESH)
-    {
+    if (fault & MAX31865_FAULT_LOWTHRESH) {
       Serial.println("RTD Low Threshold");
     }
-    if (fault & MAX31865_FAULT_REFINLOW)
-    {
+    if (fault & MAX31865_FAULT_REFINLOW) {
       Serial.println("REFIN- > 0.85 x Bias");
     }
-    if (fault & MAX31865_FAULT_REFINHIGH)
-    {
+    if (fault & MAX31865_FAULT_REFINHIGH) {
       Serial.println("REFIN- < 0.85 x Bias - FORCE- open");
     }
-    if (fault & MAX31865_FAULT_RTDINLOW)
-    {
+    if (fault & MAX31865_FAULT_RTDINLOW) {
       Serial.println("RTDIN- < 0.85 x Bias - FORCE- open");
     }
-    if (fault & MAX31865_FAULT_OVUV)
-    {
+    if (fault & MAX31865_FAULT_OVUV) {
       Serial.println("Under/Over voltage");
     }
     thermo.clearFault();
@@ -437,97 +427,97 @@ float getTemperature()
   return (thermo.temperature(RNOMINAL, RREF));
 }
 
-void monitorTemperature(bool bottomCoil)
-{
+void monitorTemperature(bool bottomCoil) {
   readTemp = getTemperature();
   temp = (float)(receivedTemp.toInt());
   //Serial.println(readTemp);
-  if (readTemp < temp)
-  {
+  if (readTemp < temp) {
     digitalWrite(upperPin, LOW);
-    if (bottomCoil)
-    {
+    if (bottomCoil) {
       digitalWrite(lowerPin, LOW);
     }
   }
-  else
-  {
+  else {
     digitalWrite(upperPin, HIGH);
     digitalWrite(lowerPin, HIGH);
   }
 }
 
-void notifyClients()
-{
-  ws.textAll("temperature," + String(readTemp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",max_temp," + String(receivedTemp)+ ",max_temp," + String(receivedDuration)+ ",function," + String(receivedFunction));
+void notifyClients() {
+  ws.textAll("temperature," + String(readTemp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",receivedTemp," + String(receivedTemp)+ ",receivedFunction," + String(receivedDuration)+ ",function," + String(receivedFunction));
 }
 
-void loop()
-{
-  int duration = receivedDuration.toInt() * 1000 * 60;
+void loop() {
+  int totalDuration = receivedDuration.toInt() * 1000 * 60;
+  int durationElapsed = (current_time - last_time)/(1000*60);
   int function = receivedFunction.toInt();
 
-  // function != "0" => start oven
-  if (function != 0)
-  {
+  // function != l0 => start oven
+  if (function != 0) {
     current_time = millis();
 
-    // function == "1" => Fermentation => Bulb on, Top & Bottom Coils
+    // function == "1" => Fermentation => Bulb on
     // function == "2" => Top & Bottom Heat => Top & Bottom Coils
     // function == "3" => Top Heat with Rotisserie => Rotisserie on, Top Coil
     // function == "4" => Top & Bottom Heat with Fan => Fan on, Top & Bottom Coils
     // function == "5" => Top Heat with Fan & Rotisserie => Fan on & Rotisserie on, Top & Bottom Coils
 
-    switch (function)
-    {
-    case 1:
-      Serial.println("Fermentation");
-      digitalWrite(bulbPin, LOW);
-      monitorTemperature(true);
-      break;
+    display.setCursor(0,0);
 
-    case 2:
-      Serial.println("Top & Bottom Heat");
-      monitorTemperature(true);
-      break;
+    switch (function) {
+      case 1:
+        digitalWrite(bulbPin, LOW);
+        display.println("Fermentation");
+        display.display();
+        break;
 
-    case 3:
-      Serial.println("Top Heat with Rotisserie");
-      digitalWrite(rotisseriePin, LOW);
-      monitorTemperature(false);
-      break;
-
-    case 4:
-      Serial.println("Top & Bottom Heat with Fan");
-      digitalWrite(fanPin, LOW);
-      monitorTemperature(true);
-      break;
-
-    case 5:
-      Serial.println("Top Heat with Fan & Rotisserie");
-      digitalWrite(rotisseriePin, LOW);
-      digitalWrite(fanPin, LOW);
-      monitorTemperature(false);
-      break;
-
-    default:
-      resetOven();
-      break;
+      case 2:
+        monitorTemperature(true);
+        display.println("Top & Bottom Heat");
+        break;
+  
+      case 3:
+        digitalWrite(rotisseriePin, LOW);
+        monitorTemperature(false);
+        display.println("Top Heat with Rotisserie");
+        break;
+  
+      case 4:
+        digitalWrite(fanPin, LOW);
+        monitorTemperature(true);
+        display.println("Top & Bottom Heat with Fan");
+        break;
+  
+      case 5:
+        digitalWrite(rotisseriePin, LOW);
+        digitalWrite(fanPin, LOW);
+        monitorTemperature(false);
+        display.println("Top Heat with Fan & Rotisserie");
+        break;
+  
+      default:
+        resetOven();
+        display.println("Unknown function");
+        break;
     }
 
-    if (current_time - last_send >= sendInterval)
-    {
+    display.println("--------------------");
+    display.println("Temperature: " + readTemp + "/" + receivedTemp);
+    display.println("Duration: " +  + durationElapsed + "/" + totalDuration);
+    display.display();
+
+    Serial.println("Current Time: " + String(current_time) + " | Last Time: " + String(last_time) + " | Interval: " + String(current_time - last_time));
+
+    if (current_time - last_send >= sendInterval) {
       last_send = current_time;
       notifyClients();
     }
 
-    if (current_time - last_time >= duration)
-    {
+    if (durationElapsed >= totalDuration) {
       resetOven();
     }
   }
-  else
-  { // function == "0" => stop oven
+  else { // function == "0" => stop oven
     resetOven();
   }
 
