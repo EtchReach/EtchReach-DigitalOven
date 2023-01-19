@@ -7,7 +7,8 @@
 </head>
 <body>
   <div class="topnav">
-    <h1 class="topnav name">Enable X Slice Cafe Digital Oven</h1>
+    <img class ="reachlogo"src = "./pictures/Reach.png"/>
+    <h1 class="topnav-name">Enable X Slice Cafe Digital Oven</h1>
   </div>
   <div class="wholeApp">
     <div class="content">
@@ -27,13 +28,12 @@
           <p class="functionOptions">Enter 5 for Top Heat with Fan & Rotisserie</p>
         </div>
       </div>
-
       <div class="buttons">
-        <div class="toprow">
           <div class="firstSet" id="firstSet" onclick="selectfirst()">
-            <div class="first">
-              <div class="buttonInner">
-                <h2 class="titles" id="firstTitle"> </h2>
+            <div class="firstwrapper">
+              <div class="buttonInner grill-box">
+                <img class="grill" src="./pictures/grill.png"/>
+                <h2 class="titles" id="firstTitle">Grill</h2>
                 <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
                 <h2 class="descriptions" id="firstTemperature"></h2>
                 <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
@@ -46,7 +46,8 @@
           <div class="secondSet" id="secondSet" onclick="selectsecond()">
             <div class="second">
               <div class="buttonInner">
-                <h2 class="titles" id="secondTitle"> </h2>
+                <img class="baking" src="./pictures/baking.png"/>
+                <h2 class="titles" id="secondTitle">Bake</h2>
                 <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
                   <h2 class="descriptions" id="secondTemperature"></h2>
                   <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
@@ -55,13 +56,12 @@
                 <h2></h2>
               </div>
             </div>
-          </div>
-        </div>  
-        <div class="bottomrow" >
+          </div> 
           <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
             <div class="third">
               <div class="buttonInner">
-                <h2 class="titles" id="thirdTitle"> </h2>
+                <img  class="rotisserie" src="./pictures/rotisserie.png"/>
+                <h2 class="titles" id="thirdTitle">Rotisserie </h2>
                 <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
                   <h2 class="descriptions" id="thirdTemperature"></h2>
                   <input class="temperature"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
@@ -71,7 +71,7 @@
               </div>
             </div>
           </div>
-          <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
+          <!-- <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
             <div class="fourth">
               <div class="buttonInner">
                 <h2 class="titles" id="fourthTitle"></h2>
@@ -83,8 +83,7 @@
                 <h2></h2>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
       </div>
     </div>
     <div class="bottomnav" id="defaultbottomnav">
@@ -123,43 +122,43 @@
 <script>
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let thirdNavbar = document.getElementById("thirdBottomNav");
-  let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
-  let function1name = document.getElementById("firstTitle");
-  let function2name = document.getElementById("secondTitle");
-  let function3name = document.getElementById("thirdTitle");
-  let function4name = document.getElementById("fourthTitle");
-  let function1Set = document.getElementById("function1").value;
-  let function2Set = document.getElementById("function2").value;
-  let function3Set = document.getElementById("function3").value;
-  let function4Set = document.getElementById("function4").value;
-  function1name.innerHTML=functionnames[function1Set];
-  function2name.innerHTML=functionnames[function2Set];
-  function3name.innerHTML=functionnames[function3Set];
-  function4name.innerHTML=functionnames[function4Set];
+  // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
+  // let function1name = document.getElementById("firstTitle");
+  // let function2name = document.getElementById("secondTitle");
+  // let function3name = document.getElementById("thirdTitle");
+  // let function4name = document.getElementById("fourthTitle");
+  // let function1Set = document.getElementById("function1").value;
+  // let function2Set = document.getElementById("function2").value;
+  // let function3Set = document.getElementById("function3").value;
+  // let function4Set = document.getElementById("function4").value;
+  // function1name.innerHTML=functionnames[function1Set];
+  // function2name.innerHTML=functionnames[function2Set];
+  // function3name.innerHTML=functionnames[function3Set];
+  // function4name.innerHTML=functionnames[function4Set];
   let temperature1Name = document.getElementById("firstTemperature");
   let temperature2Name = document.getElementById("secondTemperature");
   let temperature3Name = document.getElementById("thirdTemperature");
-  let temperature4Name = document.getElementById("fourthTemperature");
+  // let temperature4Name = document.getElementById("fourthTemperature");
   let duration1Name = document.getElementById("firstDuration");
   let duration2Name = document.getElementById("secondDuration");
   let duration3Name = document.getElementById("thirdDuration");
-  let duration4Name = document.getElementById("fourthDuration");
+  // let duration4Name = document.getElementById("fourthDuration");
   let temperature1Set = document.getElementById("temperature1").value;
   let temperature2Set = document.getElementById("temperature2").value;
   let temperature3Set = document.getElementById("temperature3").value;
-  let temperature4Set = document.getElementById("temperature4").value;
+  // let temperature4Set = document.getElementById("temperature4").value;
   let duration1Set = document.getElementById("duration1").value;
   let duration2Set = document.getElementById("duration2").value;
   let duration3Set = document.getElementById("duration3").value;
-  let duration4Set = document.getElementById("duration4").value;
+  // let duration4Set = document.getElementById("duration4").value;
   temperature1Name.innerHTML= temperature1Set+ "<sup>o</sup>C";
   temperature2Name.innerHTML= temperature2Set+ "<sup>o</sup>C";
   temperature3Name.innerHTML= temperature3Set+ "<sup>o</sup>C";
-  temperature4Name.innerHTML= temperature4Set+ "<sup>o</sup>C";
+  // temperature4Name.innerHTML= temperature4Set+ "<sup>o</sup>C";
   duration1Name.innerHTML=duration1Set + " Mins";
   duration2Name.innerHTML=duration2Set + " Mins";
   duration3Name.innerHTML=duration3Set + " Mins";
-  duration4Name.innerHTML=duration4Set + " Mins";
+  // duration4Name.innerHTML=duration4Set + " Mins";
   var gateway = `ws://${window.location.hostname}/ws`; //gets the webserver IP address
   var websocket;
   let temperatureInput1 = true;
