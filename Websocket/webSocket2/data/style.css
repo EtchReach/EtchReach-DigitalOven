@@ -135,8 +135,8 @@ margin-right:7%;
 .baking{
     height:30%;
     width:30%;
-    max-height:100px;   
-    max-width:100px;
+    max-height:80px;   
+    max-width:80px;
 }
 .secondSet{
 border-width: 3px;
@@ -144,9 +144,11 @@ border-radius:10px;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 background-color: #A668A6;
 border-style: solid;
-margin-top: 50px;
-margin-right:7%;
+max-height:150px;
+margin-top:4%;
+max-width:1500px;
 margin-left:7%;
+margin-right:7%;
 }
 
 .rotisserie{
