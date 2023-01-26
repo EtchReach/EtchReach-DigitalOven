@@ -195,19 +195,38 @@ align-items: center;
 }
 .bottomnav{
     width: 100%;
-    margin-top: 30px;
+    padding-top: 30px;
     display:flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height:100px;
+    background: #07a0a2;
+    border-width:1px;
+    border-color: black;
+    border-style:solid;
 }
-.playbuttonicon{
+
+.leftside{
+    cursor:pointer;
+    width:50%;
+    
+}
+
+.border{
+    width:2px;
+    background-color: black;
+    margin-top:-30px;
+}
+.rightside{
+    cursor:pointer;
+    width:50%;
+}
+/* .playbuttonicon{
     background: #8CC0DE;
     border-radius: 14px;
     width: 60px;
 }
 .playbutton{
     background-color: #8CC0DE;
-    border-radius: 14px;
     width:180px;
     height: 70px;
     display:flex;
@@ -215,21 +234,35 @@ align-items: center;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
-
-.settingsbuttonicon{
-    width: 55px;
-}
-.settingsbutton{
-    background-color: #8CC0DE;
-    border-radius: 14px;
+} */
+.homebutton{
+    /* background-color: #8CC0DE; */
     height:70px;
     width:86px;
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;            
+    margin:auto;
+    
+}
+.homebuttonicon{
+    width:75px;
+    height:auto;
+}
+
+.settingsbuttonicon{
+    width: 75px;
+}
+.settingsbutton{
+    /* background-color: #8CC0DE; */
+    height:70px;
+    width:86px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    margin:auto;       
 }
 
 .alternatebottomnav{
