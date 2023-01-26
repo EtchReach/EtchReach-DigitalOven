@@ -45,15 +45,19 @@
           </div>
           <div class="secondSet" id="secondSet" onclick="selectsecond()">
             <div class="second">
-              <div class="buttonInner">
-                <img class="baking" src="./pictures/baking.png"/>
-                <h2 class="titles" id="secondTitle">Bake</h2>
-                <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
-                  <h2 class="descriptions" id="secondTemperature"></h2>
-                  <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
-                  <h2 class="descriptions" id="secondDuration"></h2>
-                  <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
-                <h2></h2>
+              <div class="secondwrapper">
+                <div class="buttonInner">
+                  <img class="baking" src="./pictures/baking.png"/>
+                  <h2 class="titles" id="secondTitle">Bake</h2>
+                  <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
+                  <div>
+                    <p class="descriptions" id="secondTemperature"></p>
+                    <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
+                    <p class="descriptions" id="secondDuration"></p>
+                    <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
+                  </div>
+                  <h2></h2>
+                </div>
               </div>
             </div>
           </div> 

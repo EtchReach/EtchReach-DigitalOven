@@ -16,6 +16,12 @@ font-size: 2.5rem;
 font-weight: bold;
 color: #143642;
 }
+p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+}
+
 .wholeApp{
     display:flex;
     flex-direction: column;
@@ -61,10 +67,11 @@ width:100%;
 }
 
 .descriptions{
-    margin-top: 20px;
-    line-height:50px;
-    font-size:42px;
+    /* margin-top: 20px; */
+    /* line-height:50px; */
+    font-size:21px;
     font-weight:800;
+    text-align: right;
 }
 .card {
     background-color: #efefef;
@@ -133,11 +140,12 @@ margin-right:7%;
 }
 
 .baking{
-    height:30%;
-    width:30%;
-    max-height:80px;   
-    max-width:80px;
+    height:35%;
+    width:35%;
+    max-height:100px;   
+    max-width:100px;
 }
+
 .secondSet{
 border-width: 3px;
 border-radius:10px;
