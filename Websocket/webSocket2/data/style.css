@@ -140,6 +140,15 @@ margin-right:7%;
     max-width:100px;
 }
 
+
+.slidercontainter{
+    background-color: white;
+    width:110%;
+}
+
+.slider{
+    width:100%;
+}
 .baking{
     height:35%;
     width:35%;
@@ -331,4 +340,13 @@ padding: 16px;
 }
 .function{
     display:none;
+}
+
+@media(max-width:425px){
+    .statusstate{
+        font-size: 40px;
+    }
+    .state{
+        font-size: 20px;
+    }
 }

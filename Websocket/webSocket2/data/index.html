@@ -10,7 +10,7 @@
     <img class ="reachlogo"src = "./pictures/Reach.png"/>
     <h1 class="topnav-name">Enable X Slice Cafe Digital Oven</h1>
   </div>
-  <div class="wholeApp">
+  <div class="wholeApp">  
     <div class="content">
       <div class="card" id="content">
         <h2 class="statusstate">Status</h2>
@@ -34,12 +34,19 @@
               <div class="buttonInner grill-box">
                 <img class="grill" src="./pictures/grill.png"/>
                 <h2 class="titles" id="firstTitle">Grill</h2>
-                <input class="function" id= "function1" type="number" min="1" max="5" value=%defaultF1%>
-                <h2 class="descriptions" id="firstTemperature"></h2>
-                <input class="temperature" id= "temperature1" type="number" min="1" max="230" value=%defaultT1%>
-                <h2 class="descriptions" id="firstDuration"></h2>
-                <input class = "duration"  id= "duration1" type="number" min="1" max="120" value=%defaultD1%>
-                <h2></h2>
+                <div class="slidersandduration">
+                  <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
+                  <div class="slidercontainter">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
+                    <p>Temperature: <span id="grillTemp"></span><span><sup>o</sup>C </span></p>
+                  </div>
+                  <h2 class="descriptions" id="firstDuration"></h2>
+                  <div class="slidercontainter">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
+                    <p>Temperature: <span id="grillDuration"></span><span><sup>o</sup>C </span></p>
+                  </div>
+                  <h2></h2>
+                </div>
               </div>
             </div>
           </div>
@@ -137,6 +144,13 @@
     </div>
   </div>
 <script>
+  let slider = document.getElementById("grillSlider");
+  let output = document.getElementById("grillTemp");
+  output.innerHTML = slider.value;
+  slider.oninput = function() {
+  output.innerHTML = this.value;
+  }
+
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let thirdNavbar = document.getElementById("thirdBottomNav");
   // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
