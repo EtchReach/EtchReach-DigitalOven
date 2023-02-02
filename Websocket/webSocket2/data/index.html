@@ -47,8 +47,6 @@
                     <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
                     <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
                   </div>
-                
-                
                   </div>
                   <div class="information-wrapper">
                     <img src="./pictures/information-filled.svg" class="information-icon" />
@@ -64,11 +62,13 @@
             <div class="second">
               <div class="secondwrapper">
                 <div class="buttonInner">
-                  <img class="baking" src="./pictures/baking.png"/>
-                  <h2 class="titles" id="secondTitle">Bake</h2>
+                  <div class="iconWithDescription">
+                    <img class="baking" src="./pictures/baking.png"/>
+                    <p class="titles bakeTitles" id="secondTitle">Bake</p>
+                  </div>
                   <div class="slidersandduration">
                     <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
-                    <div class="slidercontainter">
+                    <div class="slidercontainer">
                       <input type="range" min="1" max="100" value="50" class="slider" id="bakeTemperatureSlider"/>
                       <p class="settings">Temperature: <span class="settings" id="bakeTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                     </div>
@@ -78,7 +78,6 @@
                       <p class="settings">Duration: <span class="settings" id="bakeDuration"></span><span class="settings"> Mins</span></p>
                     </div>
                   </div>
-                  <h2></h2>
                 </div>
               </div>
             </div>

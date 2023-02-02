@@ -153,6 +153,11 @@ body {
     justify-content: center;
 }
 
+.bakeTitles{
+    display:flex;
+    justify-content: center;
+}
+
 .slidersandduration{
     width:70%;
 }
@@ -170,7 +175,7 @@ body {
 }
 .baking{
     height:30%;
-    width:30%;
+    width:90%;
     max-height:100px;   
     max-width:100px;
 }
