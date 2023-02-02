@@ -30,7 +30,6 @@
       </div>
       <div class="buttons">
           <div class="firstSet" id="firstSet" onclick="selectfirst()">
-            <div class="firstwrapper">
               <div class="buttonInner grill-box">
                 <!-- slider stuff -->
                 <div class="iconWithDescription">
@@ -38,15 +37,14 @@
                   <p class="titles grillTitle" id="firstTitle">Grill</p>
                 </div>
                   <div class="slidersandduration">
-                  <div class="slidercontainter">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
-                    <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
-                  </div>
-                  <h2 class="descriptions" id="firstDuration"></h2>
-                  <div class="slidercontainter durationSliderContainer">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
-                    <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
-                  </div>
+                    <div class="slidercontainter">
+                      <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
+                      <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
+                    </div>
+                    <div class="slidercontainter durationSliderContainer">
+                      <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
+                      <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
+                    </div>
                   </div>
                   <div class="information-wrapper">
                     <img src="./pictures/information-filled.svg" class="information-icon" />
@@ -56,11 +54,9 @@
                     </div>
                   </div>
             </div>
-          </div>
         </div>
           <div class="secondSet" id="secondSet" onclick="selectsecond()">
             <div class="second">
-              <div class="secondwrapper">
                 <div class="buttonInner">
                   <div class="iconWithDescription">
                     <img class="baking" src="./pictures/baking.png"/>
@@ -79,20 +75,27 @@
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div> 
           <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
             <div class="third">
               <div class="buttonInner">
-                <img  class="rotisserie" src="./pictures/rotisserie.png"/>
-                <h2 class="titles" id="thirdTitle">Rotisserie </h2>
-                <input class="hidden" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
-                  <h2 class="descriptions" id="thirdTemperature"></h2>
-                  <input class="hidden"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
-                  <h2 class="descriptions" id="thirdDuration"></h2>
-                  <input class="hidden"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
-                <h2></h2>
+                <div class="iconWithDescription">
+                  <img  class="rotisserie" src="./pictures/rotisserie.png"/>
+                  <p class="titles" id="thirdTitle">Rotisserie </p>
+                </div>
+                <div class="slidersandduration">
+                  <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
+                  <div class="slidercontainer">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="rotiTemperatureSlider"/>
+                    <p class="settings">Temperature: <span class="settings" id="rotiTemp"></span><span class="settings"><sup>o</sup>C </span></p>
+                  </div>
+                  <p class="descriptions" id="thirdduration"></p>
+                  <div class="slidercontainter durationSliderContainer thirdDurationSlider">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="rotiDurationSlider"/>
+                    <p class="settings">Duration: <span class="settings" id="rotiDuration"></span><span class="settings"> Mins</span></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -170,6 +173,9 @@
   adjustSlider("grillDurationSlider","grillDuration");
   adjustSlider("bakeTemperatureSlider","bakeTemp");
   adjustSlider("bakeDurationSlider","bakeDuration");
+  adjustSlider("rotiTemperatureSlider","rotiTemp");
+  adjustSlider("rotiDurationSlider","rotiDuration");
+
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let thirdNavbar = document.getElementById("thirdBottomNav");
   // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
