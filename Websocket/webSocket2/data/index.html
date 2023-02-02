@@ -15,7 +15,7 @@
       <div class="card" id="content">
         <h2 class="statusstate">Status</h2>
         <p class="state state-function">Function: NIL</p>
-        <p class="state state-temperature">Temp(<sup>o</sup>C):NIL</p>
+        <p class="state state-temperature">Temperature(<sup>o</sup>C): NIL</p>
         <p class="state state-duration">Duration(mins): NIL</p>
       </div>
       <div>
@@ -34,18 +34,12 @@
               <div class="buttonInner grill-box">
                 <img class="grill" src="./pictures/grill.png"/>
                 <h2 class="titles" id="firstTitle">Grill</h2>
-                <div class="slidersandduration">
-                  <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
-                  <div class="slidercontainter">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
-                    <p>Temperature: <span id="grillTemp"></span><span><sup>o</sup>C </span></p>
+                <div class="information-wrapper">
+                  <img src="./pictures/information-filled.svg" class="information-icon" />
+                  <div class="information-tooltip">
+                    <p>Temperature: 24<sup>o</sup>C</p>
+                    <p>Duration: 10mins</p>
                   </div>
-                  <h2 class="descriptions" id="firstDuration"></h2>
-                  <div class="slidercontainter">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
-                    <p>Temperature: <span id="grillDuration"></span><span><sup>o</sup>C </span></p>
-                  </div>
-                  <h2></h2>
                 </div>
               </div>
             </div>
@@ -56,12 +50,12 @@
                 <div class="buttonInner">
                   <img class="baking" src="./pictures/baking.png"/>
                   <h2 class="titles" id="secondTitle">Bake</h2>
-                  <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
+                  <input class="hidden" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
                   <div>
                     <p class="descriptions" id="secondTemperature"></p>
-                    <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
+                    <input class="hidden"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
                     <p class="descriptions" id="secondDuration"></p>
-                    <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
+                    <input class="hidden"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
                   </div>
                   <h2></h2>
                 </div>
@@ -73,11 +67,11 @@
               <div class="buttonInner">
                 <img  class="rotisserie" src="./pictures/rotisserie.png"/>
                 <h2 class="titles" id="thirdTitle">Rotisserie </h2>
-                <input class="function" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
+                <input class="hidden" id= "function3" type="number" min="1" max="5" value=%defaultF3%>
                   <h2 class="descriptions" id="thirdTemperature"></h2>
-                  <input class="temperature"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
+                  <input class="hidden"  id= "temperature3" type="number" min="1" max="230" value=%defaultT3%>
                   <h2 class="descriptions" id="thirdDuration"></h2>
-                  <input class="duration"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
+                  <input class="hidden"  id= "duration3" type="number" min="1" max="120"  value=%defaultD3%>
                 <h2></h2>
               </div>
             </div>
