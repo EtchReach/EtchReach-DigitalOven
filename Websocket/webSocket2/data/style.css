@@ -366,7 +366,7 @@ body {
   content: url("./pictures/information-circle.svg")
 }
 
-.information-wrapper:hover .information-tooltip {
+.information-icon:hover ~ .information-tooltip {
   display: flex;
 }
 
