@@ -32,20 +32,21 @@
           <div class="firstSet" id="firstSet" onclick="selectfirst()">
             <div class="firstwrapper">
               <div class="buttonInner grill-box">
-                <img class="grill" src="./pictures/grill.png"/>
-                <h2 class="titles" id="firstTitle">Grill</h2>
-                <div class="slidersandduration">
+                <div class="iconWithDescription">
+                  <img class="grill" src="./pictures/grill.png"/>
+                  <p class="titles grillTitle" id="firstTitle">Grill</p>
+                </div>
+                  <div class="slidersandduration">
                   <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
                   <div class="slidercontainter">
                     <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
-                    <p>Temperature: <span id="grillTemp"></span><span><sup>o</sup>C </span></p>
+                    <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                   </div>
                   <h2 class="descriptions" id="firstDuration"></h2>
-                  <div class="slidercontainter">
+                  <div class="slidercontainter durationSliderContainer">
                     <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
-                    <p>Temperature: <span id="grillDuration"></span><span><sup>o</sup>C </span></p>
+                    <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
                   </div>
-                  <h2></h2>
                 </div>
               </div>
             </div>
@@ -56,12 +57,17 @@
                 <div class="buttonInner">
                   <img class="baking" src="./pictures/baking.png"/>
                   <h2 class="titles" id="secondTitle">Bake</h2>
-                  <input class="function" id= "function2" type="number" min="1" max="5" value=%defaultF2%>
-                  <div>
-                    <p class="descriptions" id="secondTemperature"></p>
-                    <input class="temperature"  id= "temperature2" type="number" min="1" max="230" value=%defaultT2%>
+                  <div class="slidersandduration">
+                    <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
+                    <div class="slidercontainter">
+                      <input type="range" min="1" max="100" value="50" class="slider" id="bakeTemperatureSlider"/>
+                      <p class="settings">Temperature: <span class="settings" id="bakeTemp"></span><span class="settings"><sup>o</sup>C </span></p>
+                    </div>
                     <p class="descriptions" id="secondDuration"></p>
-                    <input class="duration"  id= "duration2" type="number" min="1" max="120" value=%defaultD2%>
+                    <div class="slidercontainter durationSliderContainer secondDurationSlider">
+                      <input type="range" min="1" max="100" value="50" class="slider" id="bakeDurationSlider"/>
+                      <p class="settings">Duration: <span class="settings" id="bakeDuration"></span><span class="settings"> Mins</span></p>
+                    </div>
                   </div>
                   <h2></h2>
                 </div>
@@ -144,13 +150,18 @@
     </div>
   </div>
 <script>
-  let slider = document.getElementById("grillSlider");
-  let output = document.getElementById("grillTemp");
-  output.innerHTML = slider.value;
-  slider.oninput = function() {
-  output.innerHTML = this.value;
+  function adjustSlider(sliderId,sliderOuter){
+    let slider = document.getElementById(sliderId);
+    let output = document.getElementById(sliderOuter);
+    output.innerHTML = slider.value;
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
   }
-
+  adjustSlider("grillTemperatureSlider","grillTemp");
+  adjustSlider("grillDurationSlider","grillDuration");
+  adjustSlider("bakeTemperatureSlider","bakeTemp");
+  adjustSlider("bakeDurationSlider","bakeDuration");
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let thirdNavbar = document.getElementById("thirdBottomNav");
   // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};

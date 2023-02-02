@@ -135,23 +135,34 @@ margin-right:7%;
 
 .grill{
     height:30%;
-    width:30%;
+    width:90%;
     max-height:100px;   
     max-width:100px;
 }
 
+.grillTitle{
+    display: flex;
+    justify-content: center;
+}
 
+.slidersandduration{
+    width:50%;
+}
 .slidercontainter{
-    background-color: white;
-    width:110%;
+    width:100%;
 }
 
 .slider{
     width:100%;
 }
+
+.settings{
+    font-size: 20px;
+    background-color: white;
+}
 .baking{
-    height:35%;
-    width:35%;
+    height:30%;
+    width:30%;
     max-height:100px;   
     max-width:100px;
 }
@@ -348,5 +359,26 @@ padding: 16px;
     }
     .state{
         font-size: 20px;
+    }
+}
+
+@media(max-width:465px){
+    .slidersandduration{
+        margin-left:15px;
+    }
+    .settings{
+        font-size: 16px;
+    }
+}
+
+@media(max-width:359px){
+    .settings{
+        font-size: 15px;
+    }
+    .durationSliderContainer{
+        margin-top:-10px;
+    }
+    .secondDurationSlider{
+        margin-top:5px;
     }
 }
