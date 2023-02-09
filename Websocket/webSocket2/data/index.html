@@ -173,7 +173,7 @@
   adjustSlider("rotiDurationSlider","rotiDuration", 2, 1);
 
   let defaultNavbar = document.getElementById("defaultbottomnav");
-  // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
+  let functionnames ={1:"Grill", 2:"Bake", 3:"Rotisserie"};
   // let function1name = document.getElementById("firstTitle");
   // let function2name = document.getElementById("secondTitle");
   // let function3name = document.getElementById("thirdTitle");
@@ -322,12 +322,12 @@
   //   websocket.send(value);
   // }
   function toggleSave() {
-    var temp1 = document.getElementById("temperature1").value;
-    var duration1 = document.getElementById("duration1").value;
-    var temp2 = document.getElementById("temperature2").value;
-    var duration2 = document.getElementById("duration2").value;
-    var temp3 = document.getElementById("temperature3").value;
-    var duration3 = document.getElementById("duration3").value;
+    // var temp1 = document.getElementById("temperature1").value;
+    // var duration1 = document.getElementById("duration1").value;
+    // var temp2 = document.getElementById("temperature2").value;
+    // var duration2 = document.getElementById("duration2").value;
+    // var temp3 = document.getElementById("temperature3").value;
+    // var duration3 = document.getElementById("duration3").value;
     const sliders = document.getElementsByClassName("slider");
     websocket.send(`save,${sliders[0].value}\n${sliders[1].value}\n${sliders[2].value}\n${sliders[3].value}\n${sliders[4].value}\n${sliders[5].value}`);
   }
@@ -453,8 +453,8 @@ function selectfirst(){
     // let temperature = document.getElementById("temperature1").value;
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
-    console.log("function,0," + temperature + "," + duration);
-    websocket.send("function,0," + temperature + "," + duration);
+    console.log("function,1," + temperature + "," + duration);
+    websocket.send("function,1," + temperature + "," + duration);
   } else {
     // resetall();
     resetfunction();
@@ -475,8 +475,8 @@ function selectsecond(){
     x.style.backgroundColor="green";
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
-    console.log("function,1," + temperature + "," + duration);
-    websocket.send("function,1," + temperature + "," + duration);
+    console.log("function,2," + temperature + "," + duration);
+    websocket.send("function,2," + temperature + "," + duration);
   } else{
     // resetall();
     resetfunction();
@@ -497,8 +497,8 @@ function selectthird(){
     x.style.backgroundColor="green";
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
-    console.log("function,2," + temperature + "," + duration);
-    websocket.send("function,2," + temperature + "," + duration);
+    console.log("function,3," + temperature + "," + duration);
+    websocket.send("function,3," + temperature + "," + duration);
   } else {
     // resetall();
     resetfunction();

@@ -331,7 +331,7 @@ void setup()
   loadPresets();
 
   // Connect to Wi-Fi
-  WiFi.begin(ssid, password);
+  WiFi.begin(mySSID, myPASSWORD);
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(1000);
