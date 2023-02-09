@@ -2,7 +2,7 @@
 <head>
   <title>Enable X Slice Cafe Digital Oven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="Reach.png">
+  <link rel="icon" type="image/x-icon" href="./pictures/Reach.png">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -38,19 +38,19 @@
                 </div>
                   <div class="slidersandduration">
                     <div class="slidercontainter">
-                      <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider"/>
+                      <input type="range" min="1" max="100" value="50" class="slider" id="grillTemperatureSlider" />
                       <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                     </div>
                     <div class="slidercontainter durationSliderContainer">
-                      <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider"/>
+                      <input type="range" min="1" max="100" value="50" class="slider" id="grillDurationSlider" />
                       <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
                     </div>
                   </div>
                   <div class="information-wrapper">
                     <img src="./pictures/information-filled.svg" class="information-icon" />
                     <div class="information-tooltip">
-                      <p>Temperature: 24<sup>o</sup>C</p>
-                      <p>Duration: 10mins</p>
+                      <p>Temperature: <span>24</span><sup>o</sup>C</p>
+                      <p>Duration: <span>10</span>mins</p>
                     </div>
                   </div>
             </div>
@@ -74,6 +74,13 @@
                       <p class="settings">Duration: <span class="settings" id="bakeDuration"></span><span class="settings"> Mins</span></p>
                     </div>
                   </div>
+                  <div class="information-wrapper">
+                    <img src="./pictures/information-filled.svg" class="information-icon" />
+                    <div class="information-tooltip">
+                      <p>Temperature: <span>24</span><sup>o</sup>C</p>
+                      <p>Duration: <span>10</span>mins</p>
+                    </div>
+                  </div>
                 </div>
             </div>
           </div> 
@@ -94,6 +101,13 @@
                   <div class="slidercontainter durationSliderContainer thirdDurationSlider">
                     <input type="range" min="1" max="100" value="50" class="slider" id="rotiDurationSlider"/>
                     <p class="settings">Duration: <span class="settings" id="rotiDuration"></span><span class="settings"> Mins</span></p>
+                  </div>
+                </div>
+                <div class="information-wrapper">
+                  <img src="./pictures/information-filled.svg" class="information-icon" />
+                  <div class="information-tooltip">
+                    <p>Temperature: <span>24</span><sup>o</sup>C</p>
+                    <p>Duration: <span>10</span>mins</p>
                   </div>
                 </div>
               </div>
@@ -161,20 +175,24 @@
     </div>
   </div>
 <script>
-  function adjustSlider(sliderId,sliderOuter){
+  function adjustSlider(sliderId, sliderOuter, tooltipId, tooltipItemId){
     let slider = document.getElementById(sliderId);
     let output = document.getElementById(sliderOuter);
+    const tooltips = document.getElementsByClassName("information-tooltip");
+    const tooltipItem = tooltips[tooltipId].children[tooltipItemId].children[0];
+    tooltipItem.innerHTML = slider.value;
     output.innerHTML = slider.value;
     slider.oninput = function() {
       output.innerHTML = this.value;
+      tooltipItem.innerHTML = slider.value;
     }
   }
-  adjustSlider("grillTemperatureSlider","grillTemp");
-  adjustSlider("grillDurationSlider","grillDuration");
-  adjustSlider("bakeTemperatureSlider","bakeTemp");
-  adjustSlider("bakeDurationSlider","bakeDuration");
-  adjustSlider("rotiTemperatureSlider","rotiTemp");
-  adjustSlider("rotiDurationSlider","rotiDuration");
+  adjustSlider("grillTemperatureSlider","grillTemp", 0, 0);
+  adjustSlider("grillDurationSlider","grillDuration", 0, 1);
+  adjustSlider("bakeTemperatureSlider","bakeTemp", 1, 0);
+  adjustSlider("bakeDurationSlider","bakeDuration", 1, 1);
+  adjustSlider("rotiTemperatureSlider","rotiTemp", 2, 0);
+  adjustSlider("rotiDurationSlider","rotiDuration", 2, 1);
 
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let thirdNavbar = document.getElementById("thirdBottomNav");
