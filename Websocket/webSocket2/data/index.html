@@ -19,14 +19,14 @@
         <p class="state state-duration">Duration(mins): NIL</p>
       </div>
       <div>
-        <div class="menu" id ="menu">
+        <!-- <div class="menu" id ="menu">
           <h2 class="statusstate">Function Menu</h2>
           <p class="functionOptions">Enter 1 for Fermentation</p>
           <p class="functionOptions">Enter 2 for Top & Bottom Heat</p>
           <p class="functionOptions">Enter 3 for Top heat with Rotisserie</p>
           <p class="functionOptions">Enter 4 for Top & Bottom Heat with Fan</p>
           <p class="functionOptions">Enter 5 for Top Heat with Fan & Rotisserie</p>
-        </div>
+        </div> -->
       </div>
       <div class="buttons">
           <div class="firstSet" id="firstSet" onclick="selectfirst()">
@@ -120,7 +120,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
         </svg> 
       </div> -->
-      <div class="leftside">
+      <div class="leftside" onclick="homebutton()">
         <div class="homebutton">
           <svg class="homebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -131,7 +131,7 @@
     <div class="border">
     </div>
       <div class="rightside">
-        <div class="settingsbutton" onclick="hideblock()">
+        <div class="settingsbutton" onclick="settingsbutton()">
           <svg class="settingsbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -169,6 +169,7 @@
       output.innerHTML = this.value;
     }
   }
+  let onSettings = false;
   adjustSlider("grillTemperatureSlider","grillTemp");
   adjustSlider("grillDurationSlider","grillDuration");
   adjustSlider("bakeTemperatureSlider","bakeTemp");
@@ -343,86 +344,101 @@
     hideblock();
 
   }
-
-function hideblock(){
-  let functionMenu = document.getElementById("menu");
-  let x=  document.getElementById("content");
-  let y= document.getElementById("defaultbottomnav");
-  let z= document.getElementById("alternatebottomnav");
-  let temperature1 =document.getElementById("temperature1");
-  let temperature2 =document.getElementById("temperature2");
-  let temperature3 =document.getElementById("temperature3");
-  let temperature4 =document.getElementById("temperature4");
-  let duration1 = document.getElementById("duration1");
-  let duration2 = document.getElementById("duration2");
-  let duration3 = document.getElementById("duration3");
-  let duration4 = document.getElementById("duration4");
-  let function1 = document.getElementById("function1");
-  let function2 = document.getElementById("function2");
-  let function3 = document.getElementById("function3");
-  let function4 = document.getElementById("function4");
-  if(x.style.display=="none"){
-    x.style.display="block";
-    y.style.display="flex";
-    z.style.display="none";
-    temperature1.style.display="none"
-    temperature2.style.display="none"
-    temperature3.style.display="none"
-    temperature4.style.display="none"
-    duration1.style.display="none";
-    duration2.style.display="none";
-    duration3.style.display="none";
-    duration4.style.display="none";
-    function1.style.display="none";
-    function2.style.display="none";
-    function3.style.display="none";
-    function4.style.display="none";
-    functionMenu.style.display="none";
+  function homebutton(){
+    let sliders = document.getElementsByClassName("slidersandduration");
+      for (const slider of sliders) {
+        slider.style.visibility="hidden"
+      }
+      onSettings=true;
   }
-  else{
-    x.style.display="none";
-    y.style.display="none";
-    z.style.display="flex";
-    temperature1.style.display="block";
-    temperature2.style.display="block";
-    temperature3.style.display="block";
-    temperature4.style.display="block";
-    duration1.style.display="block";
-    duration2.style.display="block";
-    duration3.style.display="block";
-    duration4.style.display="block";
-    function1.style.display="block";
-    function2.style.display="block";
-    function3.style.display="block";
-    function4.style.display="block";
-    functionMenu.style.display="block";
+  
+  function settingsbutton(){
+    let sliders = document.getElementsByClassName("slidersandduration");
+      for (const slider of sliders) {
+        slider.style.visibility="visible"
+      }
+      onSettings=true;
   }
+// function hideblock(){
+//   let functionMenu = document.getElementById("menu");
+//   let x = document.getElementById("content");
+//   let sliders= document.getElementsByClassName("slider");
+//   let temperature1 = document.getElementById("temperature1");
+//   let temperature2 =document.getElementById("temperature2");
+//   let temperature3 =document.getElementById("temperature3");
+//   let temperature4 =document.getElementById("temperature4");
+//   let duration1 = document.getElementById("duration1");
+//   let duration2 = document.getElementById("duration2");
+//   let duration3 = document.getElementById("duration3");
+//   let duration4 = document.getElementById("duration4");
+//   let function1 = document.getElementById("function1");
+//   let function2 = document.getElementById("function2");
+//   let function3 = document.getElementById("function3");
+//   let function4 = document.getElementById("function4");
+//   if(sliders[0].disabled==true){
+//     // x.style.display="block";
+//     // sliders[0].disabled=false;
+//     // sliders[1].disabled=false;
+//     // sliders[2].disabled=false;
+//     // temperature1.style.display="none"
+//     // temperature2.style.display="none"
+//     // temperature3.style.display="none"
+//     // temperature4.style.display="none"
+//     // duration1.style.display="none";
+//     // duration2.style.display="none";
+//     // duration3.style.display="none";
+//     // duration4.style.display="none";
+//     // function1.style.display="none";
+//     // function2.style.display="none";
+//     // function3.style.display="none";
+//     // function4.style.display="none";
+//     // functionMenu.style.display="none";
+//   }
+//   else{
+//     // x.style.display="none";
+//     // sliders[0].disabled=true;
+//     // sliders[1].disabled=true;
+//     // sliders[2].disabled=true;
+//     // temperature1.style.display="block";
+//     // temperature2.style.display="block";
+//     // temperature3.style.display="block";
+//     // temperature4.style.display="block";
+//     // duration1.style.display="block";
+//     // duration2.style.display="block";
+//     // duration3.style.display="block";
+//     // duration4.style.display="block";
+//     // function1.style.display="block";
+//     // function2.style.display="block";
+//     // function3.style.display="block";
+//     // function4.style.display="block";
+//     // functionMenu.style.display="block";
+//   }
 
-  let function1Set = document.getElementById("function1").value;
-  let function2Set = document.getElementById("function2").value;
-  let function3Set = document.getElementById("function3").value;
-  let function4Set = document.getElementById("function4").value;
-  let temperature1Set = document.getElementById("temperature1").value;
-  let temperature2Set = document.getElementById("temperature2").value;
-  let temperature3Set = document.getElementById("temperature3").value;
-  let temperature4Set = document.getElementById("temperature4").value;
-  let duration1Set = document.getElementById("duration1").value;
-  let duration2Set = document.getElementById("duration2").value;
-  let duration3Set = document.getElementById("duration3").value;
-  let duration4Set = document.getElementById("duration4").value;
-  function1name.innerHTML=functionnames[function1Set];
-  function2name.innerHTML=functionnames[function2Set];
-  function3name.innerHTML=functionnames[function3Set];
-  function4name.innerHTML=functionnames[function4Set];
-  temperature1Name.innerHTML= temperature1Set+ "°C";
-  temperature2Name.innerHTML= temperature2Set+ "°C";
-  temperature3Name.innerHTML= temperature3Set+ "°C";
-  temperature4Name.innerHTML= temperature4Set+ "°C";
-  duration1Name.innerHTML=duration1Set + " Mins";
-  duration2Name.innerHTML=duration2Set + " Mins";
-  duration3Name.innerHTML=duration3Set + " Mins";
-  duration4Name.innerHTML=duration4Set + " Mins";
-}
+//   let function1Set = document.getElementById("function1").value;
+//   let function2Set = document.getElementById("function2").value;
+//   let function3Set = document.getElementById("function3").value;
+//   let function4Set = document.getElementById("function4").value;
+//   let temperature1Set = document.getElementById("temperature1").value;
+//   let temperature2Set = document.getElementById("temperature2").value;
+//   let temperature3Set = document.getElementById("temperature3").value;
+//   let temperature4Set = document.getElementById("temperature4").value;
+//   let duration1Set = document.getElementById("duration1").value;
+//   let duration2Set = document.getElementById("duration2").value;
+//   let duration3Set = document.getElementById("duration3").value;
+//   let duration4Set = document.getElementById("duration4").value;
+//   function1name.innerHTML=functionnames[function1Set];
+//   function2name.innerHTML=functionnames[function2Set];
+//   function3name.innerHTML=functionnames[function3Set];
+//   function4name.innerHTML=functionnames[function4Set];
+//   temperature1Name.innerHTML= temperature1Set+ "°C";
+//   temperature2Name.innerHTML= temperature2Set+ "°C";
+//   temperature3Name.innerHTML= temperature3Set+ "°C";
+//   temperature4Name.innerHTML= temperature4Set+ "°C";
+//   duration1Name.innerHTML=duration1Set + " Mins";
+//   duration2Name.innerHTML=duration2Set + " Mins";
+//   duration3Name.innerHTML=duration3Set + " Mins";
+//   duration4Name.innerHTML=duration4Set + " Mins";
+// }
 function resetall(){
   let box1 = document.getElementById("firstSet");
   let box2 = document.getElementById("secondSet");
