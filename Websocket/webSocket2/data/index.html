@@ -89,7 +89,7 @@
               <div class="buttonInner">
                 <div class="iconWithDescription">
                   <img  class="rotisserie" src="./pictures/rotisserie.png"/>
-                  <p class="titles" id="thirdTitle">Rotisserie </p>
+                  <p class="titles thirdTitle" id="thirdTitle">Rotisserie </p>
                 </div>
                 <div class="slidersandduration">
                   <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
@@ -113,39 +113,21 @@
               </div>
             </div>
           </div>
-          <!-- <div class="fourthSet" id="fourthSet" onclick="selectfourth()">
-            <div class="fourth">
-              <div class="buttonInner">
-                <h2 class="titles" id="fourthTitle"></h2>
-                <input class="function" id= "function4" type="number" min="1" max="5" value=%defaultF4%>
-                  <h2 class="descriptions" id="fourthTemperature"></h2>
-                  <input  class="temperature" id= "temperature4" type="number" min="1" max="230" value=%defaultT4%>
-                  <h2 class="descriptions" id="fourthDuration"></h2>
-                  <input  class="duration" id= "duration4" type="number" min="1" max="120" value=%defaultD4%>
-                <h2></h2>
-              </div>
-            </div>
-          </div> -->
       </div>
     </div>
     <div class="bottomnav" id="defaultbottomnav">
-      <!-- <div class="playbutton" id = "playbutton">
-        <svg class="playbuttonicon" xmlns="http://www.w3.org/2000/svg"class="w-6 h-20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-        </svg> 
-      </div> -->
-      <div class="leftside" onclick="homebutton()">
-        <div class="homebutton">
-          <svg class="homebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-          </svg>
-          <span class="home">Home</span>        
+        <div class="leftside" onclick="homebutton()">
+          <div class="homebutton">
+            <svg class="homebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <span class="home">Home</span>        
+          </div>
         </div>
-      </div>
-    <div class="border">
+      <div class="border">
     </div>
-      <div class="rightside">
-        <div class="settingsbutton" onclick="settingsbutton()">
+      <div class="rightside" onclick="settingsbutton()">
+        <div class="settingsbutton">
           <svg class="settingsbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -159,7 +141,7 @@
         <svg class="backbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
         </svg>
-      </div>
+      </div>  
       <div class="savebutton" onclick=toggleSave()>
         <div class="savebuttonicon">
           <svg class = "savebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -168,11 +150,6 @@
         </div>
       </div>
     </div> -->
-    <div class="thirdBottomNav" id = "thirdBottomNav">
-      <div class="resetButtonClass">
-        <h3 class="resetButton" onclick="resetfunction()"> Reset </h3>
-      </div>
-    </div>
   </div>
 <script>
   function adjustSlider(sliderId, sliderOuter, tooltipId, tooltipItemId){
@@ -196,7 +173,6 @@
   adjustSlider("rotiDurationSlider","rotiDuration", 2, 1);
 
   let defaultNavbar = document.getElementById("defaultbottomnav");
-  let thirdNavbar = document.getElementById("thirdBottomNav");
   // let functionnames ={1:"Fermentation", 2:"Top & Bottom Heat",3:"Top Heat with Rotisserie", 4:"Top & Bottom Heat with Fan",5:"Top Heat with Fan & Rotisserie"};
   // let function1name = document.getElementById("firstTitle");
   // let function2name = document.getElementById("secondTitle");
@@ -210,29 +186,29 @@
   // function2name.innerHTML=functionnames[function2Set];
   // function3name.innerHTML=functionnames[function3Set];
   // function4name.innerHTML=functionnames[function4Set];
-  let temperature1Name = document.getElementById("firstTemperature");
-  let temperature2Name = document.getElementById("secondTemperature");
-  let temperature3Name = document.getElementById("thirdTemperature");
+  // let temperature1Name = document.getElementById("firstTemperature");
+  // let temperature2Name = document.getElementById("secondTemperature");
+  // let temperature3Name = document.getElementById("thirdTemperature");
   // let temperature4Name = document.getElementById("fourthTemperature");
-  let duration1Name = document.getElementById("firstDuration");
-  let duration2Name = document.getElementById("secondDuration");
-  let duration3Name = document.getElementById("thirdDuration");
+  // let duration1Name = document.getElementById("firstDuration");
+  // let duration2Name = document.getElementById("secondDuration");
+  // let duration3Name = document.getElementById("thirdDuration");
   // let duration4Name = document.getElementById("fourthDuration");
-  let temperature1Set = document.getElementById("temperature1").value;
-  let temperature2Set = document.getElementById("temperature2").value;
-  let temperature3Set = document.getElementById("temperature3").value;
+  // let temperature1Set = document.getElementById("temperature1").value;
+  // let temperature2Set = document.getElementById("temperature2").value;
+  // let temperature3Set = document.getElementById("temperature3").value;
   // let temperature4Set = document.getElementById("temperature4").value;
-  let duration1Set = document.getElementById("duration1").value;
-  let duration2Set = document.getElementById("duration2").value;
-  let duration3Set = document.getElementById("duration3").value;
+  // let duration1Set = document.getElementById("duration1").value;
+  // let duration2Set = document.getElementById("duration2").value;
+  // let duration3Set = document.getElementById("duration3").value;
   // let duration4Set = document.getElementById("duration4").value;
-  temperature1Name.innerHTML= temperature1Set+ "<sup>o</sup>C";
-  temperature2Name.innerHTML= temperature2Set+ "<sup>o</sup>C";
-  temperature3Name.innerHTML= temperature3Set+ "<sup>o</sup>C";
+  // temperature1Name.innerHTML= temperature1Set+ "<sup>o</sup>C";
+  // temperature2Name.innerHTML= temperature2Set+ "<sup>o</sup>C";
+  // temperature3Name.innerHTML= temperature3Set+ "<sup>o</sup>C";
   // temperature4Name.innerHTML= temperature4Set+ "<sup>o</sup>C";
-  duration1Name.innerHTML=duration1Set + " Mins";
-  duration2Name.innerHTML=duration2Set + " Mins";
-  duration3Name.innerHTML=duration3Set + " Mins";
+  // duration1Name.innerHTML=duration1Set + " Mins";
+  // duration2Name.innerHTML=duration2Set + " Mins";
+  // duration3Name.innerHTML=duration3Set + " Mins";
   // duration4Name.innerHTML=duration4Set + " Mins";
   var gateway = `ws://${window.location.hostname}/ws`; //gets the webserver IP address
   var websocket;
@@ -274,45 +250,45 @@
   }
   function onLoad(event) {
     initWebSocket();
-    initButton();
+    // initButton();
   }
-  function initButton() {
-    document.getElementById('button').addEventListener('click', toggle);
+  // function initButton() {
+    // document.getElementById('button').addEventListener('click', toggle);
     // document.getElementById('firstbutton').addEventListener('click', toggle1);
     // document.getElementById('secondbutton').addEventListener('click', toggle2);
     // document.getElementById('thirdbutton').addEventListener('click', toggle3);
     // document.getElementById('fourthbutton').addEventListener('click', toggle4);
     // document.getElementById('saveButton').addEventListener('click', toggleSave);
 
-    document.getElementById('setting1').addEventListener('click', () => {
-      temperatureInput1 = !temperatureInput1;
-      document.getElementById('temperature1').disabled= temperatureInput1;
-      document.getElementById('duration1').disabled= temperatureInput1;
-      document.getElementById('function1').disabled= temperatureInput1;
-    });
-    document.getElementById('setting2').addEventListener('click', () => {
-      temperatureInput2 = !temperatureInput2;
-      document.getElementById('temperature2').disabled= temperatureInput2;
-      document.getElementById('duration2').disabled= temperatureInput2;
-      document.getElementById('function2').disabled= temperatureInput2;
-    });
-    document.getElementById('setting3').addEventListener('click', () => {
-      temperatureInput3 = !temperatureInput3;
-      document.getElementById('temperature3').disabled= temperatureInput3;
-      document.getElementById('duration3').disabled= temperatureInput3;
-      document.getElementById('function3').disabled= temperatureInput3;
-    });
-    document.getElementById('setting4').addEventListener('click', () => {
-      temperatureInput4 = !temperatureInput4;
-      document.getElementById('temperature4').disabled= temperatureInput4;
-      document.getElementById('duration4').disabled= temperatureInput4;
-      document.getElementById('function4').disabled= temperatureInput4;
-    });
-  }
-  function toggle(){
-    //console.log("toggle");
-    websocket.send("toggle");
-  }
+    // document.getElementById('setting1').addEventListener('click', () => {
+    //   temperatureInput1 = !temperatureInput1;
+    //   document.getElementById('temperature1').disabled= temperatureInput1;
+    //   document.getElementById('duration1').disabled= temperatureInput1;
+    //   document.getElementById('function1').disabled= temperatureInput1;
+    // });
+    // document.getElementById('setting2').addEventListener('click', () => {
+    //   temperatureInput2 = !temperatureInput2;
+    //   document.getElementById('temperature2').disabled= temperatureInput2;
+    //   document.getElementById('duration2').disabled= temperatureInput2;
+    //   document.getElementById('function2').disabled= temperatureInput2;
+    // });
+    // document.getElementById('setting3').addEventListener('click', () => {
+    //   temperatureInput3 = !temperatureInput3;
+    //   document.getElementById('temperature3').disabled= temperatureInput3;
+    //   document.getElementById('duration3').disabled= temperatureInput3;
+    //   document.getElementById('function3').disabled= temperatureInput3;
+    // });
+    // document.getElementById('setting4').addEventListener('click', () => {
+    //   temperatureInput4 = !temperatureInput4;
+    //   document.getElementById('temperature4').disabled= temperatureInput4;
+    //   document.getElementById('duration4').disabled= temperatureInput4;
+    //   document.getElementById('function4').disabled= temperatureInput4;
+    // });
+  // }
+  // function toggle(){
+  //   //console.log("toggle");
+  //   websocket.send("toggle");
+  // }
   // function toggle1(){
   //   var temp = document.getElementById("temperature1").value;
   //   var duration = document.getElementById("duration1").value;
@@ -345,37 +321,33 @@
   //   //console.log(value);
   //   websocket.send(value);
   // }
-  function toggleSave(){
+  function toggleSave() {
     var temp1 = document.getElementById("temperature1").value;
     var duration1 = document.getElementById("duration1").value;
-    var func1 = document.getElementById("function1").value;
     var temp2 = document.getElementById("temperature2").value;
     var duration2 = document.getElementById("duration2").value;
-    var func2 = document.getElementById("function2").value;
     var temp3 = document.getElementById("temperature3").value;
     var duration3 = document.getElementById("duration3").value;
-    var func3 = document.getElementById("function3").value;
-    var temp4 = document.getElementById("temperature4").value;
-    var duration4 = document.getElementById("duration4").value;
-    var func4 = document.getElementById("function4").value;
-    websocket.send(`save,${temp1}\n${duration1}\n${func1}\n${temp2}\n${duration2}\n${func2}\n${temp3}\n${duration3}\n${func3}\n${temp4}\n${duration4}\n${func4}`);
-    hideblock();
-
+    const sliders = document.getElementsByClassName("slider");
+    websocket.send(`save,${sliders[0].value}\n${sliders[1].value}\n${sliders[2].value}\n${sliders[3].value}\n${sliders[4].value}\n${sliders[5].value}`);
   }
+
   function homebutton(){
     let sliders = document.getElementsByClassName("slidersandduration");
-      for (const slider of sliders) {
-        slider.style.visibility="hidden"
-      }
-      onSettings=true;
+    for (const slider of sliders) {
+      slider.style.display="none"
+    }
+    onSettings=true;
+    toggleSave();
   }
   
   function settingsbutton(){
     let sliders = document.getElementsByClassName("slidersandduration");
       for (const slider of sliders) {
-        slider.style.visibility="visible"
+        slider.style.display="block"
       }
       onSettings=true;
+      resetall();
   }
 // function hideblock(){
 //   let functionMenu = document.getElementById("menu");
@@ -461,16 +433,15 @@ function resetall(){
   let box1 = document.getElementById("firstSet");
   let box2 = document.getElementById("secondSet");
   let box3 = document.getElementById("thirdSet");
-  let box4 = document.getElementById("fourthSet");
   box1.style.backgroundColor="#FFB52E";
   box2.style.backgroundColor="#A668A6";
   box3.style.backgroundColor="#F7A4A4";
-  box4.style.backgroundColor="#10BBE5";
 } 
 function selectfirst(){
-  let menu = document.getElementById("menu");
-  let check = window.getComputedStyle(menu,null).display;
-  if(check != "none"){
+  const tempSlider = document.getElementsByClassName("slider")[0];
+  const durationSlider = document.getElementsByClassName("slider")[1];
+  let check = window.getComputedStyle(tempSlider,null).display;
+  if(check == "none"){
     return;
   }
   let x = document.getElementById("firstSet");
@@ -478,23 +449,22 @@ function selectfirst(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(255, 181, 46)"){
     resetall();
-    defaultNavbar.style.display="none";
-    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature1").value;
-    let duration = document.getElementById("duration1").value;
-    let functionSent = document.getElementById("function1").value;
-    console.log("function," + functionSent+"," + temperature + "," + duration);
-    websocket.send("function," + functionSent+"," + temperature + "," + duration);
-  }
-  else{
-    resetall();
+    // let temperature = document.getElementById("temperature1").value;
+    const temperature = tempSlider.value;
+    const duration = durationSlider.value;
+    console.log("function,0," + temperature + "," + duration);
+    websocket.send("function,0," + temperature + "," + duration);
+  } else {
+    // resetall();
+    resetfunction();
   }
 }
 function selectsecond(){
-  let menu = document.getElementById("menu");
-  let check = window.getComputedStyle(menu,null).display;
-  if(check != "none"){
+  const tempSlider = document.getElementsByClassName("slider")[2];
+  const durationSlider = document.getElementsByClassName("slider")[3];
+  let check = window.getComputedStyle(tempSlider,null).display;
+  if(check == "none"){
     return;
   }
   let x = document.getElementById("secondSet");
@@ -502,23 +472,21 @@ function selectsecond(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(166, 104, 166)"){
     resetall();
-    defaultNavbar.style.display="none";
-    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature2").value;
-    let duration = document.getElementById("duration2").value;
-    let functionSent = document.getElementById("function2").value;
-    console.log("function," + functionSent+"," + temperature + "," + duration);
-    websocket.send("function," + functionSent+"," + temperature + "," + duration);
-  }
-  else{
-    resetall();
+    const temperature = tempSlider.value;
+    const duration = durationSlider.value;
+    console.log("function,1," + temperature + "," + duration);
+    websocket.send("function,1," + temperature + "," + duration);
+  } else{
+    // resetall();
+    resetfunction();
   }
 }
 function selectthird(){
-  let menu = document.getElementById("menu");
-  let check = window.getComputedStyle(menu,null).display;
-  if(check != "none"){
+  const tempSlider = document.getElementsByClassName("slider")[4];
+  const durationSlider = document.getElementsByClassName("slider")[5];
+  let check = window.getComputedStyle(tempSlider,null).display;
+  if(check == "none"){
     return;
   }
   let x = document.getElementById("thirdSet");
@@ -526,51 +494,28 @@ function selectthird(){
   let z = y.getPropertyValue("background-color");
   if(z === "rgb(247, 164, 164)"){
     resetall();
-    defaultNavbar.style.display="none";
-    thirdNavbar.style.display="flex";
     x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature3").value;
-    let duration = document.getElementById("duration3").value;
-    let functionSent = document.getElementById("function3").value;
-    console.log("function," + functionSent+"," + temperature + "," + duration);
-    websocket.send("function," + functionSent+"," + temperature + "," + duration);
-  }
-  else{
-    resetall();
-  }
-}
-function selectfourth(){
-  let menu = document.getElementById("menu");
-  let check = window.getComputedStyle(menu,null).display;
-  if(check != "none"){
-    return;
-  }
-  let x = document.getElementById("fourthSet");
-  let y=window.getComputedStyle(x);
-  let z = y.getPropertyValue("background-color");
-  if(z === "rgb(16, 187, 229)"){
-    resetall();
-    defaultNavbar.style.display="none";
-    thirdNavbar.style.display="flex";
-    x.style.backgroundColor="green";
-    let temperature = document.getElementById("temperature4").value;
-    let duration = document.getElementById("duration4").value;
-    let functionSent = document.getElementById("function4").value;
-    console.log("function," + functionSent+"," + temperature + "," + duration);
-    websocket.send("function," + functionSent+"," + temperature + "," + duration);
-  }
-  else{
-    resetall();
+    const temperature = tempSlider.value;
+    const duration = durationSlider.value;
+    console.log("function,2," + temperature + "," + duration);
+    websocket.send("function,2," + temperature + "," + duration);
+  } else {
+    // resetall();
+    resetfunction();
   }
 }
 function resetfunction(){
-  websocket.send("reset");
+  try {
+    websocket.send("reset");
+  } catch (error) {
+    console.error(error);
+  }
   resetall();
   document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
   document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
   document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
-  defaultNavbar.style.display="flex";
-  thirdNavbar.style.display="none";
+  // defaultNavbar.style.display="flex";
+  // thirdNavbar.style.display="none";
   temperature = "0";
   duration = "0";
   maxTemp= "0";

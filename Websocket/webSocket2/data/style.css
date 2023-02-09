@@ -142,10 +142,10 @@ body {
 
 
 .grill{
-    height:30%;
-    width:90%;
-    max-height:100px;   
-    max-width:100px;
+  width:90px;
+  height:90px;
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .grillTitle{
@@ -164,7 +164,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     gap:12px;
-    visibility: hidden;
+    display:none;
 }
 
 .slidercontainter{
@@ -180,10 +180,10 @@ body {
 }
 
 .baking{
-    height:30%;
-    width:90%;
-    max-height:100px;   
-    max-width:100px;
+  width:90px;
+  height:90px;
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .secondSet {
@@ -200,8 +200,8 @@ body {
 }
 
 .rotisserie {
-  height: 30%;
-  width: 80%;
+  width:90px;
+  height:90px;
   max-height: 100px;
   max-width: 100px;
 }
@@ -215,6 +215,10 @@ body {
   margin-bottom: 50px;
   margin-right: 7%;
   margin-left: 7%;
+}
+
+.thirdTitle{
+  font-size:18px;
 }
 .fourthSet {
   border-width: 3px;
@@ -235,10 +239,10 @@ body {
 }
 .bottomnav {
   width: 100%;
-  padding-top: 30px;
+  /* padding-top: 30px; */
   display: flex;
   justify-content: space-around;
-  height: 100px;
+  height: 130px;
   background: #07a0a2;
   border-width: 1px;
   border-color: black;
@@ -249,15 +253,19 @@ body {
   cursor: pointer;
   width: 50%;
 }
-
+.homebutton{
+  padding-top:30px;
+}
 .border {
   width: 2px;
   background-color: black;
-  margin-top: -30px;
 }
 .rightside {
   cursor: pointer;
   width: 50%;
+}
+.settingsbutton{
+  padding-top:30px;
 }
 /* .playbuttonicon{
     background: #8CC0DE;
@@ -401,17 +409,41 @@ body {
     .settings{
         font-size: 16px;
     }
+    .rotisserie{
+      height:79px;
+      width:79px
+    }
+    .baking{
+      height:79px;
+      width:79px
+    }
+    .grill{
+      height:79px;
+      width:79px
+    }
 }
 
 @media(max-width:359px){
     .settings{
         font-size: 15px;
     }
-    .durationSliderContainer{
-        margin-top:-10px;
-    }
     .secondDurationSlider{
         margin-top:5px;
+    }
+    .rotisserie{
+      height:70px;
+      width:70px
+    }
+    .baking{
+      height:70px;
+      width:70px
+    }
+    .grill{
+      height:70px;
+      width:70px
+    }
+    .thirdTitle{
+      font-size: 12.5px;
     }
 }
 
