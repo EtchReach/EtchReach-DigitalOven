@@ -220,10 +220,7 @@ String processor(const String &var)
   {
     return temperature3;
   }
-  else if (var == "defaultT4")
-  {
-    return temperature4;
-  }
+
   else if (var == "defaultD1")
   {
     return duration1;
@@ -236,27 +233,7 @@ String processor(const String &var)
   {
     return duration3;
   }
-  else if (var == "defaultD4")
-  {
-    return duration4;
-  }
-  else if (var == "defaultF1")
-  {
-    return function1;
-  }
-  else if (var == "defaultF2")
-  {
-    return function2;
-  }
-  else if (var == "defaultF3")
-  {
-    return function3;
-  }
-  else if (var == "defaultF4")
-  {
-    return function4;
-  }
-  return String();
+  return "";
 }
 
 void savePresets(char *data)
