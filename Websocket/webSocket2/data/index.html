@@ -438,11 +438,15 @@ function resetall(){
   box2.style.backgroundColor="#A668A6";
   box3.style.backgroundColor="#F7A4A4";
 } 
+
+
 function selectfirst(){
   const tempSlider = document.getElementsByClassName("slider")[0];
   const durationSlider = document.getElementsByClassName("slider")[1];
-  let check = window.getComputedStyle(tempSlider,null).display;
-  if(check == "none"){
+  // let tempSliderDisplay = window.getComputedStyle(tempSlider,null).display;
+  let firstCheck = document.getElementsByClassName("slidersandduration")[0];
+  let check= window.getComputedStyle(firstCheck,null).display;
+  if(check == "block"){
     return;
   }
   let x = document.getElementById("firstSet");
@@ -464,8 +468,9 @@ function selectfirst(){
 function selectsecond(){
   const tempSlider = document.getElementsByClassName("slider")[2];
   const durationSlider = document.getElementsByClassName("slider")[3];
-  let check = window.getComputedStyle(tempSlider,null).display;
-  if(check == "none"){
+  let secondCheck = document.getElementsByClassName("slidersandduration")[1];
+  let check = window.getComputedStyle(secondCheck,null).display;
+  if(check == "block"){
     return;
   }
   let x = document.getElementById("secondSet");
@@ -486,8 +491,10 @@ function selectsecond(){
 function selectthird(){
   const tempSlider = document.getElementsByClassName("slider")[4];
   const durationSlider = document.getElementsByClassName("slider")[5];
-  let check = window.getComputedStyle(tempSlider,null).display;
-  if(check == "none"){
+  // let check = window.getComputedStyle(tempSlider,null).display;
+  let thirdCheck = document.getElementsByClassName("slidersandduration")[2];
+  let check = window.getComputedStyle(thirdCheck,null).display
+  if(check == "block"){
     return;
   }
   let x = document.getElementById("thirdSet");
