@@ -47,7 +47,7 @@
                     </div>
                   </div>
                   <div class="information-wrapper">
-                    <img src="./pictures/information-filled.svg" class="information-icon" />
+                    <img src="./pictures/filled.svg" class="information-icon" />
                     <div class="information-tooltip">
                       <p>Temperature: <span>24</span><sup>o</sup>C</p>
                       <p>Duration: <span>10</span>mins</p>
@@ -75,7 +75,7 @@
                     </div>
                   </div>
                   <div class="information-wrapper">
-                    <img src="./pictures/information-filled.svg" class="information-icon" />
+                    <img src="./pictures/filled.svg" class="information-icon" />
                     <div class="information-tooltip">
                       <p>Temperature: <span>24</span><sup>o</sup>C</p>
                       <p>Duration: <span>10</span>mins</p>
@@ -104,7 +104,7 @@
                   </div>
                 </div>
                 <div class="information-wrapper">
-                  <img src="./pictures/information-filled.svg" class="information-icon" />
+                  <img src="./pictures/filled.svg" class="information-icon" />
                   <div class="information-tooltip">
                     <p>Temperature: <span>24</span><sup>o</sup>C</p>
                     <p>Duration: <span>10</span>mins</p>
@@ -239,6 +239,7 @@
   function onMessage(event) { //Handles incoming message from the server (esp32 board)
     var state;
     let data = event.data.split(",");
+    console.log(data);
     temperature = data[1];
     duration = data[3];
     maxTemp= data[5];

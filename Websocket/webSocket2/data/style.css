@@ -395,7 +395,7 @@ body {
 }
 
 .information-icon:hover {
-  content: url("./pictures/information-circle.svg")
+  content: url("./pictures/circle.svg")
 }
 
 .information-icon:hover ~ .information-tooltip {

@@ -148,7 +148,6 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
       last_time = millis();
-      last_send = millis();
     } else if (strcmp((char *)ptr, "save") == 0) {
       Serial.printf("Saving Configurations\n");
       char *settings = strtok(NULL, ",");
@@ -302,19 +301,12 @@ void loadPresets()
   }
   temperature1 = v[0];
   duration1 = v[1];
-  function1 = v[2];
 
-  temperature2 = v[3];
-  duration2 = v[4];
-  function2 = v[5];
+  temperature2 = v[2];
+  duration2 = v[3];
 
-  temperature3 = v[6];
-  duration3 = v[7];
-  function3 = v[8];
-
-  temperature4 = v[9];
-  duration4 = v[10];
-  function4 = v[11];
+  temperature3 = v[4];
+  duration3 = v[5];
 }
 
 void setup()
@@ -342,12 +334,14 @@ void setup()
   Serial.println(WiFi.localIP());
 
   initWebSocket();
-  // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(SPIFFS, "/index.html", String(), false, processor); });
-  // Route to load style.css file
-  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(SPIFFS, "/style.css", "text/css"); });
+//  Routing for root / web page
+//  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+//            { request->send(SPIFFS, "/index.html", String(), false, processor); });
+//  // Route to load style.css file
+//  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
+//            { request->send(SPIFFS, "/style.css", "text/css"); });
+            
+  server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
 
   // Start server
   server.begin();
@@ -441,7 +435,8 @@ void monitorTemperature(bool bottomCoil) {
 }
 
 void notifyClients() {
-  ws.textAll("temperature," + String(readTemp) + ",duration," + String((current_time - last_time) / (1000 * 60)) + ",receivedTemp," + String(receivedTemp)+ ",receivedFunction," + String(receivedDuration)+ ",function," + String(receivedFunction));
+  int durationElapsed = current_time - last_time;
+  ws.textAll("temperature," + String(readTemp) + ",duration," + String(durationElapsed / (1000 * 60)) + ",receivedTemp," + String(receivedTemp)+ ",receivedDuration," + String(receivedDuration)+ ",receivedFunction," + String(receivedFunction));
 }
 
 void loop() {
@@ -449,7 +444,7 @@ void loop() {
   int durationElapsed = current_time - last_time;
   int function = receivedFunction.toInt();
 
-  // function != l0 => start oven
+  // function != 0 => start oven
   if (function != 0) {
     current_time = millis();
 
