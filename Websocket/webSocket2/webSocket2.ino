@@ -153,6 +153,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
       char *settings = strtok(NULL, ",");
       Serial.printf("%s\n", settings);
       savePresets(settings);
+      loadPresets();
       return;
     } else if (strcmp((char*)ptr, "reset") == 0) {
       resetOven();
@@ -312,8 +313,8 @@ void setup()
 
   initWebSocket();
 //  Routing for root / web page
-//  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-//            { request->send(SPIFFS, "/index.html", String(), false, processor); });
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(SPIFFS, "/index.html", String(), false, processor); });
 //  // Route to load style.css file
 //  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
 //            { request->send(SPIFFS, "/style.css", "text/css"); });
