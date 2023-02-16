@@ -117,6 +117,11 @@ body {
   margin: 0;
   font-size: 1.5rem;
 }
+
+.state-temperature {
+  margin-top: -4px;
+}
+
 .functionOptions {
   font-size: medium;
   color: black;

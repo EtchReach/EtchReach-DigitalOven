@@ -148,6 +148,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
       receivedTemp = String(strtok(NULL, ","));
       receivedDuration = String(strtok(NULL, ","));
       last_time = millis();
+      last_send = 0;
     } else if (strcmp((char *)ptr, "save") == 0) {
       Serial.printf("Saving Configurations\n");
       char *settings = strtok(NULL, ",");
@@ -426,11 +427,9 @@ void loop() {
   if (function != 0) {
     current_time = millis();
 
-    // function == "1" => Fermentation => Bulb on
-    // function == "2" => Top & Bottom Heat => Top & Bottom Coils
-    // function == "3" => Top Heat with Rotisserie => Rotisserie on, Top Coil
-    // function == "4" => Top & Bottom Heat with Fan => Fan on, Top & Bottom Coils
-    // function == "5" => Top Heat with Fan & Rotisserie => Fan on & Rotisserie on, Top & Bottom Coils
+    // function == "1" => Grill => Bulb on, Top and Bottom Coil
+    // function == "2" => Bake => Bulb on, Top and Bottom Coil, Fan
+    // function == "3" => Rotisserie => Bulb on, Top and Bottom Coil, Rotisserie
 
     display.clearDisplay();
     display.setCursor(0,0);
@@ -438,33 +437,22 @@ void loop() {
     switch (function) {
       case 1:
         digitalWrite(bulbPin, LOW);
-        readTemp = getTemperature();
-        display.println("Fermentation");
-        display.display();
+        monitorTemperature(true);
+        display.println("Grill");
         break;
 
       case 2:
+        digitalWrite(bulbPin, LOW);
+        digitalWrite(fanPin, LOW);
         monitorTemperature(true);
-        display.println("Top & Btm Heat");
+        display.println("Bake");
         break;
   
       case 3:
         digitalWrite(rotisseriePin, LOW);
-        monitorTemperature(false);
-        display.println("Top Heat + Roti");
-        break;
-  
-      case 4:
-        digitalWrite(fanPin, LOW);
+        digitalWrite(bulbPin, LOW);
         monitorTemperature(true);
-        display.println("Top & Btm Heat + Fan");
-        break;
-  
-      case 5:
-        digitalWrite(rotisseriePin, LOW);
-        digitalWrite(fanPin, LOW);
-        monitorTemperature(false);
-        display.println("Top Heat + Fan & Roti");
+        display.println("Rotisserie");
         break;
   
       default:

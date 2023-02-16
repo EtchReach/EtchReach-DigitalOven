@@ -245,6 +245,12 @@
     maxTemp= data[5];
     maxDuration= data[7];
     selectedFunction=parseInt(data[9]);
+
+    initButton(selectedFunction);
+    if (duration >= maxDuration) {
+      resetfunction();
+    }
+    
     document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
     document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): ${temperature}/${maxTemp}`;
     document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/${maxDuration}`;
@@ -253,39 +259,19 @@
     initWebSocket();
     // initButton();
   }
-  // function initButton() {
-    // document.getElementById('button').addEventListener('click', toggle);
-    // document.getElementById('firstbutton').addEventListener('click', toggle1);
-    // document.getElementById('secondbutton').addEventListener('click', toggle2);
-    // document.getElementById('thirdbutton').addEventListener('click', toggle3);
-    // document.getElementById('fourthbutton').addEventListener('click', toggle4);
-    // document.getElementById('saveButton').addEventListener('click', toggleSave);
 
-    // document.getElementById('setting1').addEventListener('click', () => {
-    //   temperatureInput1 = !temperatureInput1;
-    //   document.getElementById('temperature1').disabled= temperatureInput1;
-    //   document.getElementById('duration1').disabled= temperatureInput1;
-    //   document.getElementById('function1').disabled= temperatureInput1;
-    // });
-    // document.getElementById('setting2').addEventListener('click', () => {
-    //   temperatureInput2 = !temperatureInput2;
-    //   document.getElementById('temperature2').disabled= temperatureInput2;
-    //   document.getElementById('duration2').disabled= temperatureInput2;
-    //   document.getElementById('function2').disabled= temperatureInput2;
-    // });
-    // document.getElementById('setting3').addEventListener('click', () => {
-    //   temperatureInput3 = !temperatureInput3;
-    //   document.getElementById('temperature3').disabled= temperatureInput3;
-    //   document.getElementById('duration3').disabled= temperatureInput3;
-    //   document.getElementById('function3').disabled= temperatureInput3;
-    // });
-    // document.getElementById('setting4').addEventListener('click', () => {
-    //   temperatureInput4 = !temperatureInput4;
-    //   document.getElementById('temperature4').disabled= temperatureInput4;
-    //   document.getElementById('duration4').disabled= temperatureInput4;
-    //   document.getElementById('function4').disabled= temperatureInput4;
-    // });
-  // }
+  function initButton(functionID) {
+    if (functionID === 1) {
+      let x = document.getElementById("firstSet");
+      x.style.backgroundColor="green";
+    } else if (functionID === 2) {
+      let x = document.getElementById("secondSet");
+      x.style.backgroundColor="green";
+    } else if (functionID === 3) {
+      let x = document.getElementById("thirdSet");
+      x.style.backgroundColor="green";
+    }
+  }
   // function toggle(){
   //   //console.log("toggle");
   //   websocket.send("toggle");
