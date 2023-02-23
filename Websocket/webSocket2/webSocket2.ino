@@ -484,7 +484,8 @@ void loop() {
     }
   } else { // function == "0" => stop oven
     resetOven();
-    if (connected) {
+    display.clearDisplay();
+    if (wsConnected) {
       display.println("Select a Function to start!");
     } else {
       display.println("Connect to the Smart Oven at");
