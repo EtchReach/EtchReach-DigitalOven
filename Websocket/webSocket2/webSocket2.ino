@@ -103,6 +103,9 @@ String function2;
 String function3;
 String function4;
 
+bool wsConnected = false;
+String wsIP = "";
+
 // Websocket read values
 String receivedFunction = "0";
 String receivedTemp = "0";
@@ -175,9 +178,12 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
   {
   case WS_EVT_CONNECT:
     Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
+    wsConnected = true;
+    wsIP = client->remoteIP().toString();
     break;
   case WS_EVT_DISCONNECT:
     Serial.printf("WebSocket client #%u disconnected\n", client->id());
+    wsConnected = false;
     break;
   case WS_EVT_DATA: // when a data packet is received from the client
     handleWebSocketMessage(arg, data, len);
@@ -476,9 +482,16 @@ void loop() {
     if (durationElapsed >= totalDuration) {
       resetOven();
     }
-  }
-  else { // function == "0" => stop oven
+  } else { // function == "0" => stop oven
     resetOven();
+    if (connected) {
+      display.println("Select a Function to start!");
+    } else {
+      display.println("Connect to the Smart Oven at");
+      display.println(wsIP);
+    }
+
+    display.display();
   }
 
   ws.cleanupClients(); // limits number of clients by closing oldest client when maximum num of client has exceeded - can call once per second to conserve power
