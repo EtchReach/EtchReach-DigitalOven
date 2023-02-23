@@ -104,7 +104,6 @@ String function3;
 String function4;
 
 bool wsConnected = false;
-String wsIP = "";
 
 // Websocket read values
 String receivedFunction = "0";
@@ -179,7 +178,6 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
   case WS_EVT_CONNECT:
     Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
     wsConnected = true;
-    wsIP = client->remoteIP().toString();
     break;
   case WS_EVT_DISCONNECT:
     Serial.printf("WebSocket client #%u disconnected\n", client->id());
@@ -485,13 +483,15 @@ void loop() {
   } else { // function == "0" => stop oven
     resetOven();
     display.clearDisplay();
+    display.setCursor(0,0);
     if (wsConnected) {
+      display.println("");
       display.println("Select a Function to start!");
     } else {
-      display.println("Connect to the Smart Oven at");
-      display.println(wsIP);
+      display.println("Connect to the");
+      display.println("Smart Oven at: ");
+      display.println(WiFi.localIP());
     }
-
     display.display();
   }
 
