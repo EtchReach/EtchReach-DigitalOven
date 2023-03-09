@@ -69,11 +69,11 @@ Adafruit_MAX31865 thermo = Adafruit_MAX31865(05, 23, 19, 18);
 // D15 GPIO 15 ROTISSERIE
 // VIN
 
-const int lowerPin = 16; // RX2
-const int bulbPin = 2;
-const int upperPin = 4;
-const int fanPin = 17; // TX2
-const int rotisseriePin = 15;
+const int lowerPin = 16; // RX2 -> IN2 -> LOWER COIL
+const int bulbPin = 2; // -> IN3 -> Bulb
+const int upperPin = 4; // -> IN4 -> UPPER COIL
+const int fanPin = 17; // TX2 -> IN1 -> FAN
+const int rotisseriePin = 15; // -> IN5 -> Rotisserie
 
 // thermoprobe constants & variables
 float temp = 0;
@@ -133,6 +133,7 @@ void resetOven() {
   digitalWrite(fanPin, HIGH);
   digitalWrite(rotisseriePin, HIGH);
   digitalWrite(bulbPin, HIGH);
+  notifyClients();
 }
 
 // callback to handle the data from clients via websocket protocol
@@ -478,6 +479,7 @@ void loop() {
     }
 
     if (durationElapsed >= totalDuration) {
+      last_send = current_time;
       resetOven();
     }
   } else { // function == "0" => stop oven

@@ -19,14 +19,7 @@
         <p class="state state-duration">Duration(mins): NIL</p>
       </div>
       <div>
-        <!-- <div class="menu" id ="menu">
-          <h2 class="statusstate">Function Menu</h2>
-          <p class="functionOptions">Enter 1 for Fermentation</p>
-          <p class="functionOptions">Enter 2 for Top & Bottom Heat</p>
-          <p class="functionOptions">Enter 3 for Top heat with Rotisserie</p>
-          <p class="functionOptions">Enter 4 for Top & Bottom Heat with Fan</p>
-          <p class="functionOptions">Enter 5 for Top Heat with Fan & Rotisserie</p>
-        </div> -->
+
       </div>
       <div class="buttons">
           <div class="firstSet" id="firstSet" onclick="selectfirst()">
@@ -38,11 +31,11 @@
                 </div>
                   <div class="slidersandduration">
                     <div class="slidercontainter">
-                      <input type="range" min="1" max="100" value=%defaultT1% class="slider" id="grillTemperatureSlider" />
+                      <input type="range" min="30" max="230" value=%defaultT1% class="slider" id="grillTemperatureSlider" />
                       <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                     </div>
                     <div class="slidercontainter durationSliderContainer">
-                      <input type="range" min="1" max="100" value=%defaultD1% class="slider" id="grillDurationSlider" />
+                      <input type="range" min="1" max="120" value=%defaultD1% class="slider" id="grillDurationSlider" />
                       <p class="settings">Duration: <span class="settings" id="grillDuration"></span><span class="settings"> Mins</span></p>
                     </div>
                   </div>
@@ -65,12 +58,12 @@
                   <div class="slidersandduration">
                     <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
                     <div class="slidercontainer">
-                      <input type="range" min="1" max="100" value=%defaultT2% class="slider" id="bakeTemperatureSlider"/>
+                      <input type="range" min="30" max="230" value=%defaultT2% class="slider" id="bakeTemperatureSlider"/>
                       <p class="settings">Temperature: <span class="settings" id="bakeTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                     </div>
                     <p class="descriptions" id="secondDuration"></p>
                     <div class="slidercontainter durationSliderContainer secondDurationSlider">
-                      <input type="range" min="1" max="100" value=%defaultD2% class="slider" id="bakeDurationSlider"/>
+                      <input type="range" min="10" max="120" value=%defaultD2% class="slider" id="bakeDurationSlider"/>
                       <p class="settings">Duration: <span class="settings" id="bakeDuration"></span><span class="settings"> Mins</span></p>
                     </div>
                   </div>
@@ -94,12 +87,12 @@
                 <div class="slidersandduration">
                   <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
                   <div class="slidercontainer">
-                    <input type="range" min="1" max="100" value=%defaultT3% class="slider" id="rotiTemperatureSlider"/>
+                    <input type="range" min="30" max="230" value=%defaultT3% class="slider" id="rotiTemperatureSlider"/>
                     <p class="settings">Temperature: <span class="settings" id="rotiTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                   </div>
                   <p class="descriptions" id="thirdduration"></p>
                   <div class="slidercontainter durationSliderContainer thirdDurationSlider">
-                    <input type="range" min="1" max="100" value=%defaultD3% class="slider" id="rotiDurationSlider"/>
+                    <input type="range" min="10" max="120" value=%defaultD3% class="slider" id="rotiDurationSlider"/>
                     <p class="settings">Duration: <span class="settings" id="rotiDuration"></span><span class="settings"> Mins</span></p>
                   </div>
                 </div>
@@ -136,20 +129,7 @@
         </div>     
       </div>
     </div>
-    <!-- <div class="alternatebottomnav" id="alternatebottomnav">
-      <div class="backbutton" onclick="hideblock()">
-        <svg class="backbuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-        </svg>
-      </div>  
-      <div class="savebutton" onclick=toggleSave()>
-        <div class="savebuttonicon">
-          <svg class = "savebuttonicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
-          </svg>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 <script>
   function adjustSlider(sliderId, sliderOuter, tooltipId, tooltipItemId){
@@ -174,42 +154,7 @@
 
   let defaultNavbar = document.getElementById("defaultbottomnav");
   let functionnames ={1:"Grill", 2:"Bake", 3:"Rotisserie"};
-  // let function1name = document.getElementById("firstTitle");
-  // let function2name = document.getElementById("secondTitle");
-  // let function3name = document.getElementById("thirdTitle");
-  // let function4name = document.getElementById("fourthTitle");
-  // let function1Set = document.getElementById("function1").value;
-  // let function2Set = document.getElementById("function2").value;
-  // let function3Set = document.getElementById("function3").value;
-  // let function4Set = document.getElementById("function4").value;
-  // function1name.innerHTML=functionnames[function1Set];
-  // function2name.innerHTML=functionnames[function2Set];
-  // function3name.innerHTML=functionnames[function3Set];
-  // function4name.innerHTML=functionnames[function4Set];
-  // let temperature1Name = document.getElementById("firstTemperature");
-  // let temperature2Name = document.getElementById("secondTemperature");
-  // let temperature3Name = document.getElementById("thirdTemperature");
-  // let temperature4Name = document.getElementById("fourthTemperature");
-  // let duration1Name = document.getElementById("firstDuration");
-  // let duration2Name = document.getElementById("secondDuration");
-  // let duration3Name = document.getElementById("thirdDuration");
-  // let duration4Name = document.getElementById("fourthDuration");
-  // let temperature1Set = document.getElementById("temperature1").value;
-  // let temperature2Set = document.getElementById("temperature2").value;
-  // let temperature3Set = document.getElementById("temperature3").value;
-  // let temperature4Set = document.getElementById("temperature4").value;
-  // let duration1Set = document.getElementById("duration1").value;
-  // let duration2Set = document.getElementById("duration2").value;
-  // let duration3Set = document.getElementById("duration3").value;
-  // let duration4Set = document.getElementById("duration4").value;
-  // temperature1Name.innerHTML= temperature1Set+ "<sup>o</sup>C";
-  // temperature2Name.innerHTML= temperature2Set+ "<sup>o</sup>C";
-  // temperature3Name.innerHTML= temperature3Set+ "<sup>o</sup>C";
-  // temperature4Name.innerHTML= temperature4Set+ "<sup>o</sup>C";
-  // duration1Name.innerHTML=duration1Set + " Mins";
-  // duration2Name.innerHTML=duration2Set + " Mins";
-  // duration3Name.innerHTML=duration3Set + " Mins";
-  // duration4Name.innerHTML=duration4Set + " Mins";
+
   var gateway = `ws://${window.location.hostname}/ws`; //gets the webserver IP address
   var websocket;
   let temperatureInput1 = true;
@@ -247,13 +192,18 @@
     selectedFunction=parseInt(data[9]);
 
     initButton(selectedFunction);
-    if (duration >= maxDuration) {
-      resetfunction();
+
+    if (selectedFunction === 0) {
+      document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
+      document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
+      document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
+      resetall();
+    } else {
+      document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
+      document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): ${temperature}/${maxTemp}`;
+      document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/${maxDuration}`;
     }
     
-    document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
-    document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): ${temperature}/${maxTemp}`;
-    document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): ${duration}/${maxDuration}`;
   }
   function onLoad(event) {
     initWebSocket();
@@ -261,60 +211,29 @@
   }
 
   function initButton(functionID) {
+    let box1 = document.getElementById("firstSet");
+    let box2 = document.getElementById("secondSet");
+    let box3 = document.getElementById("thirdSet");
+
     if (functionID === 1) {
-      let x = document.getElementById("firstSet");
-      x.style.backgroundColor="green";
+      let box1 = document.getElementById("firstSet");
+      box1.style.backgroundColor="green";
+      box2.style.backgroundColor="#A668A6";
+      box3.style.backgroundColor="#F7A4A4";
     } else if (functionID === 2) {
-      let x = document.getElementById("secondSet");
-      x.style.backgroundColor="green";
+      let box2 = document.getElementById("secondSet");
+      box2.style.backgroundColor="green";
+      box1.style.backgroundColor="#FFB52E";
+      box3.style.backgroundColor="#F7A4A4";
     } else if (functionID === 3) {
-      let x = document.getElementById("thirdSet");
-      x.style.backgroundColor="green";
+      let box3 = document.getElementById("thirdSet");
+      box3.style.backgroundColor="green";
+      box1.style.backgroundColor="#FFB52E";
+      box2.style.backgroundColor="#A668A6";
     }
   }
-  // function toggle(){
-  //   //console.log("toggle");
-  //   websocket.send("toggle");
-  // }
-  // function toggle1(){
-  //   var temp = document.getElementById("temperature1").value;
-  //   var duration = document.getElementById("duration1").value;
-  //   var func = document.getElementById("function1").value;
-  //   var value= temp+','+duration+','+func
-  //   // console.log(value);
-  //   websocket.send(value);
-  // }
-  // function toggle2(){
-  //   var temp = document.getElementById("temperature2").value;
-  //   var duration = document.getElementById("duration2").value;
-  //   var func = document.getElementById("function2").value;
-  //   var value= temp+','+duration+','+func
-  //   //console.log(value);
-  //   websocket.send(value);
-  // }
-  // function toggle3(){
-  //   var temp = document.getElementById("temperature3").value;
-  //   var duration = document.getElementById("duration3").value;
-  //   var func = document.getElementById("function3").value;
-  //   var value= temp+','+duration+','+func
-  //   //console.log(value);
-  //   websocket.send(value);
-  // }
-  // function toggle4(){
-  //   var temp = document.getElementById("temperature4").value;
-  //   var duration = document.getElementById("duration4").value;
-  //   var func = document.getElementById("function4").value;
-  //   var value= temp+','+duration+','+func
-  //   //console.log(value);
-  //   websocket.send(value);
-  // }
+
   function toggleSave() {
-    // var temp1 = document.getElementById("temperature1").value;
-    // var duration1 = document.getElementById("duration1").value;
-    // var temp2 = document.getElementById("temperature2").value;
-    // var duration2 = document.getElementById("duration2").value;
-    // var temp3 = document.getElementById("temperature3").value;
-    // var duration3 = document.getElementById("duration3").value;
     const sliders = document.getElementsByClassName("slider");
     websocket.send(`save,${sliders[0].value}\n${sliders[1].value}\n${sliders[2].value}\n${sliders[3].value}\n${sliders[4].value}\n${sliders[5].value}`);
   }
@@ -336,86 +255,8 @@
       onSettings=true;
       resetall();
   }
-// function hideblock(){
-//   let functionMenu = document.getElementById("menu");
-//   let x = document.getElementById("content");
-//   let sliders= document.getElementsByClassName("slider");
-//   let temperature1 = document.getElementById("temperature1");
-//   let temperature2 =document.getElementById("temperature2");
-//   let temperature3 =document.getElementById("temperature3");
-//   let temperature4 =document.getElementById("temperature4");
-//   let duration1 = document.getElementById("duration1");
-//   let duration2 = document.getElementById("duration2");
-//   let duration3 = document.getElementById("duration3");
-//   let duration4 = document.getElementById("duration4");
-//   let function1 = document.getElementById("function1");
-//   let function2 = document.getElementById("function2");
-//   let function3 = document.getElementById("function3");
-//   let function4 = document.getElementById("function4");
-//   if(sliders[0].disabled==true){
-//     // x.style.display="block";
-//     // sliders[0].disabled=false;
-//     // sliders[1].disabled=false;
-//     // sliders[2].disabled=false;
-//     // temperature1.style.display="none"
-//     // temperature2.style.display="none"
-//     // temperature3.style.display="none"
-//     // temperature4.style.display="none"
-//     // duration1.style.display="none";
-//     // duration2.style.display="none";
-//     // duration3.style.display="none";
-//     // duration4.style.display="none";
-//     // function1.style.display="none";
-//     // function2.style.display="none";
-//     // function3.style.display="none";
-//     // function4.style.display="none";
-//     // functionMenu.style.display="none";
-//   }
-//   else{
-//     // x.style.display="none";
-//     // sliders[0].disabled=true;
-//     // sliders[1].disabled=true;
-//     // sliders[2].disabled=true;
-//     // temperature1.style.display="block";
-//     // temperature2.style.display="block";
-//     // temperature3.style.display="block";
-//     // temperature4.style.display="block";
-//     // duration1.style.display="block";
-//     // duration2.style.display="block";
-//     // duration3.style.display="block";
-//     // duration4.style.display="block";
-//     // function1.style.display="block";
-//     // function2.style.display="block";
-//     // function3.style.display="block";
-//     // function4.style.display="block";
-//     // functionMenu.style.display="block";
-//   }
 
-//   let function1Set = document.getElementById("function1").value;
-//   let function2Set = document.getElementById("function2").value;
-//   let function3Set = document.getElementById("function3").value;
-//   let function4Set = document.getElementById("function4").value;
-//   let temperature1Set = document.getElementById("temperature1").value;
-//   let temperature2Set = document.getElementById("temperature2").value;
-//   let temperature3Set = document.getElementById("temperature3").value;
-//   let temperature4Set = document.getElementById("temperature4").value;
-//   let duration1Set = document.getElementById("duration1").value;
-//   let duration2Set = document.getElementById("duration2").value;
-//   let duration3Set = document.getElementById("duration3").value;
-//   let duration4Set = document.getElementById("duration4").value;
-//   function1name.innerHTML=functionnames[function1Set];
-//   function2name.innerHTML=functionnames[function2Set];
-//   function3name.innerHTML=functionnames[function3Set];
-//   function4name.innerHTML=functionnames[function4Set];
-//   temperature1Name.innerHTML= temperature1Set+ "°C";
-//   temperature2Name.innerHTML= temperature2Set+ "°C";
-//   temperature3Name.innerHTML= temperature3Set+ "°C";
-//   temperature4Name.innerHTML= temperature4Set+ "°C";
-//   duration1Name.innerHTML=duration1Set + " Mins";
-//   duration2Name.innerHTML=duration2Set + " Mins";
-//   duration3Name.innerHTML=duration3Set + " Mins";
-//   duration4Name.innerHTML=duration4Set + " Mins";
-// }
+// Reset all styles
 function resetall(){
   let box1 = document.getElementById("firstSet");
   let box2 = document.getElementById("secondSet");
@@ -432,7 +273,7 @@ function selectfirst(){
   // let tempSliderDisplay = window.getComputedStyle(tempSlider,null).display;
   let firstCheck = document.getElementsByClassName("slidersandduration")[0];
   let check= window.getComputedStyle(firstCheck,null).display;
-  if(check == "block"){
+  if(check == "block"){ // check whether on settings page
     return;
   }
   let x = document.getElementById("firstSet");
@@ -441,13 +282,11 @@ function selectfirst(){
   if(z === "rgb(255, 181, 46)"){
     resetall();
     x.style.backgroundColor="green";
-    // let temperature = document.getElementById("temperature1").value;
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
     console.log("function,1," + temperature + "," + duration);
     websocket.send("function,1," + temperature + "," + duration);
   } else {
-    // resetall();
     resetfunction();
   }
 }
@@ -505,15 +344,16 @@ function resetfunction(){
     console.error(error);
   }
   resetall();
+
+  // defaultNavbar.style.display="flex";
+  // thirdNavbar.style.display="none";
   document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
   document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
   document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
-  // defaultNavbar.style.display="flex";
-  // thirdNavbar.style.display="none";
   temperature = "0";
   duration = "0";
-  maxTemp= "0";
-  maxDuration= "0";
+  maxTemp = "0";
+  maxDuration = "0";
   selectedFunction=0;
 }
 
