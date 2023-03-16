@@ -132,7 +132,36 @@ body {
   display: none;
 }
 
+.start-button{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.start-text{
+  font-size: 50px;
+  font-weight: 700;
+  visibility: visible;
+}
+
+.stop-button{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.stop-text{
+  font-size: 50px;
+  font-weight: 700;
+  visibility: hidden;
+}
+
 .firstSet {
+  position: relative;
   border-width: 3px;
   border-radius: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -397,6 +426,34 @@ body {
   display: flex;
 }
 
+
+@media(max-width: 700px){
+  .start-text{
+    font-size: 35px;
+  }
+  .stop-text{
+    font-size: 35px;
+  }
+}
+
+@media(max-width: 617px){
+  .start-button{
+    left:70px;
+  }
+  .stop-button{
+    left:70px;
+  }
+}
+
+@media(max-width: 475px){
+  .start-text{
+    font-size: 25px;
+  }
+  .stop-text{
+    font-size: 25px;
+  }
+}
+
 @media(max-width:465px){
     .slidersandduration{
         margin-left:15px;
@@ -439,6 +496,12 @@ body {
     }
     .thirdTitle{
       font-size: 12.5px;
+    }
+    .start-text{
+      font-size: 20px;
+    }
+    .stop-text{
+      font-size: 20px;
     }
 }
 

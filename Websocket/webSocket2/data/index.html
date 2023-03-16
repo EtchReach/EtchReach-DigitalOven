@@ -29,8 +29,14 @@
                   <img class="grill" src="./pictures/grill.png"/>
                   <p class="titles grillTitle" id="firstTitle">Grill</p>
                 </div>
-                  <div class="slidersandduration">
-                    <div class="slidercontainter">
+                <div class="start-button">
+                  <p class="start-text">Press to START</p>
+                </div>
+                <div class="stop-button">
+                  <p class="stop-text">Press to STOP</p>
+                </div>
+                <div class="slidersandduration">
+                  <div class="slidercontainter">
                       <input type="range" min="30" max="230" value=%defaultT1% class="slider" id="grillTemperatureSlider" />
                       <p class="settings">Temperature: <span class="settings" id="grillTemp"></span><span class="settings"><sup>o</sup>C </span></p>
                     </div>
@@ -54,6 +60,12 @@
                   <div class="iconWithDescription">
                     <img class="baking" src="./pictures/baking.png"/>
                     <p class="titles bakeTitles" id="secondTitle">Bake</p>
+                  </div>
+                  <div class="start-button">
+                    <p class="start-text">Press to START</p>
+                  </div>
+                  <div class="stop-button">
+                    <p class="stop-text">Press to STOP</p>
                   </div>
                   <div class="slidersandduration">
                     <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
@@ -83,6 +95,12 @@
                 <div class="iconWithDescription">
                   <img  class="rotisserie" src="./pictures/rotisserie.png"/>
                   <p class="titles thirdTitle" id="thirdTitle">Rotisserie </p>
+                </div>
+                <div class="start-button">
+                  <p class="start-text">Press to START</p>
+                </div>
+                <div class="stop-button">
+                  <p class="stop-text">Press to STOP</p>
                 </div>
                 <div class="slidersandduration">
                   <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
@@ -240,17 +258,29 @@
 
   function homebutton(){
     let sliders = document.getElementsByClassName("slidersandduration");
+    let startText = document.getElementsByClassName("start-text");
     for (const slider of sliders) {
       slider.style.display="none"
     }
+    for (const text of startText){
+        text.style.visibility = "visible";
+      }
     onSettings=true;
     toggleSave();
   }
   
   function settingsbutton(){
     let sliders = document.getElementsByClassName("slidersandduration");
+    let startText = document.getElementsByClassName("start-text");
+    let stopText = document.getElementsByClassName("stop-text");
       for (const slider of sliders) {
         slider.style.display="block"
+      }
+      for (const text of startText){
+        text.style.visibility = "hidden";
+      }
+      for (const texto of stopText){
+        text.stlye.visibility = "hidden";
       }
       onSettings=true;
       resetall();
@@ -264,10 +294,13 @@ function resetall(){
   box1.style.backgroundColor="#FFB52E";
   box2.style.backgroundColor="#A668A6";
   box3.style.backgroundColor="#F7A4A4";
+
 } 
 
 
 function selectfirst(){
+  const startText = document.getElementsByClassName("start-text")[0];
+  const stopText = document.getElementsByClassName("stop-text")[0];
   const tempSlider = document.getElementsByClassName("slider")[0];
   const durationSlider = document.getElementsByClassName("slider")[1];
   // let tempSliderDisplay = window.getComputedStyle(tempSlider,null).display;
@@ -282,15 +315,21 @@ function selectfirst(){
   if(z === "rgb(255, 181, 46)"){
     resetall();
     x.style.backgroundColor="green";
+    startText.style.visibility = "hidden";
+    stopText.style.visibility = "visible";
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
     console.log("function,1," + temperature + "," + duration);
     websocket.send("function,1," + temperature + "," + duration);
   } else {
+    startText.style.visibility = "visible";
+    stopText.style.visibility = "hidden";
     resetfunction();
   }
 }
 function selectsecond(){
+  const startText = document.getElementsByClassName("start-text")[1];
+  const stopText = document.getElementsByClassName("stop-text")[1];
   const tempSlider = document.getElementsByClassName("slider")[2];
   const durationSlider = document.getElementsByClassName("slider")[3];
   let secondCheck = document.getElementsByClassName("slidersandduration")[1];
@@ -304,16 +343,22 @@ function selectsecond(){
   if(z === "rgb(166, 104, 166)"){
     resetall();
     x.style.backgroundColor="green";
+    startText.style.visibility = "hidden";
+    stopText.style.visibility = "visible";
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
     console.log("function,2," + temperature + "," + duration);
     websocket.send("function,2," + temperature + "," + duration);
   } else{
     // resetall();
+    startText.style.visibility = "visible";
+    stopText.style.visibility = "hidden";
     resetfunction();
   }
 }
 function selectthird(){
+  const startText = document.getElementsByClassName("start-text")[2];
+  const stopText = document.getElementsByClassName("stop-text")[2];
   const tempSlider = document.getElementsByClassName("slider")[4];
   const durationSlider = document.getElementsByClassName("slider")[5];
   // let check = window.getComputedStyle(tempSlider,null).display;
@@ -328,11 +373,15 @@ function selectthird(){
   if(z === "rgb(247, 164, 164)"){
     resetall();
     x.style.backgroundColor="green";
+    startText.style.visibility = "hidden";
+    stopText.style.visibility = "visible";
     const temperature = tempSlider.value;
     const duration = durationSlider.value;
     console.log("function,3," + temperature + "," + duration);
     websocket.send("function,3," + temperature + "," + duration);
   } else {
+    startText.style.visibility = "visible";
+    stopText.style.visibility = "hidden";
     // resetall();
     resetfunction();
   }
