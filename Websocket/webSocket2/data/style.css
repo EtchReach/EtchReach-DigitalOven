@@ -32,6 +32,10 @@ p {
   justify-content: space-between;
 }
 
+.text-white {
+  color: white;
+}
+
 .topnav {
   font-size: medium;
   min-height: 80px;
@@ -243,7 +247,7 @@ body {
   border-width: 3px;
   border-radius: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #f7a4a4;
+  background-color: black;
   border-style: solid;
   max-width: 1500px;
   margin-top: 4%;
@@ -277,8 +281,9 @@ body {
   cursor: pointer;
   width: 50%;
 }
-.homebutton{
-  padding-top:30px;
+
+.home {
+  margin-top: 0px;
 }
 .border {
   width: 2px;
@@ -309,12 +314,13 @@ body {
 .homebutton {
   /* background-color: #8CC0DE; */
   height: 70px;
-  width: 86px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding-top: 30px;
+  gap: 5px;
 }
 .homebuttonicon {
   width: 75px;
@@ -325,14 +331,13 @@ body {
   width: 75px;
 }
 .settingsbutton {
-  /* background-color: #8CC0DE; */
   height: 70px;
-  width: 86px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
+  gap: 5px;
 }
 
 .alternatebottomnav {
@@ -400,6 +405,7 @@ body {
   display: flex;
   position: relative;
   flex: 1 1 0;
+  color: black;
 }
 
 .information-tooltip {
@@ -420,6 +426,10 @@ body {
 
 .information-icon:hover {
   content: url("./pictures/circle.svg")
+}
+
+.information-icon-white:hover {
+  content: url("./pictures/circle_white.svg")
 }
 
 .information-icon:hover ~ .information-tooltip {

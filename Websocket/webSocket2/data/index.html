@@ -14,9 +14,9 @@
     <div class="content">
       <div class="card" id="content">
         <h2 class="statusstate">Status</h2>
-        <p class="state state-function">Function: NIL</p>
-        <p class="state state-temperature">Temperature(<sup>o</sup>C): NIL</p>
-        <p class="state state-duration">Duration(mins): NIL</p>
+        <p class="state state-function">&nbsp;</p>
+        <p class="state state-temperature">Function: No Function</p>
+        <p class="state state-duration">&nbsp;</p>
       </div>
       <div>
 
@@ -68,7 +68,6 @@
                     <p class="stop-text">Press to STOP</p>
                   </div>
                   <div class="slidersandduration">
-                    <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
                     <div class="slidercontainer">
                       <input type="range" min="30" max="230" value=%defaultT2% class="slider" id="bakeTemperatureSlider"/>
                       <p class="settings">Temperature: <span class="settings" id="bakeTemp"></span><span class="settings"><sup>o</sup>C </span></p>
@@ -91,10 +90,10 @@
           </div> 
           <div class="thirdSet" id ="thirdSet" onclick="selectthird()">
             <div class="third">
-              <div class="buttonInner">
+              <div class="buttonInner text-white">
                 <div class="iconWithDescription">
                   <img  class="rotisserie" src="./pictures/rotisserie.png"/>
-                  <p class="titles thirdTitle" id="thirdTitle">Rotisserie </p>
+                  <p class="titles thirdTitle text-white" id="thirdTitle">Rotisserie </p>
                 </div>
                 <div class="start-button">
                   <p class="start-text">Press to START</p>
@@ -103,7 +102,6 @@
                   <p class="stop-text">Press to STOP</p>
                 </div>
                 <div class="slidersandduration">
-                  <!-- <h2 class="descriptions" id="firstTemperature"></h2> -->
                   <div class="slidercontainer">
                     <input type="range" min="30" max="230" value=%defaultT3% class="slider" id="rotiTemperatureSlider"/>
                     <p class="settings">Temperature: <span class="settings" id="rotiTemp"></span><span class="settings"><sup>o</sup>C </span></p>
@@ -115,7 +113,7 @@
                   </div>
                 </div>
                 <div class="information-wrapper">
-                  <img src="./pictures/filled.svg" class="information-icon" />
+                  <img src="./pictures/filled_white.svg" class="information-icon information-icon-white" />
                   <div class="information-tooltip">
                     <p>Temperature: <span>%defaultT3%</span><sup>o</sup>C</p>
                     <p>Duration: <span>%defaultD3%</span>mins</p>
@@ -212,9 +210,9 @@
     initButton(selectedFunction);
 
     if (selectedFunction === 0) {
-      document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
-      document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
-      document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
+      document.getElementsByClassName("state-function")[0].innerHTML = "&nbsp;";
+      document.getElementsByClassName("state-temperature")[0].innerHTML = "Function: No Function";
+      document.getElementsByClassName("state-duration")[0].innerHTML = "&nbsp;";
       resetall();
     } else {
       document.getElementsByClassName("state-function")[0].innerHTML = `Function: ${functionnames[selectedFunction]}`;
@@ -229,22 +227,19 @@
   }
 
   function initButton(functionID) {
-    let box1 = document.getElementById("firstSet");
-    let box2 = document.getElementById("secondSet");
-    let box3 = document.getElementById("thirdSet");
-
     if (functionID === 1) {
-      let box1 = document.getElementById("firstSet");
+      const box1 = document.getElementById("firstSet");
       box1.style.backgroundColor="green";
       box2.style.backgroundColor="#A668A6";
-      box3.style.backgroundColor="#F7A4A4";
+      box3.style.backgroundColor="#black";
+      
     } else if (functionID === 2) {
-      let box2 = document.getElementById("secondSet");
+      const box2 = document.getElementById("secondSet");
       box2.style.backgroundColor="green";
       box1.style.backgroundColor="#FFB52E";
-      box3.style.backgroundColor="#F7A4A4";
+      box3.style.backgroundColor="#black";
     } else if (functionID === 3) {
-      let box3 = document.getElementById("thirdSet");
+      const box3 = document.getElementById("thirdSet");
       box3.style.backgroundColor="green";
       box1.style.backgroundColor="#FFB52E";
       box2.style.backgroundColor="#A668A6";
@@ -273,17 +268,18 @@
     let sliders = document.getElementsByClassName("slidersandduration");
     let startText = document.getElementsByClassName("start-text");
     let stopText = document.getElementsByClassName("stop-text");
-      for (const slider of sliders) {
-        slider.style.display="block"
-      }
-      for (const text of startText){
-        text.style.visibility = "hidden";
-      }
-      for (const text of stopText){
-        text.style.visibility = "hidden";
-      }
-      onSettings=true;
-      resetall();
+    
+    resetall();
+    for (const slider of sliders) {
+      slider.style.display="block"
+    }
+    for (const text of startText){
+      text.style.visibility = "hidden";
+    }
+    for (const text of stopText){
+      text.style.visibility = "hidden";
+    }
+    onSettings=true;
   }
 
 // Reset all styles
@@ -293,8 +289,18 @@ function resetall(){
   let box3 = document.getElementById("thirdSet");
   box1.style.backgroundColor="#FFB52E";
   box2.style.backgroundColor="#A668A6";
-  box3.style.backgroundColor="#F7A4A4";
+  box3.style.backgroundColor="black";
 
+  const startTexts = document.getElementsByClassName("start-text");
+  const stopTexts = document.getElementsByClassName("stop-text");
+
+  for (const startText of startTexts) {
+    startText.style.visibility = "visible";
+  }
+
+  for (const stopText of stopTexts) {
+    stopText.style.visibility = "hidden";
+  }
 } 
 
 
@@ -370,7 +376,7 @@ function selectthird(){
   let x = document.getElementById("thirdSet");
   let y=window.getComputedStyle(x);
   let z = y.getPropertyValue("background-color");
-  if(z === "rgb(247, 164, 164)"){
+  if(z === "rgb(0, 0, 0)"){
     resetall();
     x.style.backgroundColor="green";
     startText.style.visibility = "hidden";
@@ -396,9 +402,9 @@ function resetfunction(){
 
   // defaultNavbar.style.display="flex";
   // thirdNavbar.style.display="none";
-  document.getElementsByClassName("state-function")[0].innerHTML = `Function: RESET`;
-  document.getElementsByClassName("state-temperature")[0].innerHTML = `Temp(<sup>o</sup>C): RESET`;
-  document.getElementsByClassName("state-duration")[0].innerHTML = `Duration(mins): RESET`;
+  document.getElementsByClassName("state-function")[0].innerHTML = "&nbsp;";
+  document.getElementsByClassName("state-temperature")[0].innerHTML = "Function: No Function";
+  document.getElementsByClassName("state-duration")[0].innerHTML = "&nbsp;";
   temperature = "0";
   duration = "0";
   maxTemp = "0";
