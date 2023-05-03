@@ -18,6 +18,11 @@ CAD files for the control box with its associated components are found in the [H
 * Heat shrink exposed ends.
 * Reassemble the oven.
 
+### High level Diagram:
+
+![image](https://user-images.githubusercontent.com/77315991/235966263-edc31077-0570-401a-80f1-38e39e28b3be.png)
+
+
 ## Software
 ### Oven Control Logic
 The software logic to control the various components of the oven was done with the [Arduino](https://www.arduino.cc/) programming language. The Arduino file can be found [here](./webSocket2/webSocket2.ino).
@@ -35,7 +40,7 @@ The mobile application is responsible for displaying various information to the 
 ![REACH Enable Schematic pptx (1)](https://user-images.githubusercontent.com/77315991/235963603-66be0e25-3e35-4c61-a1a6-95d963be1af5.jpg)
 
 ## Bill of Materials
-|Item |Quantity |Purpose|
+|Item|Quantity|Purpose|
 |-|-|-|
 |Conventional Oven|1|To be modified||
 |ESP32|1|Micro-Controller|
