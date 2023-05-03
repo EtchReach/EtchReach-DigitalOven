@@ -14,7 +14,10 @@ CAD files for the control box with its associated components are found in the Ha
 ### Oven Hacking 
 
 ## Software
-### 
+### Oven Control Logic
+The software logic to control the various components of the oven was done with the [Arduino](https://www.arduino.cc/) programming language. The Arduino file can be found here.
+
+
 ## Electronics
 ### Wiring
 ### ESP32 Programming
