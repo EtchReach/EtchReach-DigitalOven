@@ -5,11 +5,11 @@ A project by Enable, a student-led interest group under Nanyang Technology Unive
 [Product Demonstration]()
 ## Overview
 Project information and prototype usage can be found [here](https://docs.google.com/document/d/1T6A8cfehCGghUUyGrNWb8jcuDFIxB7nuweHgq2GrgUs/edit?usp=sharing).
-## Bill of Materials
 
 ## Hardware
 ### Control Box
-CAD files for the control box with its associated components are found in the Hardware Directory. Either PLA or PETG filament is suitable.
+CAD files for the control box with its associated components are found in the [Hardware Directory](./Hardware/). Either PLA or PETG filament is suitable.
+
 ### Oven Modification
 * Dismantle the oven and identify the wires connected to the oven's components (Heating Coil, Rotisserie, Fan, Bulb).
 * Connect the thermal fuse to the wires connecting to the heating coil(s).
@@ -33,8 +33,6 @@ The mobile application is responsible for displaying various information to the 
 ### Wiring
 * Connect the electrical components based on the wiring schema:
 ![REACH Enable Schematic pptx (1)](https://user-images.githubusercontent.com/77315991/235963603-66be0e25-3e35-4c61-a1a6-95d963be1af5.jpg)
-
-### ESP32 Programming
 
 ## Bill of Materials
 |Item |Quantity |Purpose|
