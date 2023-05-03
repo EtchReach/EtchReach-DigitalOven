@@ -10,8 +10,13 @@ Project information and prototype usage can be found [here](https://docs.google.
 ## Hardware
 ### Control Box
 CAD files for the control box with its associated components are found in the Hardware Directory. Either PLA or PETG filament is suitable.
-
-### Oven Hacking 
+### Oven Modification
+* Dismantle the oven and identify the wires connected to the oven's components (Heating Coil, Rotisserie, Fan, Bulb).
+* Connect the thermal fuse to the wires connecting to the heating coil(s).
+* Based on the Bulb's voltage requirements, attach the appropriate power resistor. (Power resistor is able to withstand the higher temperatures).
+* Extend the wires to the 8 Channel Relay using the 14AWG wires.
+* Heat shrink exposed ends.
+* Reassemble the oven.
 
 ## Software
 ### Oven Control Logic
@@ -26,6 +31,26 @@ The mobile application is responsible for displaying various information to the 
 
 ## Electronics
 ### Wiring
+* Connect the electrical components based on the wiring schema:
+![REACH Enable Schematic pptx (1)](https://user-images.githubusercontent.com/77315991/235963603-66be0e25-3e35-4c61-a1a6-95d963be1af5.jpg)
+
 ### ESP32 Programming
 
-
+## Bill of Materials
+|Item |Quantity |Purpose|
+|-|-|-|
+|Conventional Oven|1|To be modified||
+|ESP32|1|Micro-Controller|
+|Micro USB Cable|1|To power and program micro-controller|
+|PT100 Temperature Probe|1|To measure temperature changes|
+|MAX31865 Module|1|To process the oven's temperature|
+|OLED Display Module 0.96" |1|To display commands|
+|Donut Board|1|To mount micro-controller|
+|8 Chanel Relay|1|To control the oven's functionalities|
+|220Ω Power Resistor|1|To reduce Voltage to the oven's bulb|
+|250C 10A Thermal Fuse|2|Safety mechanism to prevent overheating|
+|Wire Splitter|2|To split cables into parallel circuits|
+|Heat Shrink Tube|As Required|To insulate exposed ends|
+|14 AWG Wires|As Required|To connect |
+|Jumper Cables|As Required|To connect electronic components|
+|Cable Ties|As Required|For cable management|
